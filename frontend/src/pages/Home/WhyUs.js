@@ -1,20 +1,20 @@
 import React from 'react'
-import whyus from '../assets/svg/why-us.svg'
-import Poster from './Poster'
+import whyus from '../../assets/svg/why-us.svg'
+import Poster from '../../components/Poster'
 
 const WhyUs = () => {
   const Content = () => {
     return (
-        <div className='why-us'>
+      <div className='why-us'>
         <h1>Why FairLance?</h1>
         <h4>
-        <i class="fa-solid fa-business-time"></i> Post quickly and for free
+          <i class="fa-solid fa-business-time"></i> Post quickly and for free
         </h4>
         <p>
           We do not ask for any money to post your projects
         </p>
         <h4>
-        <i class="fa-solid fa-globe"></i> Work with the best from all over the world
+          <i class="fa-solid fa-globe"></i> Work with the best from all over the world
         </h4>
         <p>
           FairLance is created to break the borders. We do not ask users to display their nationalities on their profile.

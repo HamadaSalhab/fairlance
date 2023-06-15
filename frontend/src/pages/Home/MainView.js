@@ -1,6 +1,6 @@
 import React from 'react'
-import searching from '../assets/svg/searching.svg'
-import Poster from './Poster'
+import searching from '../../assets/svg/searching.svg'
+import Poster from '../../components/Poster'
 
 const MainView = () => {
     const Content = () => {

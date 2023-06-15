@@ -1,11 +1,11 @@
 import React from 'react'
-import RecentPost from './RecentPost'
+import RecentPost from '../pages/Home/RecentPost'
 
-const HorizontalBlogs = ({ posts, postIdx,previousPost,nextPost,done }) => {
+const HorizontalBlogs = ({ posts, postIdx, previousPost, nextPost, done }) => {
     return (
         <div>
             <div className='recent-posts-container'>
-                {done?<h2>Recently delivered projects:</h2>:<h2>Recently posted oppurtunities:</h2>}
+                {done ? <h2>Recently delivered projects:</h2> : <h2>Recently posted oppurtunities:</h2>}
                 <div className="recents-panel">
                     <button className={((postIdx === 0) ? "disabled" : "")} onClick={previousPost}><i className="fa-solid fa-arrow-left"></i></button>
                     <div className='recent-posts'>

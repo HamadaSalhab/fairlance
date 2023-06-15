@@ -1,8 +1,8 @@
 import React from 'react'
-import signup from '../assets/svg/signup.svg'
-import analyzing from '../assets/svg/analyzing.svg'
-import delivery from '../assets/svg/delivery.svg'
-import paid from '../assets/svg/paid.svg'
+import signup from '../../assets/svg/signup.svg'
+import analyzing from '../../assets/svg/analyzing.svg'
+import delivery from '../../assets/svg/delivery.svg'
+import paid from '../../assets/svg/paid.svg'
 
 const Options = () => {
     return (
