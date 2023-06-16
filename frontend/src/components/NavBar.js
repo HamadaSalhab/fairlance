@@ -12,10 +12,10 @@ const NavBar = () => {
         <li><a href="#find-freelancer">Find freelancers</a></li>
         <li><a href="#find-job">Find job</a></li>
         <li>
-          <Link to='/sign-in'>Log in</Link>
+          <Link to='/login'>Log in</Link>
         </li>
         <li>
-          <Link to='/sign-up'>Sign up</Link>
+          <Link to='/signup'>Sign up</Link>
         </li>
       </div>
     </ul>
