@@ -1,6 +1,7 @@
 import React from 'react'
 import searching from '../../assets/svg/searching.svg'
 import Poster from '../../components/Poster'
+import SearchBar from '../../components/SearchBar'
 
 const MainView = () => {
     const Content = () => {
@@ -11,7 +12,7 @@ const MainView = () => {
                 <h3>We have experienced freelancers from all around the world</h3>
                 <div className='hire-search'>
                     <button>Hire freelancer</button>
-                    <input type="text" placeholder="Search for a job"></input><i className="fa-sharp fa-solid fa-magnifying-glass"></i>
+                    <SearchBar text="Search for a job"/>
                 </div>
             </div>
         )

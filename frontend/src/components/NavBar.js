@@ -10,7 +10,9 @@ const NavBar = () => {
         </li>
         <li><Link to='/'>Home</Link></li>
         <li><a href="#find-freelancer">Find freelancers</a></li>
-        <li><a href="#find-job">Find job</a></li>
+        <li>
+          <Link to='/find-job'>Find job</Link>
+        </li>
         <li>
           <Link to='/login'>Log in</Link>
         </li>

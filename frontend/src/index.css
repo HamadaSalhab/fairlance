@@ -123,30 +123,6 @@ body::-webkit-scrollbar {
     transition: all 0.4s;
 }
 
-.hire-search input {
-    padding: 1rem;
-    width: 50%;
-    font-size: 1rem;
-    border: solid 1px #7b7b7b;
-    font-weight: 500;
-    border-radius: 0.4rem;
-}
-
-.hire-search input::placeholder {
-    color: #9a9a9a;
-}
-
-.hire-search input:focus {
-    outline: none;
-    border: 1px #1E88E5 solid;
-    box-shadow: 2px 2px 8px 0px rgba(30, 136, 229, 0.2);
-    transition: all 0.3s;
-}
-
-.hire-search i {
-    margin-left: -2rem;
-}
-
 #options {
     margin: 0 auto;
     width: 50%;
