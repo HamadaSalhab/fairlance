@@ -2,3 +2,5 @@
 *.log
 *.pid
 .idea/
+*.pyc
+backend/db.sqlite3
