@@ -1,15 +1,18 @@
-import './App.css';
-import MainView from './components/MainView';
-import NavBar from './components/NavBar';
-import Options from './components/Options';
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/Home/LandingPage';
+import LoginPage from './pages/Login/LoginPage';
+import SignUpPage from './pages/Signup/SignupPage';
+import * as React from 'react';
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <MainView />
-      <Options />
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignUpPage />} />
+      </Routes>
+    </>
   );
 }
 
