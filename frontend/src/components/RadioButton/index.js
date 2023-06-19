@@ -1,10 +1,10 @@
 import React from 'react'
-import '../assets/styles/RadioButton.css'
+import { StyledRadioButton } from './style'
 
 const RadioButton = ({ name, id, value, onChange, checked, text }) => {
 
     return (
-        <div className='radio-button'>
+        <StyledRadioButton className='radio-button'>
             <input className="radio-input" type="radio"
                 name={name}
                 id={id}
@@ -16,7 +16,7 @@ const RadioButton = ({ name, id, value, onChange, checked, text }) => {
                 document.getElementById(id).checked = true;
                 onChange(name)
             }}><div className="inside"></div></div>
-        </div>
+        </StyledRadioButton>
     )
 }
 

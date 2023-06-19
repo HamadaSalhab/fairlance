@@ -1,15 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/Home/LandingPage';
+import Home from './pages/Home';
 import LoginPage from './pages/Login/LoginPage';
 import SignUpPage from './pages/Signup/SignupPage';
 import * as React from 'react';
-import FindJobPage from './pages/FindJob/FindJobPage';
+import FindJobPage from './pages/FindJob';
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<LandingPage />} />
+        <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignUpPage />} />
         {/* 

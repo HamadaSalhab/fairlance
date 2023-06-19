@@ -1,9 +1,11 @@
 import React from 'react'
+import Button from '../../../components/Button'
+import { StyledPost } from '../style'
 
 const RecentPost = ({ post, done }) => {
     return (
-        <div className='post'>
-            <div className='post-info'>
+        <StyledPost>
+            <div>
                 <div>
                     <h4>
                         {post.title}
@@ -19,10 +21,10 @@ const RecentPost = ({ post, done }) => {
                 </div>
             </div>
             <div className="apply-info">
-                {done?<button>More Details</button>:<button>Apply</button>}
+                {done ? <Button>More Details</Button> : <Button>Apply</Button>}
                 <p>{post.price}</p>
             </div>
-        </div>
+        </StyledPost>
     )
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import HorizontalBlogs from './HorizontalBlogs';
+import HorizontalBlogs from '../HorizontalBlogs';
 
 const Recents = ({ URL, done }) => {
 

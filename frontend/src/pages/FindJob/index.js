@@ -1,10 +1,10 @@
 import React from 'react'
 import NavBar from '../../components/NavBar'
 import SearchBar from '../../components/SearchBar'
-import '../../assets/styles/findjob.css'
 import Select from 'react-select'
-import Filters from './Filters'
-
+import Filters from './components/Filters'
+import Posts from './components/Posts'
+import { StyledFindContainer } from './styles'
 
 const FindJobPage = () => {
 
@@ -14,11 +14,11 @@ const FindJobPage = () => {
         { value: 'cheaper', label: 'Lowest budget first' },
         { value: 'expensive', label: 'Highest budget first' },
     ]
-
+    const POSTS_URL = "http://localhost:3030/posts";
     return (
         <div>
-            <NavBar/>
-            <div className='find-job-container'>
+            <NavBar />
+            <StyledFindContainer className='find-job-container'>
                 <h1>Browse jobs</h1>
                 <div className='search'>
                     <div className="search-options">
@@ -32,12 +32,10 @@ const FindJobPage = () => {
                     </div>
                 </div>
                 <div className='posts-container'>
-                    <Filters/>
-                    <div className="posts">
-
-                    </div>
+                    <Filters />
+                    <Posts URL={POSTS_URL} />
                 </div>
-            </div>
+            </StyledFindContainer>
         </div>
     )
 }

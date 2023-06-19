@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import RadioButton from '../../components/RadioButton'
-import SlideBar from '../../components/SlideBar'
+import RadioButton from '../../../components/RadioButton'
+import SlideBar from '../../../components/SlideBar'
 import Select from 'react-select'
+import { StyledFilters } from '../styles.js'
 
 const Filters = () => {
 
@@ -53,8 +54,8 @@ const Filters = () => {
     ]
 
     return (
-        <div className="filters">
-            <div className="categories filters-option">
+        <StyledFilters>
+            <div>
                 <h4>Categories:</h4>
                 <RadioButton id="it" name="it" value="Development & IT" text="Development & IT" onChange={clickedOption} checked={category.it} />
                 <RadioButton id="design" name="design" value="Design" text="Design" onChange={clickedOption} checked={category.design} />
@@ -62,7 +63,7 @@ const Filters = () => {
                 <RadioButton id="marketing" name="marketing" value="Marketing" text="Marketing" onChange={clickedOption} checked={category.marketing} />
                 <RadioButton id="writing" name="writing" value="Writing" text="Writing" onChange={clickedOption} checked={category.writing} />
             </div>
-            <div className="filters-option">
+            <div>
                 <h4>Budget:</h4>
                 select fixed budget
                 <SlideBar rtl={false} MAX={MAX} MIN={MIN} STEP={STEP} setValues={changeRange} values={range} />
@@ -79,17 +80,18 @@ const Filters = () => {
                     />
                 </div>
             </div>
-            <div className="filters-option">
+            <div>
                 <h4>Time:</h4>
-                select time period
-                <Select options={timePeriods} className='time-panel' defaultValue={timePeriods[0]} />
+                <p style={{ marginBottom: '0.5rem' }} >
+                    select time period
+                </p>
+                <Select options={timePeriods} defaultValue={timePeriods[0]} />
             </div>
-            <div className="filters-option">
+            <div>
                 <h4>Rating:</h4>
                 select the minimum rating of employer
                 <SlideBar rtl={false} MIN={0} MAX={5} STEP={0.1} oneSided={true} setValues={changeRatingRange} values={ratingRange} />
                 <div className="rating-filter">
-
                     <input type="number" value={ratingRange[0]}
                         onChange={(e) => setRatingRange([ratingRange[0], e.target.value])}
                         onFocus={(e) => { e.target.value = ''; }}
@@ -97,7 +99,7 @@ const Filters = () => {
                     />
                 </div>
             </div>
-        </div>
+        </StyledFilters>
     )
 }
 
