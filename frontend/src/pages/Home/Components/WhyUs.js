@@ -1,11 +1,13 @@
 import React from 'react'
-import whyus from '../../assets/svg/why-us.svg'
-import Poster from '../../components/Poster'
+import whyus from '../../../assets/svg/why-us.svg'
+import Poster from '../../../components/Poster'
+import Button from '../../../components/Button'
+import { StyledWhyUs } from '../style'
 
 const WhyUs = () => {
   const Content = () => {
     return (
-      <div className='why-us'>
+      <StyledWhyUs>
         <h1>Why FairLance?</h1>
         <h4>
           <i class="fa-solid fa-business-time"></i> Post quickly and for free
@@ -23,8 +25,8 @@ const WhyUs = () => {
         <p>
           You can pay using crypto in our website. The most reliable, and the fastest payment method with almost no transaction fees
         </p>
-        <button>Sign up</button>
-      </div>
+        <Button>Sign up</Button>
+      </StyledWhyUs>
     )
   }
   return (

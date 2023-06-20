@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from '../assets/images/logo.png'
-import '../Footer.css';
+import logo from '../../assets/images/logo.png'
+import { StyledFooter } from './style';
 
 const Footer = () => {
     return (
-        <div className='Footer'>
+        <StyledFooter>
             <div className='lists-container'>
                 <ul>
                     <li><img srcSet={logo} alt="" /></li>
@@ -32,7 +32,7 @@ const Footer = () => {
                     <li><a href='#fees'>Fees and charges</a></li>
                 </ul>
             </div>
-        </div>
+        </StyledFooter>
     )
 }
 
