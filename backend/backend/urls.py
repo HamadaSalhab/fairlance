@@ -39,5 +39,6 @@ router.register(r'users', UserViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', include(router.urls)),
+    path('projects/',include('projects.urls')),
+    path('users/',include('users.urls')),    
 ]
