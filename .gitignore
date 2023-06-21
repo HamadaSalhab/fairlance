@@ -5,3 +5,4 @@
 .idea/
 *.pyc
 backend/db.sqlite3
+*.cpyc
