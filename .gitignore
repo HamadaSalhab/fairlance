@@ -1,7 +1,9 @@
 /backend/venv/
 /backend/backend/Config.py
+/py_client
 *.log
 *.pid
 .idea/
 *.pyc
 *.cpyc
+/.vscode
