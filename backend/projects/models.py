@@ -1,21 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import User
+from users.models import Skill
 
-from users.models import (
-    Users,
-    Skills,
-)
+class Project(models.Model):
+    STATUS_CHOICES = (
+        ('hiring', 'Hiring'),
+        ('communication', 'Communication'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('conflict', 'Conflict'),
+    )
 
-class Projects(models.Model):
     project_id = models.IntegerField(primary_key=True)
-    owner = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='owned_projects')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_projects')
     title = models.CharField(max_length=256)
-    description = models.CharField(max_length=256)
-    media = models.ImageField(upload_to='./project_media/')
+    description = models.CharField(max_length=4096)
+    media = models.URLField(max_length=256)
     deadline = models.DateTimeField()
     price_min = models.DecimalField(max_digits=10, decimal_places=1)
     price_max = models.DecimalField(max_digits=10, decimal_places=1)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
-class Required_Skills(models.Model):
-    project = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='required_skills')
-    skill = models.ForeignKey(Skills, on_delete=models.CASCADE)
+class Required_Skill(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='required_skills')
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
 
