@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyles = createGlobalStyle`
 * {
     margin: 0;
     padding: 0;
@@ -14,10 +17,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-
 .seperate {
     height: 1px;
     width: 85%;
     background-color: #cfcfcf;
     margin: 0 auto;
 }
+`

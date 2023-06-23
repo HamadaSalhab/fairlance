@@ -3,9 +3,9 @@ import logo from '../../assets/images/logo-new.png'
 import { Link } from 'react-router-dom'
 import { StyledNav } from './style'
 
-const NavBar = () => {
+const NavBar = ({ notFixed }) => {
   return (
-    <StyledNav id="nav-bar">
+    <StyledNav id="nav-bar" notFixed={notFixed}>
       <div id="nav-container">
         <li>
           <Link to='/'><img srcSet={logo} alt="" /></Link>

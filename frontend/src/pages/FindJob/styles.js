@@ -9,18 +9,16 @@ export const StyledFilters = styled.div`
     height: fit-content;
     &>div {
         margin-top: 1rem;
-    }
-    h4 {
-        display: block;
-        font-weight: 600;
-        user-select: none;
-        margin-bottom: 0.3rem;
-    }
-    &>div {
         border-bottom: 1px solid #7b7b7b;
         padding-bottom: 1.5rem;
         &:last-child{
             border: none;
+        }
+        h4 {
+            display: block;
+            font-weight: 600;
+            user-select: none;
+            margin-bottom: 0.3rem;
         }
     }
     .range-values {

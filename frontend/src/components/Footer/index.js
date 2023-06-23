@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../assets/images/logo.png'
 import { StyledFooter } from './style';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -9,7 +10,9 @@ const Footer = () => {
                 <ul>
                     <li><img srcSet={logo} alt="" /></li>
                     <li><a href='#help'>Help and support</a></li>
-                    <li><a href='#faq'>FAQ</a></li>
+                    <li>
+                        <Link to='/faq'>FAQ</Link>
+                    </li>
                 </ul>
                 <ul>
                     <li>FairLance</li>

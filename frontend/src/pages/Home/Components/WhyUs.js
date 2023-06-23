@@ -3,6 +3,7 @@ import whyus from '../../../assets/svg/why-us.svg'
 import Poster from '../../../components/Poster'
 import Button from '../../../components/Button'
 import { StyledWhyUs } from '../style'
+import { Link } from 'react-router-dom'
 
 const WhyUs = () => {
   const Content = () => {
@@ -25,7 +26,9 @@ const WhyUs = () => {
         <p>
           You can pay using crypto in our website. The most reliable, and the fastest payment method with almost no transaction fees
         </p>
-        <Button>Sign up</Button>
+        <Link to='/signup'>
+          <Button>Sign up</Button>
+        </Link>
       </StyledWhyUs>
     )
   }

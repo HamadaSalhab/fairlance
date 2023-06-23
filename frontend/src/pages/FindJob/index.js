@@ -18,7 +18,7 @@ const FindJobPage = () => {
     return (
         <div>
             <NavBar />
-            <StyledFindContainer className='find-job-container'>
+            <StyledFindContainer>
                 <h1>Browse jobs</h1>
                 <div className='search'>
                     <div className="search-options">
