@@ -5,8 +5,8 @@ const Tags = ({ tags }) => {
     return (
         <Tag className='tags'>
             {
-                tags.map((tag) => {
-                    return <div>
+                tags.map((tag,idx) => {
+                    return <div key={idx}>
                         <span>#</span> {tag}
                     </div>
                 })

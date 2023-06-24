@@ -1,16 +1,58 @@
 import styled from 'styled-components';
 
-export const LoginWrapper = styled.div`
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+export const AuthWrapper = styled.div`
+  width: 85%;
+  box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.2);
+  background-color: #fff;
+  border-radius: 1rem;
+  height: 80vh;
+  margin: 1rem auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  p{
+    color: #a1a1a1;
+  }
+  h2{
+    padding-bottom: 0.5rem;
+  }
+  .move-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 `;
 
-export const Title = styled.h2`
-  padding-bottom: 1%;
-`;
+export const LoginDetails = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+`
+
+export const BrandDetails = styled.div`
+  width: 50%;
+  height: 100%;
+  background-color: #eefafd;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 0.5s;
+  z-index: 1;
+  img{
+    width: 60%;
+  }
+`
 
 export const LoginForm = styled.form`
   display: flex;
@@ -65,4 +107,24 @@ export const SubmitButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const SignupDetails = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+`
+
+export const SignupForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin-top: 20px;
 `;

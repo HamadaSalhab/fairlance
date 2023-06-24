@@ -19,7 +19,7 @@ const Collapsible = ({ children, title }) => {
             <div className="shown">
                 <h4>{title}</h4>
                 <div ref={collapse}>
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <i className="fa-solid fa-chevron-down"></i>
                 </div>
             </div>
             {isExpanded && <div className='hidden'>{children}</div>}

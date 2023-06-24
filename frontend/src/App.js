@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import LoginPage from './pages/Login/index';
-import SignUpPage from './pages/Signup/index';
+import LoginPage from './pages/Login';
 import * as React from 'react';
 import FindJobPage from './pages/FindJob';
 import FAQ from './pages/FAQ';
@@ -12,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/signup' element={<LoginPage />} />
         <Route path='/faq' element={<FAQ />}></Route>
         {/* 
           TODO: add authentication to the following pages:
