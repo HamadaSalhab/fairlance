@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
-
+import knox.views
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -40,5 +40,7 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('projects/',include('projects.urls')),
-    path('users/',include('users.urls')),    
+    path('',include('users.urls')),
+    path('logout', knox.views.LogoutView.as_view()),
+    path('logoutall', knox.views.LogoutAllView.as_view()) # logout all devices for one user
 ]
