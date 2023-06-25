@@ -40,19 +40,6 @@ export const LoginDetails = styled.div`
   justify-content: center;
 `
 
-export const BrandDetails = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  transition: all 0.5s;
-  z-index: 1;
-  img{
-    width: 60%;
-  }
-`
-
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -62,7 +49,7 @@ export const LoginForm = styled.form`
 `;
 
 export const InputFieldWrapper = styled.div`
-  margin-top: 1rem;
+  margin: 1rem 0;
   position: relative;
   width: 100%;
 `;
@@ -103,4 +90,21 @@ export const SubmitButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const SignupDetails = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+`
+
+export const SignupForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin-top: 20px;
 `;
