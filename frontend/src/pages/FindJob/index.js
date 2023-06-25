@@ -14,7 +14,7 @@ const FindJobPage = () => {
         { value: 'cheaper', label: 'Lowest budget first' },
         { value: 'expensive', label: 'Highest budget first' },
     ]
-    const POSTS_URL = "http://localhost:3030/posts";
+    const POSTS_URL = process.env.REACT_APP_POSTS || "http://localhost:3030/posts";
     return (
         <div>
             <NavBar />
