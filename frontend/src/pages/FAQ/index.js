@@ -7,7 +7,7 @@ import Collapsible from './components/Collapsible'
 const FAQ = () => {
     return (
         <StyledFAQ>
-            <NavBar notFixed={true}></NavBar>
+            <NavBar notfixed={true}></NavBar>
             <div className="container">
                 <header>
                     <img srcSet={logo} alt="" />

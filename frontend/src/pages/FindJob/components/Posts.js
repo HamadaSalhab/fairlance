@@ -25,8 +25,8 @@ const Posts = ({ URL }) => {
     return (
         <StyledPosts>
             {
-                posts.map((post) => {
-                    return <Post post={post} />
+                posts.map((post,idx) => {
+                    return <Post post={post} key={idx} />
                 })
             }
         </StyledPosts>

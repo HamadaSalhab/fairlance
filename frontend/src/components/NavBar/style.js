@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const StyledNav = styled.ul`
     background-color: #fff;
     box-shadow: 1px 2px 8px 0px rgba(30, 136, 229, 0.1);
-    position: ${props => props.notFixed ? 'static' : 'fixed'};
+    position: ${props => props.$notfixed ? 'static' : 'fixed'};
     width: 100%;
     z-index: 1;
     top: 0;
@@ -37,7 +37,7 @@ export const StyledNav = styled.ul`
                     height: 2.7rem;
                 }
             }
-            &:nth-child(4) {
+            &:nth-child(3) {
                 margin-right: auto;
             }
             .active {
