@@ -23,7 +23,7 @@ const index = () => {
         writing: false
     });
     const [deadline, setDeadline] = useState(new Date());
-    const [description, setDescription] = useState();
+    const [description, setDescription] = useState("");
     const [tags, setTags] = useState([
         { id: 'frontend', text: 'Frontend development' },
         { id: 'html', text: 'HTML' },
