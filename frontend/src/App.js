@@ -5,6 +5,7 @@ import SignupPage from './pages/Signup';
 import * as React from 'react';
 import FindJobPage from './pages/FindJob';
 import FAQ from './pages/FAQ';
+import PostDetailsPage from './pages/PostDetails';
 
 function App() {
   return (
@@ -13,11 +14,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
-        <Route path='/faq' element={<FAQ />}></Route>
+        <Route path='/faq' element={<FAQ />} />
         {/* 
           TODO: add authentication to the following pages:
         */}
         <Route path='/find-job' element={<FindJobPage />} />
+        <Route path="/post/:id" element={<PostDetailsPage />} />
       </Routes>
     </>
   );

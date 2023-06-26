@@ -1,7 +1,8 @@
-import React from 'react'
-import Tags from './Tags'
-import { StyledPost } from '../styles'
-import Button from '../../../components/Button'
+import React from 'react';
+import Tags from '../../pages/FindJob/components/Tags';
+import { StyledPost } from './style';
+import Button from '../Button';
+import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => {
     return (
@@ -19,7 +20,9 @@ const Post = ({ post }) => {
 
                     <div>{post.price_range_max}</div>
                 </div>
-                <Button>Apply </Button>
+                <Link to={`/post/${post.id}`}>
+                    <Button>More Details</Button>
+                </Link>
             </div>
         </StyledPost>
     )
