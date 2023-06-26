@@ -15,6 +15,9 @@ const NavBar = ({notfixed}) => {
           <Link to='/find-job'>Find job</Link>
         </li>
         <li>
+          <Link to='/create-post'>Add post</Link>
+        </li>
+        <li>
           <Link to='/login' state={{ isSignin: true }}>Log in</Link>
         </li>
         <li>

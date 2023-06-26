@@ -3,4 +3,5 @@
 *.log
 *.pid
 .idea/
-contracts
+# Local Netlify folder
+.netlify

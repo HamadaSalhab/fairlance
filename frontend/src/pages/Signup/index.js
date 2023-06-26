@@ -69,7 +69,7 @@ const LoginPage = () => {
             </SubmitButton>
           </SignupForm>
           <p>
-            Already have an account? <Link to='/login'>Login</Link> instead.
+            Already have an account? <Link to='/login' className='move-btn'>Login</Link> instead.
           </p>
         </SignupDetails>
       </AuthWrapper>
