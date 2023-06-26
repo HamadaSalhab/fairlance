@@ -4,6 +4,7 @@ import LoginPage from './pages/Login/LoginPage';
 import SignUpPage from './pages/Signup/SignupPage';
 import * as React from 'react';
 import FindJobPage from './pages/FindJob';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           TODO: add authentication to the following pages:
         */}
         <Route path='/find-job' element={<FindJobPage />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </>
   );
