@@ -5,6 +5,7 @@ import Select from 'react-select'
 import Filters from './components/Filters'
 import Posts from './components/Posts'
 import { StyledFindContainer } from './styles'
+import Footer from '../../components/Footer';
 
 const FindJobPage = () => {
 
@@ -18,7 +19,7 @@ const FindJobPage = () => {
     return (
         <div>
             <NavBar />
-            <StyledFindContainer className='find-job-container'>
+            <StyledFindContainer>
                 <h1>Browse jobs</h1>
                 <div className='search'>
                     <div className="search-options">
@@ -36,6 +37,7 @@ const FindJobPage = () => {
                     <Posts URL={POSTS_URL} />
                 </div>
             </StyledFindContainer>
+            <Footer/>
         </div>
     )
 }

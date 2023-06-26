@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Post from './Post'
+import Post from '../../../components/Post';
 import { StyledPosts } from '../styles';
 
 const Posts = ({ URL }) => {
@@ -25,12 +25,16 @@ const Posts = ({ URL }) => {
     return (
         <StyledPosts>
             {
-                posts.map((post) => {
-                    return <Post post={post} />
-                })
+                posts.map((post, idx) => {
+                    return (
+                        <Post post={post} key={idx}>
+                        </Post>
+                    );
+                }
+                )
             }
         </StyledPosts>
-    )
-}
+    );
+};
 
 export default Posts
