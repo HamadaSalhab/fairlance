@@ -2,7 +2,6 @@ import React from 'react';
 import Tags from '../../pages/FindJob/components/Tags';
 import { StyledDetailedPost } from './style';
 import Button from '../Button';
-import { Link } from 'react-router-dom';
 
 const DetailedPost = ({ post }) => {
     return (
