@@ -145,19 +145,20 @@ export const CreatePostStyled = styled.div`
         cursor: pointer;
     }
     .range-values {
+        margin-left: 1rem;
         margin-top: 0.5rem;
+        width: 80%;
         display: flex;
-        justify-content: center;
         align-items: center;
-        flex-direction: column;
-        width: 50%;
+        margin-bottom: 1.5rem;
         input{
             padding: 0.3rem;
-            margin: 0.5rem;
-            margin-bottom: 2rem;
+            margin: auto .5rem;
+            width: 10%;
         }
     }
     .date-picker{
+        margin-left: 1rem;
         padding: 0.5rem;
         width: 100%;
     }
@@ -179,6 +180,9 @@ export const CreatePostStyled = styled.div`
     }
     .price-range{
         margin-bottom: 0.4rem;
+    }
+    #tags-list{
+        display: none;
     }
 `
 

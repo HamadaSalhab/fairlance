@@ -138,108 +138,108 @@
   ],
   "tags": [
     {
-      "id": "it",
-      "text": "IT"
+      "value": "it",
+      "label": "IT"
     },
     {
-      "id": "css",
-      "text": "CSS"
+      "value": "css",
+      "label": "CSS"
     },
     {
-      "id": "html",
-      "text": "HTML"
+      "value": "html",
+      "label": "HTML"
     },
     {
-      "id": "js",
-      "text": "JavaScript"
+      "value": "js",
+      "label": "JavaScript"
     },
     {
-      "id": "java",
-      "text": "Java"
+      "value": "java",
+      "label": "Java"
     },
     {
-      "id": "ebay",
-      "text": "eBay"
+      "value": "ebay",
+      "label": "eBay"
     },
     {
-      "id": "ebookdesign",
-      "text": "eBook Design"
+      "value": "ebookdesign",
+      "label": "eBook Design"
     },
     {
-      "id": "rlang",
-      "text": "R programming language"
+      "value": "rlang",
+      "label": "R programming language"
     },
     {
-      "id": "rabbitmq",
-      "text": "RabbitMQ"
+      "value": "rabbitmq",
+      "label": "RabbitMQ"
     },
     {
-      "id": "yarn",
-      "text": "Yarn"
+      "value": "yarn",
+      "label": "Yarn"
     },
     {
-      "id": "ubuntu",
-      "text": "Ubuntu"
+      "value": "ubuntu",
+      "label": "Ubuntu"
     },
     {
-      "id": "ui",
-      "text": "UI user Interface"
+      "value": "ui",
+      "label": "UI user Interface"
     },
     {
-      "id": "oath",
-      "text": "OAth"
+      "value": "oath",
+      "label": "OAth"
     },
     {
-      "id": "oop",
-      "text": "Object Oriented Programming (OOP)"
+      "value": "oop",
+      "label": "Object Oriented Programming (OOP)"
     },
     {
-      "id": "p2p",
-      "text": "P2P network"
+      "value": "p2p",
+      "label": "P2P network"
     },
     {
-      "id": "saas",
-      "text": "SaaS"
+      "value": "saas",
+      "label": "SaaS"
     },
     {
-      "id": "fabric-design",
-      "text": "Fabric Design"
+      "value": "fabric-design",
+      "label": "Fabric Design"
     },
     {
-      "id": "game-art",
-      "text": "Game Art"
+      "value": "gameart",
+      "label": "Game Art"
     },
     {
-      "id": "game-development",
-      "text": "Game Development"
+      "value": "game-development",
+      "label": "Game Development"
     },
     {
-      "id": "c",
-      "text": "C programming language"
+      "value": "c",
+      "label": "C programming language"
     },
     {
-      "id": "cpp",
-      "text": "C++ programming language"
+      "value": "cpp",
+      "label": "C++ programming language"
     },
     {
-      "id": "backend",
-      "text": "Backend development"
+      "value": "backend",
+      "label": "Backend development"
     },
     {
-      "id": "frontend",
-      "text": "Frontend development"
+      "value": "frontend",
+      "label": "Frontend development"
     },
     {
-      "id": "machine-learngin",
-      "text": "Machine Learning"
+      "value": "machine-learngin",
+      "label": "Machine Learning"
     },
     {
-      "id": "react",
-      "text": "React Framework"
+      "value": "react",
+      "label": "React Framework"
     },
     {
-      "id": "next",
-      "text": "Nextjs Framework"
+      "value": "next",
+      "label": "Nextjs Framework"
     }
   ]
 }

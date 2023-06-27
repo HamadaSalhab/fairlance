@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RadioButton from '../../../components/RadioButton';
 import Button from '../../../components/Button';
 
 const TitleForm = ({ category, clickedOption, title, setTitle, nextForm }) => {
+
+  useEffect(() => {
+    document.getElementById("title").addEventListener('keypress', (e) => {
+      if (e.key == "Enter") {
+        e.preventDefault();
+      }
+    })
+  }, []);
+
   return (
     <form>
       <h2>Job Title</h2>

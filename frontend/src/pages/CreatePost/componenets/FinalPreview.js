@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import Button from '../../../components/Button'
-import { WithContext as ReactTags } from 'react-tag-input';
+import React, { useEffect, useState } from 'react';
+import Button from '../../../components/Button';
+import Tags from '../../../components/Tags';
 
-const KeyCodes = {
-    comma: 188,
-    enter: 13
-};
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
 const FinalPreview = ({ nextForm, prevForm, title, body, tags, range, deadline, category }) => {
     const [complete, setComplete] = useState(false);
     const [missing, setMissing] = useState([]);
@@ -26,8 +21,8 @@ const FinalPreview = ({ nextForm, prevForm, title, body, tags, range, deadline, 
         if (!body) {
             missingItems.push('Please add a description to your post');
         }
-        if (!range) {
-            missingItems.push('Please add price to your post');
+        if (!range||range[0]>range[1]) {
+            missingItems.push('Please add valid price to your post');
         }
         if (deadline < new Date()) {
             missingItems.push('Please specify a valid deadline for your job');
@@ -46,7 +41,16 @@ const FinalPreview = ({ nextForm, prevForm, title, body, tags, range, deadline, 
             setComplete(true);
         }
         setMissing(missingItems);
-    }, [])
+    }, []);
+
+    const transfer = (tags) => {
+        let ret = [];
+        for (let key in tags) {
+            ret.push(tags[key].label);
+        }
+        console.log(ret);
+        return ret;
+    }
 
     return (
         <>
@@ -58,10 +62,7 @@ const FinalPreview = ({ nextForm, prevForm, title, body, tags, range, deadline, 
                         <span>{categoryName[jobCategory]}</span>
                         <p>{body}</p>
                         <div className='no-edit'>
-                            <ReactTags
-                                tags={tags}
-                                delimiters={delimiters}
-                            />
+                            <Tags tags={transfer(tags)} />
                         </div>
                         <div className='price-range'>
                             <div><span style={{ fontWeight: 'bold' }}>price:</span> {range[0]} to {range[1]}</div>

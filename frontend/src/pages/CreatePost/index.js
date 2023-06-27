@@ -11,8 +11,7 @@ import IntroForm from './componenets/IntroForm';
 const TAGS_URL = "http://localhost:3030/tags"
 
 const index = () => {
-    const MAX = 2000, MIN = 5;
-    const [range, setRange] = useState([MIN, MAX]);
+    const [range, setRange] = useState([]);
     const [title, setTitle] = useState("");
     const [formIdx, setFormIdx] = useState(0);
     const [category, setCategory] = useState({
@@ -24,11 +23,7 @@ const index = () => {
     });
     const [deadline, setDeadline] = useState(new Date());
     const [description, setDescription] = useState("");
-    const [tags, setTags] = useState([
-        { id: 'frontend', text: 'Frontend development' },
-        { id: 'html', text: 'HTML' },
-        { id: 'css', text: 'CSS' }
-    ]);
+    const [tags, setTags] = useState([]);
     const clickedOption = (name) => {
         const tmp = category;
         for (let key in category) {
