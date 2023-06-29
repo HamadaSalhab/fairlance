@@ -12,6 +12,10 @@ from .serializers import ApplicationSerializer, EmploymentSerializer
 
 
 class ApplicationRetrieveView(generics.RetrieveAPIView):
+    """
+    Retrieve a single application
+    Can be accessed by a freelancer and a client
+    """
     permissions_classes = []
     authentication_classes = []
     queryset = Application.objects.all()
@@ -19,17 +23,26 @@ class ApplicationRetrieveView(generics.RetrieveAPIView):
 
 
 class ApplicationListView(generics.ListAPIView):
+    """
+    List all applications for a given project
+    Can be accessed by a client
+    """
     permissions_classes = []
     authentication_classes = []
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
-
-    def get(self, request, project_id):
-        project = Project.get(project_id)
-        applications = Application.objects.filter(project=project)
+    lookup_field = 'project_id'
+    # def get(self, request, project_id=None):
+    #     project = Project.objects.get(project_id=project_id)
+    #     applications = Application.objects.filter(project=project)
+    #     return Response(applications, status=status.HTTP_200_OK)
 
 
 class ApplicationDestroyView(generics.DestroyAPIView):
+    """
+    Destroy a single application
+    Can be accessed by a freelancer
+    """
     permissions_classes = []
     authentication_classes = []
     queryset = Application.objects.all()
@@ -37,6 +50,10 @@ class ApplicationDestroyView(generics.DestroyAPIView):
 
 
 class ApplicationUpdateView(generics.UpdateAPIView):
+    """
+    Update a single application
+    Can be accessed by a moderator only?
+    """
     permissions_classes = [permissions.IsAuthenticated]
     authentication_classes = []
     queryset = Application.objects.all()
@@ -44,6 +61,10 @@ class ApplicationUpdateView(generics.UpdateAPIView):
 
 
 class ApplicationCreateView(generics.CreateAPIView):
+    """
+    Create a new application for given project and freelancer
+    Can be accessed by a freelancer
+    """
     permissions_classes = [permissions.IsAuthenticated]
     authentication_classes = []
     queryset = Application.objects.all()
@@ -58,7 +79,7 @@ class ApplicationCreateView(generics.CreateAPIView):
         project = Project.objects.get(project_id=request.data['project'])
         if not project:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        freelancer = User.objects.get(id=request.data['freelancer'])
+        freelancer = User.objects.get()
         if not freelancer:
             return Response(status=status.HTTP_404_NOT_FOUND)
         application = Application(project=project, freelancer=freelancer)
@@ -70,12 +91,21 @@ class ApplicationCreateView(generics.CreateAPIView):
 
 
 class EmploymentRetrieveView(generics.RetrieveAPIView):
+    """
+    Retrieve a single employment
+    Can be accessed by a freelancer and a client
+    """
     permissions_classes = []
     authentication_classes = []
     queryset = Employment.objects.all()
     serializer_class = ApplicationSerializer
 
+
 class EmploymentCreateView(generics.CreateAPIView):
+    """
+    Create a new employment for given application and a payment
+    Can be accessed by a client
+    """
     permissions_classes = [permissions.IsAuthenticated]
     authentication_classes = []
     queryset = Application.objects.all()
@@ -102,12 +132,21 @@ class EmploymentCreateView(generics.CreateAPIView):
 
 
 class EmploymentUpdateView(generics.UpdateAPIView):
+    """
+    Update a single employment
+    Can be accessed by a moderator only?
+    """
     permissions_classes = [permissions.IsAuthenticated]
     authentication_classes = []
     queryset = Employment.objects.all()
     serializer_class = ApplicationSerializer
 
+
 class EmploymentDestroyView(generics.DestroyAPIView):
+    """
+    Destroy a single employment
+    Can be accessed by a moderator only?
+    """
     permissions_classes = [permissions.IsAuthenticated]
     authentication_classes = []
     queryset = Employment.objects.all()
