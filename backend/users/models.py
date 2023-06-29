@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Skill(models.Model):
     skill_id = models.IntegerField(primary_key=True)
-    skill_name = models.CharField(max_length=32)
+    skill_name = models.CharField(max_length=255)
 
 
 class Freelancer(models.Model):
@@ -22,4 +22,4 @@ class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
     msg_date = models.DateTimeField()
-    msg_content = models.CharField(max_length=4096)
+    msg_content = models.CharField(max_length=256)

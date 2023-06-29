@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from users.models import Skill
+from users.models import Skills
 
 class Project(models.Model):
     STATUS_CHOICES = (
@@ -23,5 +23,5 @@ class Project(models.Model):
 
 class Required_Skill(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='required_skills')
-    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
+    skill = models.ForeignKey(Skills, on_delete=models.CASCADE)
 
