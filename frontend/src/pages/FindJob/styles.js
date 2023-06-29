@@ -43,22 +43,6 @@ export const StyledFilters = styled.div`
     }
 `
 
-export const Tag = styled.div`
-    display: flex;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    div {
-        margin: 0 0.3rem;
-        color: #7b7b7b;
-        border: solid 1px #1E88E5;
-        border-radius: 0.2rem;
-        padding: 0.2rem;
-        span{
-            color: #7ec2fd;
-        }
-    }
-`
-
 export const StyledFindContainer = styled.div`
     width: 85%;
     margin: 5rem auto;

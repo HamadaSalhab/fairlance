@@ -6,7 +6,7 @@ import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (data) => {
@@ -18,10 +18,6 @@ const LoginPage = () => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleSignup = (data) => {
-    // Handle signup logic
   };
 
   return (

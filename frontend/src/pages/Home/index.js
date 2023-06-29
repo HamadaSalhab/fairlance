@@ -5,8 +5,8 @@ import Options from './Components/Options';
 import Recents from '../../components/Recents';
 import Footer from '../../components/Footer';
 import WhyUs from './Components/WhyUs';
-const RECENT_POSTS_URL = "http://localhost:3030/recent-posts";
-const DERLIVERED_POSTS_URL = "http://localhost:3030/delivered-posts";
+const RECENT_POSTS_URL = process.env.REACT_APP_RECENT_POSTS || "http://localhost:3030/delivered-posts";
+const DERLIVERED_POSTS_URL = process.env.REACT_APP_DELIVERED_POSTS || "http://localhost:3030/recent-posts";
 
 const Home = () => {
     return (

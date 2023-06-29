@@ -37,7 +37,7 @@ export const StyledNav = styled.ul`
                     height: 2.7rem;
                 }
             }
-            &:nth-child(3) {
+            &:nth-child(4) {
                 margin-right: auto;
             }
             .active {

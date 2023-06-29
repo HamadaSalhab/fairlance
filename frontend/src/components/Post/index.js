@@ -1,5 +1,5 @@
 import React from 'react';
-import Tags from '../../pages/FindJob/components/Tags';
+import Tags from '../Tags';
 import { StyledPost } from './style';
 import Button from '../Button';
 import { Link } from 'react-router-dom';
