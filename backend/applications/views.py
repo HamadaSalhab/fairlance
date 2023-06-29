@@ -1,6 +1,8 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
+from rest_framework import generics
 
 from transactions.models import Payment
 from users.models import User
@@ -9,27 +11,45 @@ from projects.models import Project
 from .serializers import ApplicationSerializer, EmploymentSerializer
 
 
-class ApplicationApiView(APIView):
+class ApplicationRetrieveView(generics.RetrieveAPIView):
+    permissions_classes = []
+    authentication_classes = []
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+
+
+class ApplicationListView(generics.ListAPIView):
+    permissions_classes = []
+    authentication_classes = []
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+
+    def get(self, request, project_id):
+        project = Project.get(project_id)
+        applications = Application.objects.filter(project=project)
+
+
+class ApplicationDestroyView(generics.DestroyAPIView):
+    permissions_classes = []
+    authentication_classes = []
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+
+
+class ApplicationUpdateView(generics.UpdateAPIView):
     permissions_classes = [permissions.IsAuthenticated]
+    authentication_classes = []
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
 
-    def get_project(self, project_id):
-        try:
-            return Project.objects.get(project_id=project_id)
-        except Project.DoesNotExist:
-            return None
 
-    def get(self, request):
-        """
-        List all the applications
-        :param project_id:
-        :param request:
-        :return:
-        """
-        applications = Application.objects.all()
-        serializer = ApplicationSerializer(applications, many=True, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class ApplicationCreateView(generics.CreateAPIView):
+    permissions_classes = [permissions.IsAuthenticated]
+    authentication_classes = []
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
 
-    def post(self, request):
+    def create(self, request):
         """
         Create a new application for given project and freelancer
         :param request:
@@ -49,61 +69,19 @@ class ApplicationApiView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class ApplicationDetailApiView(APIView):
-    def get(self, request, application_id=None):
-        """
-        Get the application specified by id
-        :param request:
-        :param id:
-        :return:
-        """
-        application = Application.objects.get(id=application_id)
-        if not application:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = ApplicationSerializer(application, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class EmploymentRetrieveView(generics.RetrieveAPIView):
+    permissions_classes = []
+    authentication_classes = []
+    queryset = Employment.objects.all()
+    serializer_class = ApplicationSerializer
 
-    def delete(self, request, application_id=None):
-        """
-        Delete the application
-        :param application_id:
-        :param request:
-        :return:
-        """
-        application = Application.objects.get(id=application_id)
-        if not application:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        application.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class EmploymentCreateView(generics.CreateAPIView):
+    permissions_classes = [permissions.IsAuthenticated]
+    authentication_classes = []
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
 
-    def put(self, request, application_id=None):
-        """
-        Update the application
-        :param request:
-        :return:
-        """
-        application = Application.objects.get(id=application_id)
-        if not application:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = ApplicationSerializer(application, data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
-class EmploymentApiView(APIView):
-    def get(self, request):
-        """
-        List all the employments
-        :param request:
-        :return:
-        """
-        employments = Employment.objects.all()
-        serializer = EmploymentSerializer(employments, many=True, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def post(self, request):
+    def create(self, request):
         """
         Create a new employment for given application and a payment
         :param request:
@@ -123,45 +101,14 @@ class EmploymentApiView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class EmploymentDetailApiView(APIView):
-    def get(self, request, employment_id=None):
-        """
-        Get the employment specified by id
-        :param request:
-        :param id:
-        :return:
-        """
-        employment = Employment.objects.get(id=employment_id)
-        if not employment:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = EmploymentSerializer(employment, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class EmploymentUpdateView(generics.UpdateAPIView):
+    permissions_classes = [permissions.IsAuthenticated]
+    authentication_classes = []
+    queryset = Employment.objects.all()
+    serializer_class = ApplicationSerializer
 
-    def put(self, request, employment_id=None):
-        """
-        Update the employment
-        :param request:
-        :return:
-        """
-
-        employment = Employment.objects.get(id=employment_id)
-        if not employment:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = EmploymentSerializer(employment, data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, employment_id=None):
-        """
-        Delete the employment
-        :param employment_id:
-        :param request:
-        :return:
-        """
-        employment = Employment.objects.get(id=employment_id)
-        if not employment:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        employment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class EmploymentDestroyView(generics.DestroyAPIView):
+    permissions_classes = [permissions.IsAuthenticated]
+    authentication_classes = []
+    queryset = Employment.objects.all()
+    serializer_class = ApplicationSerializer
