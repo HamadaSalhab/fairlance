@@ -1,67 +1,37 @@
-from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import status
-from .models import Project
+from django.shortcuts import get_object_or_404
+
 from .serializers import ProjectSerializer
-import math
+from .models import Project
 
+class ProjectListAPIView(generics.ListAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    authentication_classes = []
+    permission_classes = []
 
-class ProjectAPIView(APIView):
-    def get(self, request, project_id=None):
+class ProjectCreateAPIView(generics.CreateAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    authentication_classes = []
+    permission_classes = []
 
-        project_count = request.data.get('project_count')
-        block_count = request.data.get('block_count')
-        if not project_count is None and not block_count is None:
-            try:
-                project_count = int(project_count)
-                block_count = int(block_count)
-            except:
-                return Response({"details": "invalid parameters"}, status=status.HTTP_400_BAD_REQUEST)
+class ProjectDetailAPIView(generics.RetrieveAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    lookup_field = 'pk'
 
-            projects = Project.objects.all()
-            count = projects.count()
-            left_index = (block_count - 1) * project_count
-            right_index = min(left_index + project_count, count)
-            serializer = ProjectSerializer(
-                projects[left_index:right_index], many=True)
-            return Response(serializer.data)
+class ProjectUpdateAPIView(generics.UpdateAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    lookup_field = 'pk'
 
-        if not project_id is None:
-            try:
-                project = Project.objects.get(project_id=project_id)
-                serializer = ProjectSerializer(project)
-                return Response(serializer.data)
-            except Project.DoesNotExist:
-                return Response(status=status.HTTP_404_NOT_FOUND)
-        else:
-            projects = Project.objects.all()
-            serializer = ProjectSerializer(projects, many=True)
-            return Response(serializer.data)
+class ProjectDestroyAPIView(generics.DestroyAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    lookup_field = 'pk'
 
-    def post(self, request):
-        serializer = ProjectSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def perform_delete(self, instance):
+        super().perform_destroy(instance)
 
-    def put(self, request, project_id):
-        try:
-            project = Project.objects.get(project_id=project_id)
-        except Project.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        serializer = ProjectSerializer(project, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, project_id):
-        try:
-            project = Project.objects.get(project_id=project_id)
-        except Project.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        project.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
