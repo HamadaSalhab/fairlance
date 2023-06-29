@@ -7,3 +7,4 @@
 *.pyc
 *.cpyc
 /.vscode
+backend/db.sqlite3
