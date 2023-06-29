@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-j7&)!%5v_ipzk2oywc#j^qxg+1b79m*1lolx^3nr%-61lg#vmn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'afe0-188-130-155-154.ngrok-free.app',
+    '127.0.0.1',
+    'localhost',
+]
 
 
 # Application definition
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'users',
     'projects',
     'transactions',
@@ -126,3 +131,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
 }
+    
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": [
+#         "rest_framework.authentication.TokenAuthentication" 
+#     ],
+#     "DEFAULT_PERMISSION_CLASSES": [
+#         'rest_framework.permissions.IsAuthenticated'
+#     ]
+# }
