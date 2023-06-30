@@ -11,11 +11,10 @@ class Project(models.Model):
         ('conflict', 'Conflict'),
     )
 
-    project_id = models.IntegerField(primary_key=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_projects')
     title = models.CharField(max_length=256, null=False)
     description = models.CharField(max_length=4096, null=False)
-    media = models.URLField(max_length=256)
+    media = models.URLField(max_length=256, default='http://codeforces.com')
     deadline = models.DateTimeField(null=False)
     price_min = models.DecimalField(max_digits=10, decimal_places=1, default=0.0)
     price_max = models.DecimalField(max_digits=10, decimal_places=1, default=100.0)

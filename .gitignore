@@ -8,3 +8,11 @@
 *.cpyc
 /.vscode
 backend/db.sqlite3
+/backend/applications/migrations
+/backend/applications/__pycache__
+/backend/projects/migrations
+/backend/projects/__pycache__
+/backend/users/migrations
+/backend/users/__pycache__
+/backend/transactions/migrations
+/backend/transactions/__pycache__
