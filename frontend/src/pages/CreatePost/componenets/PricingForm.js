@@ -13,12 +13,12 @@ const PricingForm = ({ prevForm, nextForm, range, setRange, deadline, setDeadlin
         const from = document.getElementById("price-from");
         const to = document.getElementById("price-to");
         from.addEventListener('keypress', (e) => {
-            if (e.key == "Enter") {
+            if (e.key === "Enter") {
                 e.preventDefault();
             }
         })
         to.addEventListener('keypress', (e) => {
-            if (e.key == "Enter") {
+            if (e.key === "Enter") {
                 e.preventDefault();
             }
         })

@@ -6,7 +6,7 @@ const TitleForm = ({ category, clickedOption, title, setTitle, nextForm }) => {
 
   useEffect(() => {
     document.getElementById("title").addEventListener('keypress', (e) => {
-      if (e.key == "Enter") {
+      if (e.key === "Enter") {
         e.preventDefault();
       }
     })

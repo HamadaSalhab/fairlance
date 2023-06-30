@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthWrapper, InputField, Error, SubmitButton, InputFieldWrapper, EyeIcon } from './style';
 import { SignupForm, SignupDetails } from './style';
 import NavBar from '../../components/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const { registerUser } = useContext(AuthContext);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -16,7 +18,7 @@ const LoginPage = () => {
 
 
   const handleSignup = (data) => {
-    // Handle signup logic
+    registerUser(data);
   };
 
   return (
@@ -28,16 +30,16 @@ const LoginPage = () => {
           <p>It's quick and easy</p>
           <SignupForm onSubmit={handleSubmit(handleSignup)}>
             {/* Signup form fields */}
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <InputField
-              id="username"
+              id="email"
               type={'text'}
               placeholder=""
-              {...register('username', {
-                required: 'Username is required',
+              {...register('email', {
+                required: 'Email is required',
               })}
             />
-            {errors.username && <Error>{errors.username.message}</Error>}
+            {errors.email && <Error>{errors.email.message}</Error>}
             <InputFieldWrapper>
               <label htmlFor="password">Password</label>
               <InputField
