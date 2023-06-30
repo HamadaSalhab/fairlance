@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthWrapper, InputField, Error, SubmitButton, InputFieldWrapper, EyeIcon } from './style';
 import { SignupForm, SignupDetails } from './style';
 import NavBar from '../../components/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const { registerUser } = useContext(AuthContext);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -16,7 +18,7 @@ const LoginPage = () => {
 
 
   const handleSignup = (data) => {
-    // Handle signup logic
+    registerUser(data);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { CreatePostStyled, StyledProgress } from './style'
 import NavBar from '../../components/NavBar';
 import TitleForm from './componenets/TitleForm';
@@ -7,10 +7,12 @@ import MediaForm from './componenets/MediaForm';
 import PricingForm from './componenets/PricingForm';
 import FinalPreview from './componenets/FinalPreview';
 import IntroForm from './componenets/IntroForm';
+import AuthContext from '../../context/AuthContext';
 
 const TAGS_URL = "http://localhost:3030/tags"
 
 const index = () => {
+    const { authToken } = useContext(AuthContext);
     const [range, setRange] = useState([]);
     const [title, setTitle] = useState("");
     const [formIdx, setFormIdx] = useState(0);
@@ -61,9 +63,33 @@ const index = () => {
         console.log(file);
     }
 
-    const handleSubmit = () => {
-        console.log("submitting");
-        // TODO: handle submit
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const req = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `token ${authToken}`,
+            },
+            body: JSON.stringify({
+                'title': title,
+                'description': description,
+                'deadline': deadline,
+                'price_min': range[0],
+                'price_max': range[1]
+            })
+        }
+        console.log(req);
+        try {
+            const res = await fetch('/api/projects/add/', req);
+            const ret = await res.json();
+            console.log(ret);
+            console.log(res);
+        }
+        catch (e) {
+
+        }
     }
 
     return (
@@ -85,7 +111,7 @@ const index = () => {
                     {formIdx === 2 ? <DetailsForm nextForm={nextForm} prevForm={prevForm} description={description} setDescription={setDescription} /> : ''}
                     {formIdx === 3 ? <MediaForm nextForm={nextForm} prevForm={prevForm} addFile={addFile} TAGS_URL={TAGS_URL} tags={tags} setTags={setTags} /> : ''}
                     {formIdx === 4 ? <PricingForm nextForm={nextForm} prevForm={prevForm} range={range} setRange={setRange} deadline={deadline} setDeadline={setDeadline} /> : ''}
-                    {formIdx === 5 ? <FinalPreview category={category} nextForm={handleSubmit} prevForm={prevForm} title={title} tags={tags} body={description} range={range} deadline={deadline} /> : ''}
+                    {formIdx === 5 ? <FinalPreview category={category} handleSubmit={handleSubmit} prevForm={prevForm} title={title} tags={tags} body={description} range={range} deadline={deadline} /> : ''}
                 </div>
             </CreatePostStyled>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Tags from '../Tags';
 import { StyledPost } from './style';
 import Button from '../Button';
@@ -13,12 +13,11 @@ const Post = ({ post }) => {
             </div>
             <h3>{post.title}</h3>
             <p>{post.description}</p>
-            <Tags tags={post.tags} />
+            {/* <Tags tags={post.tags} /> */}
             <div>
                 <div className="price-range">
-                    <div>{post.price_range_min} -</div>
-
-                    <div>{post.price_range_max}</div>
+                    <div>{parseInt(post.price_min)} -</div>
+                    <div>{parseInt(post.price_max)}$</div>
                 </div>
                 <Link to={`/post/${post.id}`}>
                     <Button>More Details</Button>

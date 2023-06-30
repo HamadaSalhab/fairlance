@@ -13,7 +13,9 @@ export const StyledPost = styled.div`
         display: flex;
         margin-right: auto;
         div {
-            margin: 0 0.5rem;
+            &:first-child{
+                margin: 0 0 0 0.5rem;
+            }
             display: flex;
             align-items: center;
         }
