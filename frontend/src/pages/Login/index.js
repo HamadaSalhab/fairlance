@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthWrapper, LoginForm, InputField, Error, SubmitButton, InputFieldWrapper, EyeIcon, LoginDetails } from './style';
 import NavBar from '../../components/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
+  const { loginUser } = useContext(AuthContext);
+
   const handleLogin = (data) => {
-    // Simulate login request
-    setTimeout(() => {
-      console.log(data); // Data contains the form values
-    }, 1000);
+    loginUser(data);
   };
 
   const togglePasswordVisibility = () => {
@@ -34,10 +34,6 @@ const LoginPage = () => {
               id="email"
               {...register('email', {
                 required: 'Email is required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
-                },
               })}
             />
             {errors.email && <Error>{errors.email.message}</Error>}

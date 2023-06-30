@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../../components/Button';
 import Tags from '../../../components/Tags';
 
-const FinalPreview = ({ nextForm, prevForm, title, body, tags, range, deadline, category }) => {
+const FinalPreview = ({ handleSubmit, prevForm, title, body, tags, range, deadline, category }) => {
     const [complete, setComplete] = useState(false);
     const [missing, setMissing] = useState([]);
     const [jobCategory, setJobCategory] = useState();
@@ -72,7 +72,7 @@ const FinalPreview = ({ nextForm, prevForm, title, body, tags, range, deadline, 
                         </div>
                         <div className='next-page'>
                             <Button primary={false} onClick={prevForm}>Previous page</Button>
-                            <Button primary={true} onClick={nextForm}>Submit</Button>
+                            <Button primary={true} onClick={handleSubmit}>Submit</Button>
                         </div>
                     </form >
                     : <>

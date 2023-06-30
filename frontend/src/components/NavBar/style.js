@@ -22,6 +22,7 @@ export const StyledNav = styled.ul`
                 color: #000;
                 font-size: 1.2rem;
                 font-weight: 500;
+                cursor: pointer;
                 &:hover {
                     color: #1E88E5;
                     transition: all 0.3s;
