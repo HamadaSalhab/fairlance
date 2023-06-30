@@ -62,7 +62,6 @@ export const LoginForm = styled.form`
 `;
 
 export const InputFieldWrapper = styled.div`
-  margin-top: 1rem;
   position: relative;
   width: 100%;
 `;
