@@ -49,7 +49,6 @@ export const LoginForm = styled.form`
 `;
 
 export const InputFieldWrapper = styled.div`
-  margin: 1rem 0;
   position: relative;
   width: 100%;
 `;

@@ -28,16 +28,39 @@ const LoginPage = () => {
           <p>It's quick and easy</p>
           <SignupForm onSubmit={handleSubmit(handleSignup)}>
             {/* Signup form fields */}
-            <label htmlFor="username">Username</label>
+            <label htmlFor="First Name">First Name</label>
             <InputField
-              id="username"
+              id="firstname"
               type={'text'}
               placeholder=""
-              {...register('username', {
-                required: 'Username is required',
+              {...register('firstname', {
+                required: 'First Name is Required',
               })}
             />
-            {errors.username && <Error>{errors.username.message}</Error>}
+            {errors.firstname && <Error>{errors.firstname.message}</Error>}
+            <label htmlFor="First Name">Last Name</label>
+            <InputField
+              id="lastname"
+              type={'text'}
+              placeholder=""
+              {...register('lastname', {
+                required: 'Last Name is required',
+              })}
+            />
+            {errors.lastname && <Error>{errors.lastname.message}</Error>}
+            <label htmlFor="email">Email</label>
+            <InputField
+              type="email"
+              id="email"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+            />
+            {errors.email && <Error>{errors.email.message}</Error>}
             <InputFieldWrapper>
               <label htmlFor="password">Password</label>
               <InputField
