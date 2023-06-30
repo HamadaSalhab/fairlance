@@ -79,7 +79,7 @@ class ApplicationCreateView(generics.CreateAPIView):
         project = Project.objects.get(project_id=request.data['project'])
         if not project:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        freelancer = User.objects.get()
+        freelancer = User.objects.get(id=request.data['freelancer'])
         if not freelancer:
             return Response(status=status.HTTP_404_NOT_FOUND)
         application = Application(project=project, freelancer=freelancer)
