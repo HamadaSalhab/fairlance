@@ -12,3 +12,25 @@ class ProjectSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user
         return super().create(validated_data)
+    
+
+class ProjectOwnerSerializer(serializers.ModelSerializer):
+    first_name = serializers.SerializerMethodField()
+    last_name = serializers.SerializerMethodField()
+    owner_id = serializers.SerializerMethodField()
+
+    def get_first_name(self, obj):
+        first_name = obj.owner.first_name
+        return first_name
+    
+    def get_last_name(self, obj):
+        last_name = obj.owner.last_name
+        return last_name
+    
+    def get_owner_id(self, obj):
+        owner_id = obj.owner.id
+        return owner_id
+    
+    class Meta:
+        model = Project
+        fields = '__all__'
