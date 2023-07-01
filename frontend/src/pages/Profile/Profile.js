@@ -1,12 +1,12 @@
 import React from 'react'
-import './style.css'
+import './style.js'
 import MainView from './Components/MainView.js'
 import NavBar from '../Profile/Components/NavBar';
 
 const Profile = () => {
   return (
     <div>
-      <NavBar />
+      <NavBar/>
       <MainView />
     </div>
   )

@@ -43,6 +43,10 @@ export const StyledNav = styled.ul`
             .active {
                 color: #1E88E5;
             }
+            #profile-fullname{
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
         }
     }
 `
