@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .views import ApplicationCreateView, ApplicationUpdateView, ApplicationDestroyView, ApplicationRetrieveView, \
     ApplicationListView
 from .views import EmploymentCreateView, EmploymentRetrieveView, EmploymentUpdateView, EmploymentDestroyView

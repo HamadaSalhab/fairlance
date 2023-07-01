@@ -1,11 +1,12 @@
-from rest_framework import viewsets, permissions, status
+import datetime
+
+from django.contrib.auth.models import User
+from rest_framework.authentication import TokenAuthentication
+from rest_framework import permissions, status
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.viewsets import GenericViewSet
 from rest_framework import generics
 
 from transactions.models import Payment
-from users.models import User
 from .models import Application, Employment
 from projects.models import Project
 from .serializers import ApplicationSerializer, EmploymentSerializer
@@ -32,10 +33,11 @@ class ApplicationListView(generics.ListAPIView):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
     lookup_field = 'project_id'
-    # def get(self, request, project_id=None):
-    #     project = Project.objects.get(project_id=project_id)
-    #     applications = Application.objects.filter(project=project)
-    #     return Response(applications, status=status.HTTP_200_OK)
+
+    def get(self, request, project_id=None, **kwargs):
+        applications = Application.objects.filter(project_id=project_id)
+        serializer = ApplicationSerializer(applications, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ApplicationDestroyView(generics.DestroyAPIView):
@@ -66,25 +68,33 @@ class ApplicationCreateView(generics.CreateAPIView):
     Can be accessed by a freelancer
     """
     permissions_classes = [permissions.IsAuthenticated]
-    authentication_classes = []
+    authentication_classes = [TokenAuthentication]
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
-    def create(self, request):
+    def create(self, request, **kwargs):
         """
         Create a new application for given project and freelancer
         :param request:
         :return:
         """
-        project = Project.objects.get(project_id=request.data['project'])
+        project = Project.objects.get(id=request.data['project'])
         if not project:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        freelancer = User.objects.get(id=request.data['freelancer'])
+        freelancer = request.user
         if not freelancer:
             return Response(status=status.HTTP_404_NOT_FOUND)
         application = Application(project=project, freelancer=freelancer)
-        serializer = ApplicationSerializer(application, data=request.data, context={'request': request})
-        if serializer.is_valid():
+        serializer_data = dict()
+        serializer_data['project'] = request.data['project']
+        serializer_data['freelancer'] = freelancer.id
+        serializer_data['bid'] = request.data['bid']
+        serializer_data['proposal'] = request.data['proposal']
+        try:
+            serializer = ApplicationSerializer(application, data=serializer_data)
+        except Exception as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -107,11 +117,11 @@ class EmploymentCreateView(generics.CreateAPIView):
     Can be accessed by a client
     """
     permissions_classes = [permissions.IsAuthenticated]
-    authentication_classes = []
+    authentication_classes = [TokenAuthentication]
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
-    def create(self, request):
+    def create(self, request, **kwargs):
         """
         Create a new employment for given application and a payment
         :param request:
@@ -120,12 +130,21 @@ class EmploymentCreateView(generics.CreateAPIView):
         application = Application.objects.get(id=request.data['application'])
         if not application:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        payment = Payment.objects.get(id=request.data['payment'])
+        # check if the user is an owner of the project
+        if request.user != application.project.owner:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        # create a payment
+        payment = Payment(payer_id=request.user.id, payee_id=application.freelancer.id, amount=application.bid, date=datetime.datetime.now())
+        payment.save()
         if not payment:
             return Response(status=status.HTTP_404_NOT_FOUND)
         employment = Employment(application=application, payment=payment)
-        serializer = EmploymentSerializer(employment, data=request.data, context={'request': request})
-        if serializer.is_valid():
+        serializer_data = dict()
+        serializer_data['application'] = request.data['application']
+        serializer_data['payment'] = payment.id
+        serializer = EmploymentSerializer(employment, data=serializer_data)
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
