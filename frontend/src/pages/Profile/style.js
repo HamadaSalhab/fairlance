@@ -39,6 +39,15 @@ export const InfoBox = styled.div`
   border-radius: 4px;
 `;
 
+export const InputField = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
 export const StyledPfp = styled.div`
   img {
     border-radius: 50%;
@@ -65,11 +74,15 @@ export const UploadPhoto = styled.div`
   margin-bottom: 0.75rem;
 `;
 
+export const ButtonsWrap = styled.div `
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const Button = styled.button`
   width: 5rem;
   padding: 10px;
-  margin-top: 1rem;
-  margin-right: 1rem;
   background-color: #1E88E5;
   border: solid #1E88E5 1px;
   color: #fff;
@@ -80,4 +93,12 @@ export const Button = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const UpdateMessage = styled.div`
+  width: auto;
+  color: #fff;
+  background-color: green;
+  padding: 10px;
+  border-radius: 4px;
 `;
