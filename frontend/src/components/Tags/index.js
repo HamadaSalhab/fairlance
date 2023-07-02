@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tag } from '../styles.js';
+import { Tag } from './style.js';
 
 const Tags = ({ tags }) => {
     return (

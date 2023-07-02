@@ -3,4 +3,6 @@
 *.log
 *.pid
 .idea/
+# Local Netlify folder
+.netlify
 contracts

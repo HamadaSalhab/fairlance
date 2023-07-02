@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthWrapper, InputField, Error, SubmitButton, InputFieldWrapper, EyeIcon } from './style';
 import { SignupForm, SignupDetails } from './style';
 import NavBar from '../../components/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 
 const LoginPage = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const { registerUser } = useContext(AuthContext);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -16,7 +18,7 @@ const LoginPage = () => {
 
 
   const handleSignup = (data) => {
-    // Handle signup logic
+    registerUser(data);
   };
 
   return (
@@ -28,16 +30,39 @@ const LoginPage = () => {
           <p>It's quick and easy</p>
           <SignupForm onSubmit={handleSubmit(handleSignup)}>
             {/* Signup form fields */}
-            <label htmlFor="username">Username</label>
+            <label htmlFor="First Name">First Name</label>
             <InputField
-              id="username"
+              id="firstname"
               type={'text'}
               placeholder=""
-              {...register('username', {
-                required: 'Username is required',
+              {...register('firstname', {
+                required: 'First Name is Required',
               })}
             />
-            {errors.username && <Error>{errors.username.message}</Error>}
+            {errors.firstname && <Error>{errors.firstname.message}</Error>}
+            <label htmlFor="First Name">Last Name</label>
+            <InputField
+              id="lastname"
+              type={'text'}
+              placeholder=""
+              {...register('lastname', {
+                required: 'Last Name is required',
+              })}
+            />
+            {errors.lastname && <Error>{errors.lastname.message}</Error>}
+            <label htmlFor="email">Email</label>
+            <InputField
+              type="email"
+              id="email"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+            />
+            {errors.email && <Error>{errors.email.message}</Error>}
             <InputFieldWrapper>
               <label htmlFor="password">Password</label>
               <InputField
@@ -69,7 +94,7 @@ const LoginPage = () => {
             </SubmitButton>
           </SignupForm>
           <p>
-            Already have an account? <Link to='/login'>Login</Link> instead.
+            Already have an account? <Link to='/login' className='move-btn'>Login</Link> instead.
           </p>
         </SignupDetails>
       </AuthWrapper>

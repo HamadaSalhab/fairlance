@@ -22,6 +22,7 @@ export const StyledNav = styled.ul`
                 color: #000;
                 font-size: 1.2rem;
                 font-weight: 500;
+                cursor: pointer;
                 &:hover {
                     color: #1E88E5;
                     transition: all 0.3s;
@@ -37,7 +38,7 @@ export const StyledNav = styled.ul`
                     height: 2.7rem;
                 }
             }
-            &:nth-child(3) {
+            &:nth-child(4) {
                 margin-right: auto;
             }
             .active {

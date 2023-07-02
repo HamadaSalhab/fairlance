@@ -24,4 +24,7 @@ export const StyledDetailedPost = styled.div`
     &>div:last-child{
         display: flex;
     }
+    p{
+        white-space: pre-line;
+    }
 `
