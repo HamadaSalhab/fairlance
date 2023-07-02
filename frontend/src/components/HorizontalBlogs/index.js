@@ -11,9 +11,7 @@ const HorizontalBlogs = ({ posts, postIdx, previousPost, nextPost, done }) => {
                 <div className='recent-posts'>
                     {
                         posts.map((post, idx) => {
-                            if (idx >= postIdx && idx < postIdx + 3)
-                                return <RecentPost post={post} key={idx} done={done} />
-                            return <></>
+                            return (idx >= postIdx && idx < postIdx + 3) && <RecentPost post={post} key={idx} done={done} />
                         })
                     }
                 </div>

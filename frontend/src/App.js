@@ -27,9 +27,6 @@ function App() {
             <Route path='/create-post' element={<CreatePost />}></Route>
           </Route>
           <Route path='/faq' element={<FAQ />} />
-          {/* 
-          TODO: add authentication to the following pages:
-        */}
           <Route path='/find-job' element={<FindJobPage />} />
           <Route path="/post/:id" element={<PostDetailsPage />} />
           <Route path='/profile' element={<Profile />} />

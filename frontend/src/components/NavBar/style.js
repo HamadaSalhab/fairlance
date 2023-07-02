@@ -17,7 +17,9 @@ export const StyledNav = styled.ul`
         margin: 0 auto;
         li {
             margin-left: 1rem;
-            a {
+            a,button {
+                border: none;
+                background-color: transparent;
                 text-decoration: none;
                 color: #000;
                 font-size: 1.2rem;

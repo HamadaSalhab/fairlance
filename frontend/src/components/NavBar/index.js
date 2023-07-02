@@ -6,7 +6,7 @@ import AuthContext from '../../context/AuthContext'
 
 const NavBar = ({ notfixed }) => {
 
-  const { user, logout } = useContext(AuthContext);
+  const { userFirstName, logout } = useContext(AuthContext);
 
   return (
     <StyledNav id="nav-bar" $notfixed={notfixed}>
@@ -21,13 +21,13 @@ const NavBar = ({ notfixed }) => {
         <li>
           <Link to='/create-post'>Add post</Link>
         </li>
-        {user ? (<>
+        {userFirstName ? (<>
           <li>
-            <a onClick={() => logout()}>Log out</a>
+            <button onClick={() => logout()}>Log out</button>
           </li>
           <li>
             {/* TODO: link the profile page */}
-            <a>{user}</a>
+            <Link to='/personal_page'>{userFirstName}</Link>
           </li>
         </>) : (
           <>
