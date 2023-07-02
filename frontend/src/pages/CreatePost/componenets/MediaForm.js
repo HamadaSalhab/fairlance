@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '../../../components/Button';
 import { FileUploader } from "react-drag-drop-files";
 import Select from 'react-select'
+import AuthContext from '../../../context/AuthContext';
 
 const fileTypes = ["JPEG", "PNG", "GIF"];
 
 const MediaForm = ({ nextForm, prevForm, TAGS_URL, tags, setTags }) => {
 
     const [suggestions, setSuggestions] = useState([]);
+    const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(TAGS_URL)
+        const req = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `token ${authToken}`,
+                'ngrok-skip-browser-warning': 'true'
+            }
+        }
+        fetch('/api/skills', req)
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                setSuggestions(data)
+                let tags = [];
+                for (let i = 0; i < data.length; i++) {
+                    let tag = {}
+                    tag.value = data[i].skill_id;
+                    tag.label = data[i].skill_name;
+                    tags.push(tag);
+                }
+                setSuggestions(tags)
             })
             .catch((error) => {
                 for (let i = 0; i < 3; i++) {
@@ -34,14 +52,14 @@ const MediaForm = ({ nextForm, prevForm, TAGS_URL, tags, setTags }) => {
         <form>
             <h2>Media & Tags</h2>
             <label htmlFor="tags-list">Add some tags related to your job</label>
-            <div style={{marginBottom:'1rem'}}>
+            <div style={{ marginBottom: '1rem' }}>
                 <Select
                     options={suggestions}
                     className='select-panel'
                     name='tags-list'
                     isMulti
                     value={tags}
-                    onChange={(value)=>setTags(value)}
+                    onChange={(value) => setTags(value)}
                 />
             </div>
             <label htmlFor="files">Upload extra files</label>
