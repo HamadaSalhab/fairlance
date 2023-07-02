@@ -1,11 +1,11 @@
 from rest_framework import generics
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
-
-from .serializers import UserSerializer
+from .models import Skill
+from .serializers import UserSerializer, SkillSerializer
 
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -23,3 +23,11 @@ class UserDetailAPIView(generics.RetrieveAPIView):
     lookup_field = 'pk'
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+
+class SkillListAPIView(generics.ListAPIView):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+

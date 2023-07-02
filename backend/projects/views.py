@@ -1,26 +1,20 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .serializers import ProjectSerializer, ProjectOwnerSerializer
 from .models import Project
-from users.serializers import UserSerializer
 
 class ProjectListAPIView(generics.ListAPIView):
     """
     List all projects
     Can be accessed by only logged-in users
     """
-
-    """
-    SELECT * from projects_project;
-    """
-    queryset = Project.objects.raw("select * from auth_user right join projects_project on auth_user.id = projects_project.owner_id")
+    queryset = Project.objects.all()
     serializer_class = ProjectOwnerSerializer
-    # authentication_classes = [TokenAuthentication]
+    # authentication_classes = [TokenAuthentication, SessionAuthentication]
     # permission_classes = [IsAuthenticated]
 
     
@@ -32,7 +26,7 @@ class ProjectCreateAPIView(generics.CreateAPIView):
     """
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication , SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
