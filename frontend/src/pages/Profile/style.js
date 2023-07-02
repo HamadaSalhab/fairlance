@@ -2,16 +2,17 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   box-sizing: border-box;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.2);
   border-radius: 1rem;
   background-color: #fff;
-  position: absolute;
-  margin: 1rem auto;
+  margin: 0 auto;
+  margin-top: 8rem;
+  margin-bottom: 5rem;
   padding: 2rem;
-  top: 4rem;
+  /* top: 4rem; */
   left: 0;
   right: 0;
   width: 70%;
@@ -34,7 +35,7 @@ export const InfoBox = styled.div`
   width: auto;
   padding: 10px;
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 `;
@@ -43,7 +44,7 @@ export const InputField = styled.input`
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 `;

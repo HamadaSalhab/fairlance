@@ -21,12 +21,12 @@ const MainView = () => {
         'ngrok-skip-browser-warning': 'true'
       }
     }
-    fetch('', req)
+    fetch('/api/users/id/', req)
       .then(response => {
         return response.json()
       })
       .then(data => {
-        // setPosts(data);
+        console.log(data);
       })
       .catch((error) => {
         // for (let i = 0; i < 3; i++) {
@@ -80,7 +80,7 @@ const MainView = () => {
           <Button onClick={handleUpdate}>
             Update
           </Button>
-          
+
         </ButtonsWrap>
       </ProfileInfo>
 
