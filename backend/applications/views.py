@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib.auth.models import User
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework import generics
@@ -68,7 +68,7 @@ class ApplicationCreateView(generics.CreateAPIView):
     Can be accessed by a freelancer
     """
     permissions_classes = [permissions.IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 

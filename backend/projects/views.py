@@ -4,8 +4,12 @@ from rest_framework.authentication import TokenAuthentication, SessionAuthentica
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
-from .serializers import ProjectSerializer, ProjectOwnerSerializer
+
+from users.serializers import Skill
+from .serializers import ProjectSerializer, ProjectDetailsSerializer, Required_SkillSerializer
 from .models import Project
+
+
 
 class ProjectListAPIView(generics.ListAPIView):
     """
@@ -13,9 +17,9 @@ class ProjectListAPIView(generics.ListAPIView):
     Can be accessed by only logged-in users
     """
     queryset = Project.objects.all()
-    serializer_class = ProjectOwnerSerializer
-    # authentication_classes = [TokenAuthentication, SessionAuthentication]
-    # permission_classes = [IsAuthenticated]
+    serializer_class = ProjectDetailsSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
     
 
@@ -36,7 +40,29 @@ class ProjectCreateAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         try:
             serializer.is_valid(raise_exception=True)
+            skills = None
+            try:
+                skills = request.data.get('skills')
+            except:
+                skills = None
+            if skills:
+                for skill in skills:
+                    skill_id = int(skill['skill_id'])
+                    try:
+                        skill_obj = Skill.objects.get(skill_id=skill_id)
+                    except:
+                        raise Exception('skill_id is not valid')
+                    
+            
             self.perform_create(serializer)
+            
+            if skills:
+                project_id = serializer.data.get('id')
+                data = [{'project': project_id, 'skill': skill.get('skill_id')} for skill in skills]
+                skillserializer = Required_SkillSerializer(data=data, many=True)
+                skillserializer.is_valid(raise_exception=True)
+                skillserializer.save()
+            
             response_data = {
                 'project_details': serializer.data,
                 'owner': {
@@ -49,6 +75,10 @@ class ProjectCreateAPIView(generics.CreateAPIView):
         except ValidationError as e:
             errors = e.detail
             return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        except Exception as e:
+            e = str(e)
+            return Response({'error-details': e}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProjectDetailAPIView(generics.RetrieveAPIView):
@@ -57,22 +87,10 @@ class ProjectDetailAPIView(generics.RetrieveAPIView):
     Can be accessed by anyone
     """
     queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
+    serializer_class = ProjectDetailsSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        user = User.objects.get(id=serializer.data['owner'])
-        response_data = {
-            'project_details': serializer.data,
-            'owner': {
-                'first_name': user.first_name,
-                'last_name': user.last_name
-            }
-        }
-        return Response(response_data)
 
 class ProjectUpdateAPIView(generics.UpdateAPIView):
     """

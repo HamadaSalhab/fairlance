@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 
 from django.urls import path, include
+from users.views import SkillListAPIView
 # Serializers define the API representation.
 
 # Wire up our API using automatic URL routing.
@@ -26,4 +27,5 @@ urlpatterns = [
     path('api/', include('applications.urls')),
     path('api/projects/',include('projects.urls')),
     path('api/users/',include('users.urls')),
+    path('api/skills/',SkillListAPIView.as_view())
 ]
