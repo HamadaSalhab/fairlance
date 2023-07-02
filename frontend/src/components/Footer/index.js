@@ -17,7 +17,7 @@ const Footer = () => {
                 <ul>
                     <li>FairLance</li>
                     <li><a href='#categories'>Categories</a></li>
-                    <li><a href='#projects'>Projects</a></li>
+                    <li><Link to='/find-job'>Projects</Link></li>
                     <li><a href='#membership'>Membership</a></li>
                     <li><a href='#get-verified'>Get verified</a></li>
                 </ul>

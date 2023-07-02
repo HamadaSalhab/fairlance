@@ -22,15 +22,31 @@ export const AuthProvider = ({ children }) => {
                     'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify({
+                    'first_name': data.firstname,
+                    'last_name': data.lastname,
                     'username': data.email,
                     'password': data.password
                 }),
             };
             console.log(req);
             const res = await fetch('/api/users/', req);
-            let ret = await res.json();
-            console.log(ret);
-            navigate('/login');
+            if (res.ok) {
+                let ret = await res.json();
+                console.log(ret);
+                notify('please login now')
+                navigate('/login');
+            }
+            else {
+                let ret = await res.json();
+                console.log(ret);
+                console.log(ret.username)
+                if (ret.username.includes('A user with that username already exists.')) {
+                    toast.error(`A username with this email exists try to login`);
+                }
+                else {
+                    toast.error(`Something went wrong`);
+                }
+            }
         }
         catch (e) {
             console.log(e);

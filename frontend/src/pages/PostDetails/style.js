@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const StyledPostDetailsComponent = styled.div`
     width: 85%;
     margin: 5rem auto;
+    min-height: 60vh;
     h4 {
         font-weight: 300;
         margin-right: 1rem;
