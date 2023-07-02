@@ -28,8 +28,7 @@ const PostDetailsPage = () => {
                 const ret = await res.json();
                 console.log(ret);
                 if (res.ok) {
-                    ret['project_details']['name'] = ret['owner']['first_name'] + ' ' + ret['owner']['last_name']
-                    setPost(ret['project_details']);
+                    setPost(ret);
                 }
             }
             catch (e) {
@@ -48,7 +47,7 @@ const PostDetailsPage = () => {
         <div>
             <NavBar />
             <StyledPostDetailsComponent>
-                {post && <DetailedPost post={post} />}
+                <DetailedPost post={post} />
             </StyledPostDetailsComponent>
             <Footer />
         </div>

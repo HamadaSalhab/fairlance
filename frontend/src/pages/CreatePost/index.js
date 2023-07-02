@@ -8,11 +8,14 @@ import PricingForm from './componenets/PricingForm';
 import FinalPreview from './componenets/FinalPreview';
 import IntroForm from './componenets/IntroForm';
 import AuthContext from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TAGS_URL = "http://localhost:3030/tags"
 
 const index = () => {
     const { authToken } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [range, setRange] = useState([]);
     const [title, setTitle] = useState("");
     const [formIdx, setFormIdx] = useState(0);
@@ -65,6 +68,11 @@ const index = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const tags_req = [];
+        for (let i = 0; i < tags.length; i++) {
+            tags_req.push({ 'skill_id': tags[i].value });
+        }
+        console.log(tags_req);
         const req = {
             method: 'POST',
             headers: {
@@ -77,7 +85,8 @@ const index = () => {
                 'description': description,
                 'deadline': deadline,
                 'price_min': range[0],
-                'price_max': range[1]
+                'price_max': range[1],
+                'skills': tags_req
             })
         }
         console.log(req);
@@ -85,10 +94,12 @@ const index = () => {
             const res = await fetch('/api/projects/add/', req);
             const ret = await res.json();
             console.log(ret);
+            navigate(`/post/${ret.project_id}`);
+            toast('post created successfully');
             console.log(res);
         }
         catch (e) {
-
+            toast.error('something went wrong please recheck')
         }
     }
 
