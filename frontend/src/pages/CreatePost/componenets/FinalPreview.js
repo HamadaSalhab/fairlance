@@ -44,9 +44,10 @@ const FinalPreview = ({ handleSubmit, prevForm, title, body, tags, range, deadli
     }, []);
 
     const transfer = (tags) => {
+        console.log(tags);
         let ret = [];
         for (let key in tags) {
-            ret.push(tags[key].label);
+            ret.push({ 'skill_name': tags[key].label });
         }
         console.log(ret);
         return ret;

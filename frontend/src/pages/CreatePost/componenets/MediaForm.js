@@ -6,7 +6,7 @@ import AuthContext from '../../../context/AuthContext';
 
 const fileTypes = ["JPEG", "PNG", "GIF"];
 
-const MediaForm = ({ nextForm, prevForm, TAGS_URL, tags, setTags }) => {
+const MediaForm = ({ nextForm, prevForm, tags, setTags }) => {
 
     const [suggestions, setSuggestions] = useState([]);
     const { authToken } = useContext(AuthContext);
@@ -41,7 +41,7 @@ const MediaForm = ({ nextForm, prevForm, TAGS_URL, tags, setTags }) => {
                 }
                 console.log(error);
             })
-    }, [setSuggestions, TAGS_URL]);
+    }, [setSuggestions]);
 
     const [file, setFile] = useState(null);
     const handleChange = (f) => {

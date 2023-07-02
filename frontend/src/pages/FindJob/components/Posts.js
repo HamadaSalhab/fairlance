@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import Post from '../../../components/Post';
 import { StyledPosts } from '../styles';
 import AuthContext from '../../../context/AuthContext';
+import { List } from 'react-content-loader'
 
-const Posts = ({ URL }) => {
+const Posts = () => {
 
     const { authToken } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
@@ -31,18 +32,27 @@ const Posts = ({ URL }) => {
                 }
                 console.log(error);
             })
-    }, [setPosts, URL]);
+    }, [setPosts]);
 
     return (
         <StyledPosts>
             {
-                posts.map((post, idx) => {
-                    return (
-                        <Post post={post} key={idx}>
-                        </Post>
-                    );
-                }
-                )
+                posts.length > 0 ?
+                    posts.map((post, idx) => {
+                        return (
+                            <Post post={post} key={idx}>
+                            </Post>
+                        );
+                    }
+                    )
+                    :
+                    <div className='loading-container'>
+                        <List className='loading' />
+                        <div className="seperate" style={{ margin: '2rem 0', width: '100%' }}></div>
+                        <List className='loading' />
+                        <div className="seperate" style={{ margin: '2rem 0', width: '100%' }}></div>
+                        <List className='loading' />
+                    </div>
             }
         </StyledPosts>
     );

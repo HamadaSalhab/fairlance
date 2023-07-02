@@ -2,11 +2,15 @@ import React, { useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
+import { toast } from 'react-toastify';
 
 const PrivateRoute = () => {
+    const notify = (msg) => toast(msg);
     const { user } = useContext(AuthContext);
     useEffect(() => {
-        console.log(user);
+        if (!user) {
+            notify('You need to login first')
+        }
     }, []);
     return user ? <Outlet /> : <Navigate to="/login" />;
 }

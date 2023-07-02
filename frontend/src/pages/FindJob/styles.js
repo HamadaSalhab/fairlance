@@ -69,12 +69,11 @@ export const StyledFindContainer = styled.div`
     .search-options {
         display: flex;
         .sort-by {
-            width: 25%;
+            width: fit-content;
             margin-left: auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-left: auto;
         }
     }
     .posts-container {
@@ -112,5 +111,12 @@ export const StyledPosts = styled.div`
         line-clamp: 4;
         -webkit-box-orient: vertical;
         margin: 1rem 0.5rem;
+    }
+    .loading-container{
+        padding-top: 2rem;
+        .loading{
+            padding-left: 2rem;
+            height: 180px;
+        }
     }
 `
