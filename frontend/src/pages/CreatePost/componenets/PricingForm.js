@@ -27,7 +27,7 @@ const PricingForm = ({ prevForm, nextForm, range, setRange, deadline, setDeadlin
     return (
         <form>
             <h2>Pricing & deadline</h2>
-            <label htmlFor="price-tange">Add a price to your project</label>
+            <label htmlFor="price-range">Add a price to your project</label>
             <p>Please consider the estimiated working hours before setting your price <br /> freelancers can propose any price within this range</p>
             <div className='range-values'>
                 <div>

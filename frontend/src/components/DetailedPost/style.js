@@ -28,6 +28,7 @@ export const StyledDetailedPost = styled.div`
     p{
         white-space: pre-line;
     }
+
 `
 
 export const StyledApply = styled.div`

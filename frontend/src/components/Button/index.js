@@ -2,9 +2,9 @@ import React from 'react'
 import { StyledButton } from './style'
 
 
-const Button = ({ children, primary, extrapadding, onClick }) => {
+const Button = ({ type, children, primary, extrapadding, onClick }) => {
     return (
-        <StyledButton $primary={primary} $extrapadding={extrapadding} onClick={onClick} >
+        <StyledButton $type={type} $primary={primary} $extrapadding={extrapadding} onClick={onClick} >
             {children}
         </StyledButton>
     )
