@@ -32,9 +32,8 @@ function App() {
           <Route path='/find-job' element={<FindJobPage />} />
           <Route path="/post/:id" element={<PostDetailsPage />} />
           <Route path='/post/:projectid/application/:id' element={<Application />} />
+          <Route path='/profile/:id' element={<Profile />} />
         </Routes>
-          <Route path='/profile/:id' element={<Profile/>} />
-      </Routes>
       </AuthProvider>
       <ToastContainer position='bottom-right' autoClose={2000} hideProgressBar={true} />
     </>

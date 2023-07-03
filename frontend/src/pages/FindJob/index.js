@@ -33,10 +33,10 @@ const FindJobPage = () => {
                 </div>
                 <div className='posts-container'>
                     <Filters />
-                    <Posts/>
+                    <Posts />
                 </div>
             </StyledFindContainer>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

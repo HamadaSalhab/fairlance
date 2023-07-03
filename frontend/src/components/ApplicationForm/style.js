@@ -8,13 +8,13 @@ export const StyledApplicationForm = styled.div`
   border-bottom: solid 1px #d1d1d1;
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 2000;
     margin-bottom: 2rem;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 1500;
     margin-bottom: 0.5rem;
   }
