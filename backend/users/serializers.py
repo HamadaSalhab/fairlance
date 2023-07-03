@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from .models import Skill
-
+from rest_framework.response import Response
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,6 +26,15 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
         )
+    
+    def update(self, instance, validated_data):
+        print(instance)
+        print(self.context["request"].user)
+        if self.context['request'].user.id != instance.id:
+            return instance
+        return super().update(instance, validated_data)
+
+
 
 
 class SkillSerializer(serializers.ModelSerializer):

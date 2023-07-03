@@ -38,8 +38,8 @@ class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
     lookup_field = "pk"
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class SkillListAPIView(generics.ListAPIView):

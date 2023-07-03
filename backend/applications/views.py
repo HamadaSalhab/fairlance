@@ -57,7 +57,7 @@ class ApplicationUpdateView(generics.UpdateAPIView):
     Can be accessed by a moderator only?
     """
     permissions_classes = [permissions.IsAuthenticated]
-    authentication_classes = []
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
@@ -78,7 +78,9 @@ class ApplicationCreateView(generics.CreateAPIView):
         :param request:
         :return:
         """
+        print(request.data['project'])
         project = Project.objects.get(id=request.data['project'])
+        print(project)
         if not project:
             return Response(status=status.HTTP_404_NOT_FOUND)
         freelancer = request.user
