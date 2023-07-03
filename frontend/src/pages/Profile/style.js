@@ -9,8 +9,8 @@ export const StyledContainer = styled.div`
   border-radius: 1rem;
   background-color: #fff;
   margin: 0 auto;
-  margin-top: 8rem;
-  margin-bottom: 5rem;
+  margin-top: 10rem;
+  margin-bottom: 7rem;
   padding: 2rem;
   /* top: 4rem; */
   left: 0;
@@ -47,6 +47,7 @@ export const InputField = styled.input`
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-weight: 550;
 `;
 
 export const StyledPfp = styled.div`

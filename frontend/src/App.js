@@ -29,7 +29,7 @@ function App() {
           <Route path='/faq' element={<FAQ />} />
           <Route path='/find-job' element={<FindJobPage />} />
           <Route path="/post/:id" element={<PostDetailsPage />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/:id' element={<Profile/>} />
       </Routes>
       </AuthProvider>
       <ToastContainer position='bottom-right' autoClose={2000} hideProgressBar={true} />
