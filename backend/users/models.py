@@ -1,29 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Skills(models.Model):
+
+class Skill(models.Model):
     skill_id = models.IntegerField(primary_key=True)
     skill_name = models.CharField(max_length=255)
 
-class Users(models.Model):
-    user_id = models.IntegerField(primary_key=True)
-    username = models.CharField(max_length=256)
-    email = models.EmailField()
-    password = models.CharField(max_length=256)
-    firstname = models.CharField(max_length=256)
-    surname = models.CharField(max_length=256)
-    is_moderator = models.BooleanField(default=False)
 
-class Freelancers(models.Model):
-    freelancer = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='freelancing')
+class Freelancer(models.Model):
+    freelancer = models.OneToOneField(User, on_delete=models.CASCADE, related_name='freelancing')
     rating = models.FloatField()
 
-class Available_Skills(models.Model):
-   freelancer = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='available_skills')
-   skill = models.ForeignKey(Skills, on_delete=models.CASCADE)
 
-class Messages(models.Model):
+class Available_Skill(models.Model):
+    freelancer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='available_skills')
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
+
+
+class Message(models.Model):
     message_id = models.IntegerField(primary_key=True)
-    sender = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='sent_messages')
-    receiver = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='received_messages')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
     msg_date = models.DateTimeField()
     msg_content = models.CharField(max_length=256)
