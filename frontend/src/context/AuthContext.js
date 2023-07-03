@@ -108,7 +108,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('userFirstName');
         localStorage.removeItem('userLastName');
         notify('Logged out successfully');
-        navigate('/')
+        navigate('/');
+        setAuthToken(null);
+        setUser(null);
+        setUserFirstName(null);
     }
     let contextData = {
         loginUser: loginUser,

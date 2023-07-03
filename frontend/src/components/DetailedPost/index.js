@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import Tags from '../Tags';
-import { StyledDetailedPost, StyledApply } from './style';
+import { StyledDetailedPost } from './style';
 import Button from '../Button';
 import { Code } from 'react-content-loader';
+import Applications from './components/Applications';
 
 const DetailedPost = ({ post }) => {
     const formatDate = (date) => {

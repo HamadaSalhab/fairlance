@@ -67,3 +67,33 @@ export const StyledApply = styled.div`
         }
     }
 `
+
+export const StyledApplications = styled.div`
+    width: 100%;
+    background-color: #fff;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
+    .price-info{
+        display: flex;
+        .price-range{
+            margin-right: auto;
+        }
+    }
+    button{
+        padding: 0.5rem;
+    }
+    p{
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    &>div{
+        padding: 1.5rem 1.5rem;
+        border-bottom: solid 1px #a2a2a2;
+        &:last-child{
+            border: none;
+        }
+    }
+`

@@ -6,7 +6,6 @@ import Recents from '../../components/Recents';
 import Footer from '../../components/Footer';
 import WhyUs from './Components/WhyUs';
 const RECENT_POSTS_URL = process.env.REACT_APP_RECENT_POSTS || "http://localhost:3030/delivered-posts";
-const DERLIVERED_POSTS_URL = process.env.REACT_APP_DELIVERED_POSTS || "http://localhost:3030/recent-posts";
 
 const Home = () => {
     return (
@@ -16,8 +15,6 @@ const Home = () => {
             <Options />
             <WhyUs />
             <Recents URL={RECENT_POSTS_URL} done={false} />
-            <div className="seperate"></div>
-            <Recents URL={DERLIVERED_POSTS_URL} done={true} />
             <Footer />
         </div>
     )
