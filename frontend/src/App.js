@@ -12,6 +12,7 @@ import PrivateRoute from './utils/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
           <Route path='/faq' element={<FAQ />} />
           <Route path='/find-job' element={<FindJobPage />} />
           <Route path="/post/:id" element={<PostDetailsPage />} />
-        </Routes>
+          <Route path='/profile/:id' element={<Profile/>} />
+      </Routes>
       </AuthProvider>
       <ToastContainer position='bottom-right' autoClose={2000} hideProgressBar={true} />
     </>
