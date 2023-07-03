@@ -121,7 +121,8 @@ export const AuthProvider = ({ children }) => {
         authToken: authToken,
         userID: userID,
         userFirstName: userFirstName,
-        userLastName: userLastName
+        userLastName: userLastName,
+        setUserFirstName: setUserFirstName
     }
     return (
         <AuthContext.Provider value={contextData}>

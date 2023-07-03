@@ -11,7 +11,7 @@ const MainView = () => {
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState(defaultPfp);
   const [cv, setCV] = useState(null);
-  const { authToken, userID } = useContext(AuthContext)
+  const { authToken, userID, setUserFirstName } = useContext(AuthContext)
   const { id } = useParams();
 
   useEffect(() => {
@@ -59,6 +59,7 @@ const MainView = () => {
         toast("Account updated successfully");
         localStorage.removeItem("userFirstName");
         localStorage.setItem("userFirstName", JSON.stringify(firstName));
+        setUserFirstName(data.first_name);
       })
       .catch((error) => {
         console.log(error);
