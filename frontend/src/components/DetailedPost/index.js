@@ -3,6 +3,7 @@ import Tags from '../Tags';
 import { StyledDetailedPost } from './style';
 import Button from '../Button';
 import { Code } from 'react-content-loader';
+import Applications from './components/Applications';
 import ApplicationForm from '../ApplicationForm';
 
 const DetailedPost = ({ post }) => {

@@ -79,6 +79,9 @@ export const StyledPost = styled.div`
         }
     }
     .apply-info {
+        p{
+            margin-right: auto;
+        }
         bottom: 0;
         display: flex;
         padding: 0.5rem 0;

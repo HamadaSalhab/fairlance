@@ -1,17 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import HorizontalBlogs from '../HorizontalBlogs';
+import AuthContext from '../../context/AuthContext';
 
 const Recents = ({ URL, done }) => {
 
     const [posts, setPosts] = useState([]);
     const [postIdx, setPostIdx] = useState(0);
+    const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(URL)
+        const req = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `token ${authToken}`,
+                'ngrok-skip-browser-warning': 'true'
+            }
+        }
+        fetch('/api/projects/recent/',req)
             .then(response => {
                 return response.json()
             })
             .then(data => {
+                console.log(data)
                 setPosts(data)
             })
             .catch((error) => {

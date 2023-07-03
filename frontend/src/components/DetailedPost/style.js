@@ -28,4 +28,73 @@ export const StyledDetailedPost = styled.div`
     p{
         white-space: pre-line;
     }
+
+`
+
+export const StyledApply = styled.div`
+    padding: 1rem 1.5rem;
+    width: 100%;
+    background-color: #fff;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
+    label{
+        font-weight: 600;
+        display: block;
+        margin-top: 1rem;
+    }
+    textarea{
+        margin-left: 0.7rem;
+        margin-top: 0.5rem;
+        width: 95%;
+        height: 65%;
+        resize: none;
+        color: #616161;
+        font-size: 1rem;
+        padding: 0.6rem;
+        height: 250px;
+    }
+    p{
+        color: #a2a2a2;
+    }
+    .proposal{
+        display: flex;
+        button{
+            margin-left: auto;
+        }
+        input{
+            margin-left: 1rem;
+            padding: 0.5rem;
+            width: 80px
+        }
+    }
+`
+
+export const StyledApplications = styled.div`
+    width: 100%;
+    background-color: #fff;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
+    .price-info{
+        display: flex;
+        .price-range{
+            margin-right: auto;
+        }
+    }
+    button{
+        padding: 0.5rem;
+    }
+    p{
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    &>div{
+        padding: 1.5rem 1.5rem;
+        border-bottom: solid 1px #a2a2a2;
+        &:last-child{
+            border: none;
+        }
+    }
 `

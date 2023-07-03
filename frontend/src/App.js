@@ -12,6 +12,8 @@ import PrivateRoute from './utils/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+
+import Application from './components/DetailedPost/components/Application';
 import Profile from './pages/Profile/Profile';
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
           <Route path='/faq' element={<FAQ />} />
           <Route path='/find-job' element={<FindJobPage />} />
           <Route path="/post/:id" element={<PostDetailsPage />} />
+          <Route path='/post/:projectid/application/:id' element={<Application />} />
+        </Routes>
           <Route path='/profile/:id' element={<Profile/>} />
       </Routes>
       </AuthProvider>

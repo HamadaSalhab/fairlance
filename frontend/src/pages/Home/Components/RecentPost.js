@@ -1,6 +1,8 @@
 import React from 'react'
 import Button from '../../../components/Button'
 import { StyledPost } from '../style'
+import logo from '../../../assets/images/logo-new.png'
+import { Link } from 'react-router-dom'
 
 const RecentPost = ({ post, done }) => {
     return (
@@ -12,17 +14,17 @@ const RecentPost = ({ post, done }) => {
                     </h4>
                 </div>
                 <div className="post-image">
-                    <img src={post.img} alt="" />
+                    <img srcSet={logo} alt="" />
                 </div>
                 <div className='post-paragraph'>
                     <p>
-                        {post.body}
+                        {post.description}
                     </p>
                 </div>
             </div>
             <div className="apply-info">
-                {done ? <Button>More Details</Button> : <Button>Apply</Button>}
-                <p>{post.price}</p>
+                <p>{post.price_min}-{post.price_max}$</p>
+                {done ? <Button>More Details</Button> : <Link to={`/post/${post.id}`}><Button>Read More</Button></Link>}
             </div>
         </StyledPost>
     )
