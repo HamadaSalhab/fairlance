@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.1",
@@ -42,7 +43,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://3897-188-130-155-162.ngrok-free.app",
   "devDependencies": {
     "depcheck": "^1.4.3"
   }

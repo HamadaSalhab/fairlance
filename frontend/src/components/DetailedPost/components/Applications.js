@@ -3,14 +3,13 @@ import { StyledApplications } from '../style'
 import AuthContext from '../../../context/AuthContext'
 import Button from '../../Button'
 import { Link } from 'react-router-dom'
+import EmptyApplication from './EmptyApplication'
 
 const Applications = ({ id }) => {
 
     const { authToken } = useContext(AuthContext);
     const [applications, setApplications] = useState([]);
-
     useEffect(() => {
-        console.log(id)
         const req = {
             method: 'GET',
             headers: {
@@ -35,6 +34,10 @@ const Applications = ({ id }) => {
 
     return (
         <StyledApplications>
+            <h3>
+                Applications:
+            </h3>
+            {applications.length==0 && <EmptyApplication />}
             {applications.map((application, idx) => {
                 console.log(application);
                 return (

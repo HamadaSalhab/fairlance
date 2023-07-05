@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import AuthContext from '../../../context/AuthContext';
 import Button from '../../Button';
 import { Link } from 'react-router-dom';
 import { StyledApplication } from '../style';
 import NavBar from '../../NavBar';
 import Footer from '../../Footer';
+import { toast } from 'react-toastify';
 
 const Application = () => {
     const { projectid, id } = useParams();
     const { authToken } = useContext(AuthContext);
     const [application, setApplication] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log(projectid);
@@ -36,6 +38,12 @@ const Application = () => {
             })
     }, []);
 
+    const hire = () => {
+        // TODO: implement hiring
+        toast('You have succesffully hired the freelancer. We will tell you when the client accepts your offer');
+        navigate(`/post/${projectid}`)
+    }
+
     return (
         <>
             <NavBar notfixed={true} />
@@ -53,9 +61,7 @@ const Application = () => {
                             <Link to={`/post/${projectid}`}>
                                 <Button>Return</Button>
                             </Link>
-                            <Link to={`application/${application.id}`}>
-                                <Button primary={true}>Hire</Button>
-                            </Link>
+                            <Button primary={true} onClick={hire}>Hire</Button>
                         </div></>
                     }
                 </StyledApplication>

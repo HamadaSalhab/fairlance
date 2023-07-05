@@ -11,7 +11,7 @@ const MainView = () => {
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState({ preview: defaultPfp, data: '' });
   const [cv, setCV] = useState(null);
-  const { authToken, userID, setUserFirstName } = useContext(AuthContext)
+  const { authToken, userID, setUserFirstName, userFirstName } = useContext(AuthContext)
   const { id } = useParams();
 
   useEffect(() => {
@@ -24,19 +24,23 @@ const MainView = () => {
         'ngrok-skip-browser-warning': 'true'
       }
     }
-    fetch(`/api/users/${id}/`, req)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        console.log(data);
-        setFirstName(data.first_name);
-        setLastName(data.last_name);
-        setEmail(data.username);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    const getInfo = async () => {
+      await fetch(`/api/users/${id}/`, req)
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          console.log(data);
+          setFirstName(data.first_name);
+          setLastName(data.last_name);
+          setEmail(data.username);
+          setPhoto({ preview: data.profile_image, data: '' })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    getInfo();
   }, []);
 
   const handleUpdate = () => {
@@ -51,21 +55,49 @@ const MainView = () => {
       }
       , body: formData
     };
-    console.log(req);
-    fetch(`/api/users/${id}/update/`, req)
+    const req2 = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': `token ${authToken}`,
+        'ngrok-skip-browser-warning': 'true'
+      }
+      , body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName
+      })
+    }
+    fetch(`/api/users/${id}/update/`, req2)
       .then(response => {
         return response.json()
       })
       .then(data => {
         toast("Account updated successfully");
+        console.log(data);
+        setFirstName(data.first_name);
+        setLastName(data.last_name);
         localStorage.removeItem("userFirstName");
-        localStorage.setItem("userFirstName", JSON.stringify(firstName));
+        localStorage.setItem("userFirstName", JSON.stringify(data.first_name));
         setUserFirstName(data.first_name);
       })
       .catch((error) => {
         console.log(error);
         toast.error("An Error Occurred, please try again")
       })
+    if (photo.data)
+      fetch(`/api/users/${id}/update/profile-image/`, req)
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          toast("Profile photo updated successfully");
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("An Error Occurred, please try again")
+        })
   };
 
   const handlePhotoChange = (e) => {
