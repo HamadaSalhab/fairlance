@@ -25,13 +25,19 @@ function App() {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/faq' element={<FAQ />}></Route>
-          <Route path='create-post' element={<PrivateRoute />}>
+          <Route path='/create-post' element={<PrivateRoute />}>
             <Route path='/create-post' element={<CreatePost />}></Route>
           </Route>
           <Route path='/faq' element={<FAQ />} />
-          <Route path='/find-job' element={<FindJobPage />} />
-          <Route path="/post/:id" element={<PostDetailsPage />} />
-          <Route path='/post/:projectid/application/:id' element={<Application />} />
+          <Route path='/find-job' element={<PrivateRoute />}>
+            <Route path='/find-job' element={<FindJobPage />}></Route>
+          </Route>
+          <Route path='/post/:id' element={<PrivateRoute />}>
+            <Route path='/post/:id' element={<PostDetailsPage />}></Route>
+          </Route>
+          <Route path='/post/:projectid/application/:id' element={<PrivateRoute />}>
+            <Route path='/post/:projectid/application/:id' element={<Application />}></Route>
+          </Route>
           <Route path='/profile/:id' element={<Profile />} />
         </Routes>
       </AuthProvider>

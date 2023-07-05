@@ -9,7 +9,7 @@ const MainView = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [photo, setPhoto] = useState(defaultPfp);
+  const [photo, setPhoto] = useState({ preview: defaultPfp, data: '' });
   const [cv, setCV] = useState(null);
   const { authToken, userID, setUserFirstName } = useContext(AuthContext)
   const { id } = useParams();
@@ -40,17 +40,18 @@ const MainView = () => {
   }, []);
 
   const handleUpdate = () => {
-
+    const formData = new FormData();
+    formData.append('profile_image', photo.data);
     const req = {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Authorization': `token ${authToken}`,
         'ngrok-skip-browser-warning': 'true'
       }
-      , body: JSON.stringify({ first_name: firstName, last_name: lastName })
-    }
+      , body: formData
+    };
+    console.log(req);
     fetch(`/api/users/${id}/update/`, req)
       .then(response => {
         return response.json()
@@ -68,9 +69,7 @@ const MainView = () => {
   };
 
   const handlePhotoChange = (e) => {
-    const selectedPhoto = e.target.files[0];
-    const photoURL = URL.createObjectURL(selectedPhoto);
-    setPhoto(photoURL);
+    setPhoto({ preview: URL.createObjectURL(e.target.files[0]), data: e.target.files[0] });
   };
 
   const handleCVchange = (e) => {
@@ -135,12 +134,12 @@ const MainView = () => {
       </ProfileInfo>
 
       <StyledPfp>
-        <img src={defaultPfp} alt="Profile Picture" />
+        <img src={photo.preview} alt="" />
         {userID == id ?
           <>
             <label htmlFor="photo">Update Photo:</label>
             <UploadPhoto>
-              <input type="file" id="photo" name="photo" onChange={handlePhotoChange} />
+              <input type="file" id="photo" name="photo" src={photo.preview} onChange={handlePhotoChange} />
             </UploadPhoto>
           </>
           :

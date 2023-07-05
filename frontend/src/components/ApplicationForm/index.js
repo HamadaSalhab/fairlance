@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { StyledApplicationForm, StyledApply } from "./style";
+import { StyledApplicationForm } from "./style";
 import Button from "../Button";
 import AuthContext from "../../context/AuthContext";
 

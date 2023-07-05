@@ -1,13 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Tags from '../Tags';
 import { StyledDetailedPost } from './style';
 import Button from '../Button';
 import { Code } from 'react-content-loader';
 import Applications from './components/Applications';
 import ApplicationForm from '../ApplicationForm';
+import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 
 const DetailedPost = ({ post }) => {
   const [showForm, setShowForm] = useState(false);
+  const [showApplications, setShowApplications] = useState(false);
+  const { userID } = useContext(AuthContext);
+  useEffect(() => {
+    console.log(userID);
+    if (post && userID === post.owner) {
+      setShowApplications(true);
+      console.log('ok');
+    }
+  }, [post]);
 
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -22,7 +33,9 @@ const DetailedPost = ({ post }) => {
       <>
         <StyledDetailedPost>
           <div>
-            <h4>{post.first_name} {post.last_name}</h4>
+            <Link to={`/profile/${post.owner}`}>
+              <h4>{post.first_name} {post.last_name}</h4>
+            </Link>
             <div style={{ color: '#7b7b7b' }}> <i className="fa-regular fa-clock" style={{ padding: '0.4rem 0.4rem 0 0.4rem' }}></i>deadline {formatDate(new Date(post.deadline))}</div>
           </div>
           <h3>{post.title}</h3>
@@ -41,7 +54,8 @@ const DetailedPost = ({ post }) => {
             )}
           </div>
         </StyledDetailedPost>
-        {showForm && <ApplicationForm projectId={post.id}/>}
+        {showForm && <ApplicationForm projectId={post.id} />}
+        {showApplications && <Applications id={post.id} />}
       </>
       :
       <StyledDetailedPost>

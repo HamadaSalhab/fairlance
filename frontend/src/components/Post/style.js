@@ -5,8 +5,14 @@ export const StyledPost = styled.div`
     padding: 1rem 1.5rem;
     &>div:first-child {
         display: flex;
-        h4 {
-            margin-right: auto;
+        div {
+            margin-left: auto;
+        }
+        h4{
+            color: #000;
+            &:hover{
+                color: #1E88E5;
+            }
         }
     }
     .price-range {

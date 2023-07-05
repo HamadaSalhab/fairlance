@@ -17,26 +17,25 @@ const NavBar = ({ notfixed }) => {
         </li>
         <li><Link to='/'>Home</Link></li>
         <li>
-          <Link to='/find-job'>Find job</Link>
+          <Link to='/find-job' state={'/find-job'}>Find job</Link>
         </li>
         <li>
-          <Link to='/create-post'>Add post</Link>
+          <Link to='/create-post' state={'/create-post'}>Add post</Link>
         </li>
         {userFirstName ? (<>
           <li>
             <button onClick={() => logout()}>Log out</button>
           </li>
           <li>
-            {/* TODO: link the profile page */}
             <Link to={`/profile/${userID}`}>{userFirstName}</Link>
           </li>
         </>) : (
           <>
             <li>
-              <Link to='/login' state={{ isSignin: true }}>Log in</Link>
+              <Link to='/login' state={'/'}>Log in</Link>
             </li>
             <li>
-              <Link to='/signup' state={{ isSignin: false }}>Sign up</Link>
+              <Link to='/signup' state={'/'}>Sign up</Link>
             </li>
           </>
         )

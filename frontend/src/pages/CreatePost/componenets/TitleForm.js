@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import RadioButton from '../../../components/RadioButton';
 import Button from '../../../components/Button';
+import ErrorMessage from '../../../components/ErrorMessage';
 
 const TitleForm = ({ category, clickedOption, title, setTitle, nextForm }) => {
+
+  const [titleError, setTitleError] = useState(false);
 
   useEffect(() => {
     document.getElementById("title").addEventListener('keypress', (e) => {
@@ -11,6 +14,14 @@ const TitleForm = ({ category, clickedOption, title, setTitle, nextForm }) => {
       }
     })
   }, []);
+  const check = (e, nextCall) => {
+    if (!title) {
+      setTitleError(true);
+    }
+    else {
+      nextCall(e);
+    }
+  }
 
   return (
     <form>
@@ -18,6 +29,7 @@ const TitleForm = ({ category, clickedOption, title, setTitle, nextForm }) => {
       <label htmlFor="title">Write a title for your job post</label>
       <p>Keep it Clear, Descriptive, and Emphasize the Key Point of Your Project</p>
       <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <ErrorMessage errorMsg='Title is required' errorState={titleError} />
       <label htmlFor="category">Job category</label>
       <p>Select the main category for your job post</p>
       <div className='job-category'>
@@ -28,9 +40,9 @@ const TitleForm = ({ category, clickedOption, title, setTitle, nextForm }) => {
         <RadioButton id="writing" name="writing" value="Writing" text="Writing" onChange={clickedOption} checked={category.writing} />
       </div>
       <div className='next-page'>
-        <Button primary={true} onClick={nextForm}>Next page</Button>
+        <Button primary={true} onClick={(e) => { e.preventDefault(); check(e, nextForm); }}>Next page</Button>
       </div>
-    </form>
+    </form >
   )
 }
 

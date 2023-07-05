@@ -5,16 +5,16 @@ export const StyledPostDetailsComponent = styled.div`
     margin: 5rem auto;
     min-height: 60vh;
     h4 {
-        font-weight: 300;
         margin-right: 1rem;
         display: inline-block;
+        color: #777;
+        &:hover{
+            color: #1E88E5;
+        }
     }
     h3 {
         margin-top: 0.5rem;
         overflow-wrap: break-word; /* Add this line to allow long words to wrap */
-    }
-    h4 {
-        font-weight: 500;
     }
     p {
         overflow-wrap: break-word; /* Add this line to allow long words to wrap */
