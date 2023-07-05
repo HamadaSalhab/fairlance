@@ -13,6 +13,7 @@ const DetailedPost = ({ post }) => {
   const [showApplications, setShowApplications] = useState(false);
   const { userID } = useContext(AuthContext);
   useEffect(() => {
+    window.scrollTo(0, 0)
     console.log(userID);
     if (post && userID === post.owner) {
       setShowApplications(true);
@@ -47,11 +48,15 @@ const DetailedPost = ({ post }) => {
 
               <div>{parseInt(post.price_max)} $</div>
             </div>
-            {!showForm ? (
-              <Button onClick={toggleForm}>Apply</Button>
-            ) : (
-              <Button onClick={toggleForm}>Close</Button>
-            )}
+            {!showApplications &&
+              <>
+                {!showForm ? (
+                  <Button onClick={toggleForm}>Apply</Button>
+                ) : (
+                  <Button onClick={toggleForm}>Close</Button>
+                )}
+              </>
+            }
           </div>
         </StyledDetailedPost>
         {showForm && <ApplicationForm projectId={post.id} />}

@@ -105,6 +105,10 @@ export const StyledApplications = styled.div`
             border: none;
         }
     }
+    h3{
+        padding: 0.5rem;
+        border-bottom: solid 1px;
+    }
 `
 
 export const StyledApplication = styled.div`
