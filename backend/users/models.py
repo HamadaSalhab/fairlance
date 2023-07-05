@@ -7,6 +7,12 @@ class Skill(models.Model):
     skill_name = models.CharField(max_length=255)
 
 
+class Wallet(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='wallet')
+    address = models.CharField(max_length=64)
+    balance = models.IntegerField(default=0)
+
+
 class Freelancer(models.Model):
     freelancer = models.OneToOneField(User, on_delete=models.CASCADE, related_name='freelancing')
     rating = models.FloatField()

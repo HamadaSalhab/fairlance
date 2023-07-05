@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
 from .models import Skill
-from .serializers import UserSerializer, SkillSerializer, UserUpdateSerializer
+from .serializers import UserSerializer, SkillSerializer, UserUpdateSerializer, WalletSerializer
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -63,3 +63,11 @@ class CustomAuthTokenView(ObtainAuthToken):
                 "last_name": token.user.last_name,
             }
         )
+
+
+class WalletRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = WalletSerializer
+    lookup_field = "pk"
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]

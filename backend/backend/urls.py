@@ -25,7 +25,9 @@ from users.views import SkillListAPIView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('applications.urls')),
+    path('api/transaction/', include('transactions.urls')),
     path('api/projects/',include('projects.urls')),
     path('api/users/',include('users.urls')),
-    path('api/skills/',SkillListAPIView.as_view())
+    path('api/skills/',SkillListAPIView.as_view()),
+    path('api/offers/',include('offers.urls')),
 ]

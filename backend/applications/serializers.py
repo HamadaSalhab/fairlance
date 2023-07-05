@@ -8,10 +8,10 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
     def get_freelancer_first_name(self, obj):
         return obj.freelancer.first_name
-        
+
     def get_freelancer_last_name(self, obj):
         return obj.freelancer.last_name
-    
+
     class Meta:
         model = Application
         fields = '__all__'

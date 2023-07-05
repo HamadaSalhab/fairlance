@@ -8,4 +8,5 @@ urlpatterns = [
     path("<int:pk>/", views.UserDetailAPIView.as_view()),
     path("<int:pk>/update/", views.UserUpdateAPIView.as_view()),
     path("auth/", views.CustomAuthTokenView.as_view()),
+    path("<int:pk>/wallet/", views.WalletRetrieveAPIView.as_view()),
 ]
