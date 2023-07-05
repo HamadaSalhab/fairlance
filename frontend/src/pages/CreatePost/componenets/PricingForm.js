@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../../components/Button';
 import DatePicker from "react-datepicker";
+import ErrorMessage from '../../../components/ErrorMessage';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -23,6 +24,31 @@ const PricingForm = ({ prevForm, nextForm, range, setRange, deadline, setDeadlin
             }
         })
     }, []);
+
+    const [priceError, setPriceError] = useState(false);
+    const [dateError, setDateError] = useState(false);
+
+    const check = (e, nextCall) => {
+        let error = false;
+        if (range[0] > range[1] || !range[0] || !range[1]) {
+            setPriceError(true);
+            error = true;
+        }
+        else {
+            setPriceError(false);
+        }
+        if (new Date() >= new Date(deadline)) {
+            setDateError(true);
+            error = true;
+        }
+        else {
+            setDateError(false);
+        }
+        if (!error) {
+            nextCall(e);
+        }
+        
+    }
 
     return (
         <form>
@@ -52,6 +78,7 @@ const PricingForm = ({ prevForm, nextForm, range, setRange, deadline, setDeadlin
                 />
                 $
             </div>
+            <ErrorMessage errorMsg='please set a valid range for price' errorState={priceError}/>
             <label htmlFor="price-tange">When do you want your project ready?</label>
             <p>We will give you 24 hours to review your project before paying the freelancer</p>
             <DatePicker
@@ -65,9 +92,10 @@ const PricingForm = ({ prevForm, nextForm, range, setRange, deadline, setDeadlin
                 showDisabledMonthNavigation
                 dateFormat="MMMM d, yyyy h:mm aa"
             />
+            <ErrorMessage errorMsg='Please set a valid date' errorState={dateError} />
             <div className='next-page'>
                 <Button onClick={prevForm}>Previous Page</Button>
-                <Button primary={true} onClick={nextForm}>Next page</Button>
+                <Button primary={true} onClick={(e) => { e.preventDefault(); check(e,nextForm) }}>Next page</Button>
             </div>
         </form>
     )

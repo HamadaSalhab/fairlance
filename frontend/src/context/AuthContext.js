@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
             console.log(e);
         }
     }
-    const loginUser = async (data) => {
+    const loginUser = async (data,dist) => {
         console.log(data);
         try {
             const req = {
@@ -86,7 +86,13 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('userName', JSON.stringify(data.email));
                 console.log(data);
                 notify(`Welcome back ${data.email}`);
-                navigate('/');
+                console.log(dist);
+                if (dist) {
+                    navigate(dist);
+                }
+                else {
+                    navigate('/');
+                }
             }
             else {
                 console.log(ret['non_field_errors']);

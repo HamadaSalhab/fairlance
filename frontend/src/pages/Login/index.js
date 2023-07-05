@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { AuthWrapper, LoginForm, InputField, Error, SubmitButton, InputFieldWrapper, EyeIcon, LoginDetails } from './style';
 import NavBar from '../../components/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 
 const LoginPage = () => {
@@ -12,8 +12,10 @@ const LoginPage = () => {
 
   const { loginUser } = useContext(AuthContext);
 
+  const { state } = useLocation();
+
   const handleLogin = (data) => {
-    loginUser(data);
+    loginUser(data, state);
   };
 
   const togglePasswordVisibility = () => {

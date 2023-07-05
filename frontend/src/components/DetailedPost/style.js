@@ -7,8 +7,16 @@ export const StyledDetailedPost = styled.div`
     box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
     &>div:first-child {
         display: flex;
-        h4 {
-            margin-right: auto;
+        div {
+            margin-left: auto;
+        }
+        h4{
+            color: #777;
+            font-weight: bold;
+            text-decoration:none;
+            &:hover{
+                color: #1E88E5;
+            }
         }
     }
 
@@ -95,6 +103,34 @@ export const StyledApplications = styled.div`
         border-bottom: solid 1px #a2a2a2;
         &:last-child{
             border: none;
+        }
+    }
+`
+
+export const StyledApplication = styled.div`
+    width: 85%;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
+    a{
+        text-decoration: none;
+    }
+    h4{
+        margin-bottom: 1.5rem;
+        font-weight: bold;
+        text-decoration:none;
+        color: #777;
+        &:hover{
+            color: #1E88E5;
+        }
+    }
+    .price-info{
+        display: flex;
+        margin-top: 1.5rem;
+        .price-range{
+            margin-right: auto;
         }
     }
 `

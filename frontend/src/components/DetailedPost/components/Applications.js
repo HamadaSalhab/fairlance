@@ -33,17 +33,15 @@ const Applications = ({ id }) => {
             })
     }, []);
 
-    const viewApplication = (applicationID) => {
-
-    }
-
     return (
         <StyledApplications>
-            {applications.map((application) => {
+            {applications.map((application, idx) => {
                 console.log(application);
                 return (
-                    <div>
-                        <h4>{application.freelancer_first_name} {application.freelancer_last_name}</h4>
+                    <div key={idx}>
+                        <Link to={`/profile/${application.freelancer}`}>
+                            <h4>{application.freelancer_first_name} {application.freelancer_last_name}</h4>
+                        </Link>
                         <p>{application.proposal}</p>
                         <div className='price-info'>
                             <div className="price-range">
