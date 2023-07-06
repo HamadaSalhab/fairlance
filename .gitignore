@@ -16,4 +16,4 @@ backend/db.sqlite3
 /backend/users/__pycache__
 /backend/transactions/migrations
 /backend/transactions/__pycache__
-**/migrations/*
+/mediafiles

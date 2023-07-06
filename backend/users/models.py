@@ -8,24 +8,44 @@ class Skill(models.Model):
 
 
 class Wallet(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='wallet')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="wallet")
     address = models.CharField(max_length=64)
     balance = models.IntegerField(default=0)
 
 
 class Freelancer(models.Model):
-    freelancer = models.OneToOneField(User, on_delete=models.CASCADE, related_name='freelancing')
+    freelancer = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="freelancing"
+    )
     rating = models.FloatField()
 
 
 class Available_Skill(models.Model):
-    freelancer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='available_skills')
+    freelancer = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="available_skills"
+    )
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
 
 
 class Message(models.Model):
-    message_id = models.IntegerField(primary_key=True)
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+    sender = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="sent_messages"
+    )
+    receiver = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="received_messages"
+    )
     msg_date = models.DateTimeField()
     msg_content = models.CharField(max_length=256)
+
+
+def upload_to(instance, filename):
+    return "images/{filename}".format(filename=filename)
+
+
+class UserExtra(models.Model):
+    user = models.OneToOneField(
+        User, primary_key=True, on_delete=models.CASCADE, related_name="extradetails"
+    )
+    bio = models.CharField(max_length=4096)
+    profile_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    profile_cv = models.FileField(upload_to="profile_cvs/", null=True)

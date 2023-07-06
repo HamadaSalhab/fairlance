@@ -14,10 +14,10 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Application
-        fields = '__all__'
+        fields = "__all__"
 
 
 class EmploymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employment
-        fields = '__all__'
+        fields = "__all__"

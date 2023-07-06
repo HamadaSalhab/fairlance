@@ -6,7 +6,7 @@ from offers.models import Offer
 class OfferSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
-        fields = '__all__'
+        fields = "__all__"
 
 
 class OfferDetailSerializer(serializers.ModelSerializer):
@@ -21,4 +21,4 @@ class OfferDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Offer
-        fields = '__all__'
+        fields = "__all__"
