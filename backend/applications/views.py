@@ -2,12 +2,12 @@ from rest_framework.authentication import TokenAuthentication, SessionAuthentica
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework import generics
-
+from rest_framework.permissions import IsAuthenticated
 from offers.models import Offer
 from .models import Application, Employment
 from projects.models import Project
 from .serializers import ApplicationSerializer, EmploymentSerializer
-
+from django.contrib.auth.models import User
 
 class ApplicationRetrieveView(generics.RetrieveAPIView):
     """
@@ -15,10 +15,16 @@ class ApplicationRetrieveView(generics.RetrieveAPIView):
     Can be accessed by a freelancer and a client
     """
 
-    permissions_classes = []
-    authentication_classes = []
-    queryset = Application.objects.all()
-    serializer_class = ApplicationSerializer
+    authentication_classes = [TokenAuthentication]
+    permissions_classes = [IsAuthenticated]
+    def get(self, request, pk=None):
+        if pk != request.user.id:
+            return Response({"details": "Unautherized"})
+        
+        applications = Application.objects.filter(freelancer=User.objects.get(id=pk))
+        serializer = ApplicationSerializer(applications, many=True)
+        return Response(serializer.data)
+
 
 
 class ApplicationListView(generics.ListAPIView):
