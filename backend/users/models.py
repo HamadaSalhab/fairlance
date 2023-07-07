@@ -49,3 +49,4 @@ class UserExtra(models.Model):
     bio = models.CharField(max_length=4096)
     profile_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
     profile_cv = models.FileField(upload_to="profile_cvs/", null=True)
+    balance = models.IntegerField(default=0)

@@ -2,11 +2,12 @@ import datetime
 
 from rest_framework import generics, status, permissions
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from applications.models import Application
 from .models import Offer
-from offers.serializers import OfferSerializer, OfferDetailSerializer
+from offers.serializers import OfferSerializer
 
 
 # Create your views here.
@@ -17,8 +18,8 @@ class OfferCreateView(generics.CreateAPIView):
     Create a new offer for given application
     Can be accessed by a client
     """
-    permissions_classes = []
-    authentication_classes = []
+    permissions_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
 
@@ -34,8 +35,8 @@ class OfferCreateView(generics.CreateAPIView):
         money_value = application.bid
         if money_value < 0:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        if request.user.wallet.balance < money_value:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        if request.user.extradetails.balance < money_value:
+            return Response({"details": "you don't have enough money in your wallet"},status=status.HTTP_400_BAD_REQUEST)
 
         serializer_data = dict()
         serializer_data['application'] = request.data['application']
@@ -44,8 +45,8 @@ class OfferCreateView(generics.CreateAPIView):
         serializer = OfferSerializer(data=serializer_data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            request.user.wallet.balance -= money_value
-            request.user.wallet.save()
+            request.user.extradetails.balance -= money_value
+            request.user.extradetails.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -90,8 +91,12 @@ class OfferListView(generics.ListAPIView):
         application_list = Application.objects.filter(freelancer=request.user)
         offer_list = []
         for application in application_list:
-            offer = Offer.objects.filter(application_id=application.id)
+            offer = None
+            try:
+                offer = Offer.objects.get(application_id=application.id)
+            except:
+                continue
             if offer:
                 offer_list.append(offer)
-        serializer = OfferDetailSerializer(offer_list, many=True)
+        serializer = OfferSerializer(offer_list, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

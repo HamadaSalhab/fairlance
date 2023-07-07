@@ -9,6 +9,7 @@ from projects.models import Project
 from .serializers import ApplicationSerializer, EmploymentSerializer
 from django.contrib.auth.models import User
 
+
 class ApplicationRetrieveView(generics.RetrieveAPIView):
     """
     Retrieve a single application
@@ -17,14 +18,9 @@ class ApplicationRetrieveView(generics.RetrieveAPIView):
 
     authentication_classes = [TokenAuthentication]
     permissions_classes = [IsAuthenticated]
-    def get(self, request, pk=None):
-        if pk != request.user.id:
-            return Response({"details": "Unautherized"})
-        
-        applications = Application.objects.filter(freelancer=User.objects.get(id=pk))
-        serializer = ApplicationSerializer(applications, many=True)
-        return Response(serializer.data)
-
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+    lookup_field = 'pk'
 
 
 class ApplicationListView(generics.ListAPIView):
@@ -63,14 +59,17 @@ class ApplicationListFreelancerView(generics.ListAPIView):
     Can be accessed by a freelancer
     """
 
-    permissions_classes = []
-    authentication_classes = []
+    permissions_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
-    lookup_field = "freelancer_id"
+    lookup_field = "pk"
 
-    def get(self, request, freelancer_id=None, **kwargs):
-        applications = Application.objects.filter(freelancer_id=freelancer_id)
+    def get(self, request, pk=None, **kwargs):
+        if pk != request.user.id:
+            return Response({"details": "Unautharized"},status=status.HTTP_401_UNAUTHORIZED)
+        
+        applications = Application.objects.filter(freelancer_id=pk)
         serializer = ApplicationSerializer(applications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
