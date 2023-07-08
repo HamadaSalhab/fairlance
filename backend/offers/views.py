@@ -19,36 +19,9 @@ class OfferCreateView(generics.CreateAPIView):
     Can be accessed by a client
     """
     permissions_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
-
-    def create(self, request, **kwargs):
-        """
-        Create a new offer for given application
-        Can be accessed by a client
-        """
-        application = Application.objects.get(id=request.data['application'])
-        owner = application.project.owner
-        if owner != request.user:
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
-        money_value = application.bid
-        if money_value < 0:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        if request.user.extradetails.balance < money_value:
-            return Response({"details": "you don't have enough money in your wallet"},status=status.HTTP_400_BAD_REQUEST)
-
-        serializer_data = dict()
-        serializer_data['application'] = request.data['application']
-        serializer_data['expiration_time'] = datetime.datetime.now() + datetime.timedelta(days=1)
-
-        serializer = OfferSerializer(data=serializer_data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            request.user.extradetails.balance -= money_value
-            request.user.extradetails.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class OfferDestroyView(generics.DestroyAPIView):

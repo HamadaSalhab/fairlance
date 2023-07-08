@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from .models import Skill, Wallet
+from .models import Skill
 from rest_framework.response import Response
 from django.conf import settings
 
@@ -69,7 +69,7 @@ class SkillIdSerializer(serializers.ModelSerializer):
         fields = ["skill_id"]
 
 
-class WalletSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Wallet
-        fields = "__all__"
+# class WalletSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Wallet
+#         fields = "__all__"

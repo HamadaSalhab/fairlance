@@ -16,7 +16,7 @@ from .serializers import (
     UserSerializer,
     SkillSerializer,
     UserUpdateSerializer,
-    WalletSerializer,
+    # WalletSerializer,
     UserExtraSerializer,
 )
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -94,9 +94,9 @@ class CustomAuthTokenView(ObtainAuthToken):
         )
 
 
-class WalletRetrieveAPIView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = WalletSerializer
-    lookup_field = "pk"
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticated]
+# class WalletRetrieveAPIView(generics.RetrieveAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = WalletSerializer
+#     lookup_field = "pk"
+#     authentication_classes = [TokenAuthentication, SessionAuthentication]
+#     permission_classes = [IsAuthenticated]

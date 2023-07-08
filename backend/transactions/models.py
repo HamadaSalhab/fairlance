@@ -11,3 +11,7 @@ class Payment(models.Model):
     )
     amount = models.DecimalField(max_digits=10, decimal_places=1)
     date = models.DateTimeField()
+
+
+class Transaction(models.Model):
+    transaction_hash = models.CharField(max_length=64)
