@@ -109,6 +109,10 @@ export const StyledApplications = styled.div`
         padding: 0.5rem;
         border-bottom: solid 1px;
     }
+    .loading{
+        height: 200px;
+        padding: 1rem;
+    }
 `
 
 export const StyledApplication = styled.div`

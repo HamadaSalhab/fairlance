@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import { StyledApplicationForm } from "./style";
 import Button from "../Button";
 import AuthContext from "../../context/AuthContext";
+import { toast } from 'react-toastify';
 
-const ApplicationForm = ({ projectId }) => {
+const ApplicationForm = ({ projectId, toggleForm }) => {
   const { authToken, userID } = useContext(AuthContext);
   const [price, setPrice] = useState("");
   const [proposal, setProposal] = useState("");
@@ -45,32 +46,34 @@ const ApplicationForm = ({ projectId }) => {
     try {
       const response = await fetch(url, requestOptions);
       if (response.ok) {
-        console.log('Application submitted!');
-        // Perform any additional actions upon successful submission
+        toast('Application submitted!');
+        toggleForm();
       } else {
-        console.error('Failed to submit application:', response.status);
+        toast.error('Failed to submit application: ' + response.status);
       }
     } catch (error) {
-      console.error('Error occurred while submitting the application:', error);
+      toast.error('Failed to submit application please try again');
+      console.log(error);
     }
   };
 
   return (
     <StyledApplicationForm>
-      <h1>Application Form</h1>
+      <h1>Application details</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="price"><h2>Price:</h2></label>
         <div className="price">
-        <div>How much do you want to offer to the post owner? </div>
-        <input
-          type="number"
-          id="price"
-          value={price}
-          onChange={handlePriceChange}
-          required
-        />
+          <p>How much do you want to offer to the post owner? </p>
+          <input
+            type="number"
+            id="price"
+            value={price}
+            onChange={handlePriceChange}
+            required
+          />
+          $
         </div>
-        
+
         <label htmlFor="proposal"><h2>Proposal:</h2></label>
         <textarea
           id="proposal"

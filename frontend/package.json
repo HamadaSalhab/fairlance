@@ -45,5 +45,6 @@
   },
   "devDependencies": {
     "depcheck": "^1.4.3"
-  }
+  },
+  "proxy": "https://e8b6-188-130-155-154.ngrok-free.app"
 }

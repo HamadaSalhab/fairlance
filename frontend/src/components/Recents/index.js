@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import HorizontalBlogs from '../HorizontalBlogs';
 import AuthContext from '../../context/AuthContext';
 
-const Recents = ({ URL, done }) => {
+const Recents = ({ done }) => {
 
     const [posts, setPosts] = useState([]);
     const [postIdx, setPostIdx] = useState(0);
@@ -32,7 +32,7 @@ const Recents = ({ URL, done }) => {
                 }
                 console.log(error);
             })
-    }, [setPosts, URL]);
+    }, [setPosts]);
 
     const previousPost = () => {
         if (postIdx > 0) {

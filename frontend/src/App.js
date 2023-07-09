@@ -10,6 +10,8 @@ import PostDetailsPage from './pages/PostDetails';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './utils/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
+import MyOffers from './pages/MyOffers';
+import FeedBack from './components/FeedBack';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,13 +37,17 @@ function App() {
           <Route path='/post/:id' element={<PrivateRoute />}>
             <Route path='/post/:id' element={<PostDetailsPage />}></Route>
           </Route>
+          <Route path='/offers' element={<MyOffers />}></Route>
           <Route path='/post/:projectid/application/:id' element={<PrivateRoute />}>
             <Route path='/post/:projectid/application/:id' element={<Application />}></Route>
           </Route>
-          <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/profile/:id' element={<Profile />}>
+            <Route path='/profile/:id' element={<Profile />} />
+          </Route>
         </Routes>
       </AuthProvider>
       <ToastContainer position='bottom-right' autoClose={2000} hideProgressBar={true} />
+      <FeedBack></FeedBack>
     </>
   );
 }
