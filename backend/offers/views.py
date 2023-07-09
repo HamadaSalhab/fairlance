@@ -61,15 +61,6 @@ class OfferListView(generics.ListAPIView):
         Retrieve a list of offers based on the applications that were made by the freelancer
         Can be accessed by a freelancer
         """
-        application_list = Application.objects.filter(freelancer=request.user)
-        offer_list = []
-        for application in application_list:
-            offer = None
-            try:
-                offer = Offer.objects.get(application_id=application.id)
-            except:
-                continue
-            if offer:
-                offer_list.append(offer)
+        offer_list = Offer.objects.select_related('application').filter(application__freelancer=request.user)
         serializer = OfferSerializer(offer_list, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
