@@ -82,6 +82,13 @@ export const Menu = styled.ul `
           text-decoration: none;
           display: block;
           text-align: left;
+          border-bottom: solid 1px #ccc;
+          &:last-child{
+            border-bottom: none;
+          }
+          &:first-child{
+            margin-top: 1rem;
+          }
           &:hover {
             background-color: #f1f1f1;
           }

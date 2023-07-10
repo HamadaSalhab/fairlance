@@ -4,14 +4,14 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://3897-188-130-155-162.ngrok-free.app',
+            target: 'http://194.67.78.162:8000',
             changeOrigin: true,
         })
     );
     app.use(
         '/media',
         createProxyMiddleware({
-            target: 'https://3897-188-130-155-162.ngrok-free.app',
+            target: 'http://194.67.78.162:8000',
             changeOrigin: true,
 
         })

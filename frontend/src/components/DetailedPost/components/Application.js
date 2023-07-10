@@ -25,7 +25,7 @@ const Application = () => {
                 'ngrok-skip-browser-warning': 'true'
             }
         }
-        fetch(`/api/application/retrieve/${id}/`, req)
+        fetch(`/api/application/${id}/`, req)
             .then(response => {
                 return response.json()
             })
@@ -40,6 +40,27 @@ const Application = () => {
 
     const hire = () => {
         // TODO: implement hiring
+        console.log(id)
+        const req = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `token ${authToken}`,
+                'ngrok-skip-browser-warning': 'true'
+            },
+            body: JSON.stringify({
+                application: id
+            })
+        }
+        fetch('/api/offers/create/', req)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(e => {
+                console.log(e);
+            })
         toast('You have succesffully hired the freelancer. We will tell you when the client accepts your offer');
         navigate(`/post/${projectid}`)
     }

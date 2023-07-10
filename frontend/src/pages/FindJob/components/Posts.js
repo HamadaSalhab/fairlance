@@ -8,6 +8,7 @@ const Posts = () => {
 
     const { authToken } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const req = {
@@ -19,19 +20,23 @@ const Posts = () => {
                 'ngrok-skip-browser-warning': 'true'
             }
         }
-        fetch('/api/projects/', req)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                setPosts(data);
-            })
-            .catch((error) => {
-                for (let i = 0; i < 3; i++) {
-                    setPosts([])
-                }
-                console.log(error);
-            })
+        const load = async () => {
+            await fetch('/api/projects/', req)
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    setPosts(data);
+                })
+                .catch((error) => {
+                    for (let i = 0; i < 3; i++) {
+                        setPosts([])
+                    }
+                    console.log(error);
+                })
+            setLoading(false);
+        }
+        load();
     }, [setPosts]);
 
     return (
@@ -46,13 +51,20 @@ const Posts = () => {
                     }
                     )
                     :
-                    <div className='loading-container'>
-                        <List className='loading' />
-                        <div className="seperate" style={{ margin: '2rem 0', width: '100%' }}></div>
-                        <List className='loading' />
-                        <div className="seperate" style={{ margin: '2rem 0', width: '100%' }}></div>
-                        <List className='loading' />
-                    </div>
+                    <>
+                        {
+                            loading ?
+                            <div className='loading-container'>
+                                <List className='loading' />
+                                <div className="seperate" style={{ margin: '2rem 0', width: '100%' }}></div>
+                                <List className='loading' />
+                                <div className="seperate" style={{ margin: '2rem 0', width: '100%' }}></div>
+                                <List className='loading' />
+                            </div>
+                            : <div style={{padding: '1rem'}}>There are not posts yet</div>
+                        }
+                    
+                    </>
             }
         </StyledPosts>
     );

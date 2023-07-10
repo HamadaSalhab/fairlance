@@ -9,9 +9,9 @@ const MainView = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [photo, setPhoto] = useState({ preview: defaultPfp, data: '' });
+  const [photo, setPhoto] = useState({});
   const [cv, setCV] = useState(null);
-  const { authToken, userID, setUserFirstName, userFirstName } = useContext(AuthContext)
+  const { authToken, userID, setUserFirstName } = useContext(AuthContext)
   const { id } = useParams();
 
   useEffect(() => {
@@ -34,14 +34,20 @@ const MainView = () => {
           setFirstName(data.first_name);
           setLastName(data.last_name);
           setEmail(data.username);
-          setPhoto({ preview: data.profile_image, data: '' })
+          if (data.profile_image) {
+            fetch(data.profile_image, req);
+            setPhoto({ preview: data.profile_image, data: '' });
+          }
+          else {
+            setPhoto({ preview: defaultPfp, data: '' });
+          }
         })
         .catch((error) => {
           console.log(error);
         });
     }
     getInfo();
-  }, []);
+  }, [id]);
 
   const handleUpdate = () => {
     const formData = new FormData();
@@ -115,7 +121,7 @@ const MainView = () => {
         <h2>Your Profile Info:</h2>
 
         <label htmlFor="fname">First name</label>
-        {userID == id ?
+        {userID.toString() === id ?
           <InputField type="text" id="fname" value={firstName}
             onChange={(e) => setFirstName(e.target.value)} />
           :
@@ -125,7 +131,7 @@ const MainView = () => {
         }
 
         <label htmlFor="lname">Last name</label>
-        {userID == id ?
+        {userID.toString() === id ?
           <InputField type="text" id="lname" value={lastName}
             onChange={(e) => setLastName(e.target.value)} />
           :
@@ -141,19 +147,19 @@ const MainView = () => {
         </InfoBox>
 
         <label htmlFor="cv">CV</label>
-        {userID == id ?
+        {userID.toString() === id ?
           <InfoBox>
             <input type="file" id="cv" name="cv" onChange={handleCVchange} />
           </InfoBox>
           :
           <InfoBox>
-            {cv == null ? <p>(Empty)</p>
+            {cv === null ? <p>(Empty)</p>
               :
               <p>User's CV:{cv}</p>
             }
           </InfoBox>
         }
-        {userID == id ?
+        {userID.toString() === id ?
           <ButtonsWrap>
             <Button onClick={handleUpdate}>
               Save
@@ -167,7 +173,7 @@ const MainView = () => {
 
       <StyledPfp>
         <img src={photo.preview} alt="" />
-        {userID == id ?
+        {userID.toString() === id ?
           <>
             <label htmlFor="photo">Update Photo:</label>
             <UploadPhoto>

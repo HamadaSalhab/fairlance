@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavBar from '../../components/NavBar'
 import SearchBar from '../../components/SearchBar'
 import Select from 'react-select'
@@ -8,6 +8,10 @@ import { StyledFindContainer } from './styles'
 import Footer from '../../components/Footer';
 
 const FindJobPage = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    })
 
     const sortBy = [
         { value: 'newest', label: 'Newest first' },

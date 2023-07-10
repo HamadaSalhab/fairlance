@@ -31,7 +31,7 @@ const DetailedPost = ({ post }) => {
   return (
     post
       ?
-      <>
+      <div style={{minHeight: '80vh'}}>
         <StyledDetailedPost>
           <div>
             <Link to={`/profile/${post.owner}`}>
@@ -59,9 +59,9 @@ const DetailedPost = ({ post }) => {
             }
           </div>
         </StyledDetailedPost>
-        {showForm && <ApplicationForm projectId={post.id} />}
+        {showForm && <ApplicationForm projectId={post.id} toggleForm={toggleForm} />}
         {showApplications && <Applications id={post.id} />}
-      </>
+      </div>
       :
       <StyledDetailedPost>
         <Code />
