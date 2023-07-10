@@ -4,6 +4,8 @@
 *.log
 *.pid
 .idea/
+.netlify
+contracts
 *.pyc
 *.cpyc
 /.vscode
