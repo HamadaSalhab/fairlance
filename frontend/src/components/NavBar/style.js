@@ -15,7 +15,7 @@ export const StyledNav = styled.ul`
         padding: 2rem 0;
         width: 85%;
         margin: 0 auto;
-        li {
+        & > li {
             margin-left: 1rem;
             a,button {
                 border: none;
@@ -51,5 +51,52 @@ export const StyledNav = styled.ul`
                 font-weight: 500;
             }
         }
+    }
+`
+
+
+export const Menu = styled.ul `
+
+  /* main UL component called: "Menu" */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  
+
+  /* dropdown LI */
+  & > .dropdown {
+      display: inline-block;
+
+      & > .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+
+        & > li {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+          border-bottom: solid 1px #ccc;
+          &:last-child{
+            border-bottom: none;
+          }
+          &:first-child{
+            margin-top: 1rem;
+          }
+          &:hover {
+            background-color: #f1f1f1;
+          }
+        }
+      }
+
+      &:hover .dropdown-content {
+        display: block
+      }
     }
 `
