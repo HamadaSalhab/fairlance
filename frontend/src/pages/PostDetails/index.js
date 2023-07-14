@@ -18,10 +18,10 @@ const PostDetailsPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
-                    'Authorization': `token ${authToken}`,
-                    'ngrok-skip-browser-warning': 'true'
-                }
-            }
+                    Authorization: `token ${authToken}`,
+                    'ngrok-skip-browser-warning': 'true',
+                },
+            };
             try {
                 const res = await fetch(`/api/projects/${id}/`, req);
                 console.log(res);
@@ -30,14 +30,12 @@ const PostDetailsPage = () => {
                 if (res.ok) {
                     setPost(ret);
                 }
-            }
-            catch (e) {
+            } catch (e) {
                 console.log('error ' + e);
             }
-        }
+        };
         retrieve();
     }, [id]);
-
 
     useEffect(() => {
         console.log('post:', post);

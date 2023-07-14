@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -8,27 +8,45 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
     const notify = (msg) => toast(msg);
-    const [authToken, setAuthToken] = useState(() => localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null);
+    const [authToken, setAuthToken] = useState(() =>
+        localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null,
+    );
     // TODO: find a better way to get the user (JWT maybe)
-    const [user, setUser] = useState(() => localStorage.getItem('userName') && localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('userName')) : null);
-    const [userID, setUserID] = useState(() => localStorage.getItem('userID') && localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('userID')) : null);
-    const [userFirstName, setUserFirstName] = useState(() => localStorage.getItem('userFirstName') && localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('userFirstName')) : null);
-    const [userLastName, setUserLastName] = useState(() => localStorage.getItem('userLastName') && localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('userLastName')) : null);
+    const [user, setUser] = useState(() =>
+        localStorage.getItem('userName') && localStorage.getItem('authToken')
+            ? JSON.parse(localStorage.getItem('userName'))
+            : null,
+    );
+    const [userID, setUserID] = useState(() =>
+        localStorage.getItem('userID') && localStorage.getItem('authToken')
+            ? JSON.parse(localStorage.getItem('userID'))
+            : null,
+    );
+    const [userFirstName, setUserFirstName] = useState(() =>
+        localStorage.getItem('userFirstName') && localStorage.getItem('authToken')
+            ? JSON.parse(localStorage.getItem('userFirstName'))
+            : null,
+    );
+    const [userLastName, setUserLastName] = useState(() =>
+        localStorage.getItem('userLastName') && localStorage.getItem('authToken')
+            ? JSON.parse(localStorage.getItem('userLastName'))
+            : null,
+    );
     const navigate = useNavigate();
     const registerUser = async (data) => {
-        console.log(data)
+        console.log(data);
         try {
             const req = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Origin': '*',
                 },
                 body: JSON.stringify({
-                    'first_name': data.firstname,
-                    'last_name': data.lastname,
-                    'username': data.email,
-                    'password': data.password
+                    first_name: data.firstname,
+                    last_name: data.lastname,
+                    username: data.email,
+                    password: data.password,
                 }),
             };
             console.log(req);
@@ -36,39 +54,36 @@ export const AuthProvider = ({ children }) => {
             if (res.ok) {
                 let ret = await res.json();
                 console.log(ret);
-                notify('please login now')
+                notify('please login now');
                 navigate('/login');
-            }
-            else {
+            } else {
                 let ret = await res.json();
                 console.log(ret);
-                console.log(ret.username)
+                console.log(ret.username);
                 if (ret.username.includes('A user with that username already exists.')) {
                     toast.error(`A username with this email exists try to login`);
-                }
-                else {
+                } else {
                     toast.error(`Something went wrong`);
                 }
             }
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
         }
-    }
-    const loginUser = async (data,dist) => {
+    };
+    const loginUser = async (data, dist) => {
         console.log(data);
         try {
             const req = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Origin': '*',
                 },
                 body: JSON.stringify({
-                    'username': data.email,
-                    'password': data.password
-                })
-            }
+                    username: data.email,
+                    password: data.password,
+                }),
+            };
             const res = await fetch('/api/users/auth/', req);
             console.log(res);
             let ret = await res.json();
@@ -89,22 +104,22 @@ export const AuthProvider = ({ children }) => {
                 console.log(dist);
                 if (dist) {
                     navigate(dist);
-                }
-                else {
+                } else {
                     navigate('/');
                 }
-            }
-            else {
+            } else {
                 console.log(ret['non_field_errors']);
-                if (ret['non_field_errors'] && ret['non_field_errors'].includes("Unable to log in with provided credentials.")) {
+                if (
+                    ret['non_field_errors'] &&
+                    ret['non_field_errors'].includes('Unable to log in with provided credentials.')
+                ) {
                     toast.error(`Sorry you provided wrong email or passowrd, try again`);
                 }
             }
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
         }
-    }
+    };
     const logout = () => {
         setAuthToken(null);
         setUser(null);
@@ -118,7 +133,7 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(null);
         setUser(null);
         setUserFirstName(null);
-    }
+    };
     let contextData = {
         loginUser: loginUser,
         registerUser: registerUser,
@@ -128,11 +143,7 @@ export const AuthProvider = ({ children }) => {
         userID: userID,
         userFirstName: userFirstName,
         userLastName: userLastName,
-        setUserFirstName: setUserFirstName
-    }
-    return (
-        <AuthContext.Provider value={contextData}>
-            {children}
-        </AuthContext.Provider>
-    )
-}
+        setUserFirstName: setUserFirstName,
+    };
+    return <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>;
+};

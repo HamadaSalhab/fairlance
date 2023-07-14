@@ -8,8 +8,8 @@ export const StyledPostDetailsComponent = styled.div`
         margin-right: 1rem;
         display: inline-block;
         color: #777;
-        &:hover{
-            color: #1E88E5;
+        &:hover {
+            color: #1e88e5;
         }
     }
     h3 {

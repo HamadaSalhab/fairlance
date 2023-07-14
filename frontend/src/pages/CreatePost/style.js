@@ -1,16 +1,16 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const CreatePostStyled = styled.div`
     display: flex;
     width: 85%;
     margin: 1rem auto;
     height: 85vh;
-    &>div{
+    & > div {
         position: relative;
         width: 75%;
         height: 100%;
         background-color: #fff;
-        &:first-child{
+        &:first-child {
             width: 25%;
             border-right: solid #d1d1d1 1px;
         }
@@ -21,13 +21,14 @@ export const CreatePostStyled = styled.div`
         margin-left: 1.5rem;
         padding: 1rem;
         height: 85%;
-        input,textarea{
+        input,
+        textarea {
             border: 1px solid #ddd;
-            &:focus{
-                outline: 1px solid #aaa; 
+            &:focus {
+                outline: 1px solid #aaa;
             }
         }
-        &>input{
+        & > input {
             display: block;
             margin-left: 0.7rem;
             padding: 0.7rem;
@@ -36,18 +37,18 @@ export const CreatePostStyled = styled.div`
             color: #616161;
             font-size: 1rem;
         }
-        label{
+        label {
             display: block;
             font-weight: 500;
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
         }
-        .file-upload{
-            label{
+        .file-upload {
+            label {
                 display: flex;
             }
         }
-        textarea{
+        textarea {
             margin-left: 0.7rem;
             margin-top: 0.5rem;
             width: 95%;
@@ -57,18 +58,18 @@ export const CreatePostStyled = styled.div`
             font-size: 1rem;
             padding: 0.6rem;
         }
-        h2{
+        h2 {
             margin-bottom: 1.5rem;
         }
-        p{
+        p {
             color: #616161;
             margin-bottom: 0.6rem;
             font-size: 0.9rem;
         }
     }
-    .job-category{
+    .job-category {
         margin-left: 0.7rem;
-        label{
+        label {
             font-size: 0.9rem;
         }
         .check {
@@ -82,28 +83,28 @@ export const CreatePostStyled = styled.div`
             }
         }
     }
-    .next-page{
+    .next-page {
         position: absolute;
         right: 1rem;
         bottom: 1rem;
     }
-    div.ReactTags__tags{
+    div.ReactTags__tags {
         margin-bottom: 1rem;
         position: relative;
         margin-left: 0.5rem;
-        button{
+        button {
             background-color: transparent;
             border: none;
             padding: 0.2rem 0.5rem;
             cursor: pointer;
         }
-        input{
+        input {
             height: 31px;
             font-size: 12px;
             width: 100%;
             padding: 4px;
         }
-        span{
+        span {
             border: 1px solid #ddd;
             background: #eee;
             font-size: 12px;
@@ -126,7 +127,7 @@ export const CreatePostStyled = styled.div`
     }
     div.ReactTags__suggestions ul {
         list-style-type: none;
-        box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+        box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
         background: white;
         width: 200px;
     }
@@ -151,56 +152,55 @@ export const CreatePostStyled = styled.div`
         display: flex;
         align-items: center;
         margin-bottom: 1.5rem;
-        input{
+        input {
             padding: 0.3rem;
-            margin: auto .5rem;
+            margin: auto 0.5rem;
             width: 10%;
         }
     }
-    .date-picker{
+    .date-picker {
         margin-left: 1rem;
         padding: 0.5rem;
         width: 100%;
     }
-    .no-edit{
-        input{
+    .no-edit {
+        input {
             display: none;
         }
-        button{
+        button {
             display: none;
         }
     }
-    .final-preview{
-        p{
+    .final-preview {
+        p {
             white-space: pre-wrap;
             margin: 0.5rem 1rem 1rem 1rem;
             height: 60%;
             overflow: scroll;
         }
     }
-    .price-range{
+    .price-range {
         margin-bottom: 0.4rem;
     }
-    #tags-list{
+    #tags-list {
         display: none;
     }
-`
+`;
 
 export const StyledProgress = styled.div`
     padding-top: 2rem;
-    #elements{
+    #elements {
         z-index: 100;
         position: relative;
-        .active-border{
-            border-right: solid 4px #1E88E5;
-            color: #1E88E5;
-            &::after{
-                background-color: #1E88E5;
+        .active-border {
+            border-right: solid 4px #1e88e5;
+            color: #1e88e5;
+            &::after {
+                background-color: #1e88e5;
             }
         }
-        
     }
-    #elements div{
+    #elements div {
         font-weight: 700;
         font-size: 1rem;
         border-right: solid 4px #ccc;
@@ -208,7 +208,7 @@ export const StyledProgress = styled.div`
         padding: 20% 1rem 0 0;
         margin: 0 1rem 0 auto;
         position: relative;
-        &::after{
+        &::after {
             content: '';
             width: 9px;
             height: 9px;
@@ -220,9 +220,9 @@ export const StyledProgress = styled.div`
             z-index: 1;
         }
     }
-    .arrow{
+    .arrow {
         height: 100%;
         width: 2px;
         background-color: red;
     }
-`
+`;

@@ -7,24 +7,23 @@ export const StyledMyApplication = styled.div`
     padding: 1rem;
     margin-top: 1rem;
     box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
-    a{
+    a {
         text-decoration: none;
     }
-    h4{
+    h4 {
         margin-bottom: 1.5rem;
         font-weight: bold;
-        text-decoration:none;
+        text-decoration: none;
         color: #777;
-        &:hover{
-            color: #1E88E5;
+        &:hover {
+            color: #1e88e5;
         }
     }
-    .price-info{
+    .price-info {
         display: flex;
         margin-top: 1.5rem;
-        .price-range{
+        .price-range {
             margin-right: auto;
         }
     }
-`
-
+`;

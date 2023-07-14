@@ -6,28 +6,28 @@ export const StyledBlogs = styled.div`
     .recents-panel {
         display: flex;
         height: 100%;
-        &>button {
+        & > button {
             background-color: transparent;
             height: fit-content;
             margin: auto;
             padding: 0.5rem;
             border-radius: 50%;
             cursor: pointer;
-            background-color: #1E88E5;
-            border: #1E88E5 solid 1px;
+            background-color: #1e88e5;
+            border: #1e88e5 solid 1px;
             color: #fff;
             height: 2.5rem;
             width: 2.5rem;
             font-size: 1rem;
             &:hover {
                 background-color: #fff;
-                color: #1E88E5;
+                color: #1e88e5;
                 transition: all 0.2s;
             }
         }
-        &>.disabled {
+        & > .disabled {
             background-color: #fff;
-            color: #1E88E5;
+            color: #1e88e5;
             cursor: default;
         }
     }
@@ -42,4 +42,4 @@ export const StyledBlogs = styled.div`
             width: 100%;
         }
     }
-`
+`;

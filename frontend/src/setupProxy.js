@@ -4,16 +4,15 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://194.67.78.162:8000',
+            target: 'https://e8be-188-130-155-154.ngrok-free.app',
             changeOrigin: true,
-        })
+        }),
     );
     app.use(
         '/media',
         createProxyMiddleware({
-            target: 'http://194.67.78.162:8000',
+            target: 'https://e8be-188-130-155-154.ngrok-free.app',
             changeOrigin: true,
-
-        })
-    )
+        }),
+    );
 };

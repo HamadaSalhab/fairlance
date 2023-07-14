@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import AuthContext from '../../../context/AuthContext';
 import Button from '../../Button';
 import { Link } from 'react-router-dom';
@@ -21,75 +21,84 @@ const Application = () => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'Authorization': `token ${authToken}`,
-                'ngrok-skip-browser-warning': 'true'
-            }
-        }
+                Authorization: `token ${authToken}`,
+                'ngrok-skip-browser-warning': 'true',
+            },
+        };
         fetch(`/api/application/${id}/`, req)
-            .then(response => {
-                return response.json()
+            .then((response) => {
+                return response.json();
             })
-            .then(data => {
+            .then((data) => {
                 console.log(data);
                 setApplication(data);
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
     }, []);
 
     const hire = () => {
         // TODO: implement hiring
-        console.log(id)
+        console.log(id);
         const req = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'Authorization': `token ${authToken}`,
-                'ngrok-skip-browser-warning': 'true'
+                Authorization: `token ${authToken}`,
+                'ngrok-skip-browser-warning': 'true',
             },
             body: JSON.stringify({
-                application: id
-            })
-        }
+                application: id,
+            }),
+        };
         fetch('/api/offers/create/', req)
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 console.log(data);
             })
-            .catch(e => {
+            .catch((e) => {
                 console.log(e);
-            })
-        toast('You have succesffully hired the freelancer. We will tell you when the client accepts your offer');
-        navigate(`/post/${projectid}`)
-    }
+            });
+        toast(
+            'You have succesffully hired the freelancer. We will tell you when the client accepts your offer',
+        );
+        navigate(`/post/${projectid}`);
+    };
 
     return (
         <>
             <NavBar notfixed={true} />
             <div style={{ height: '60vh' }}>
                 <StyledApplication>
-                    {application && <>
-                        <Link to={`/profile/${application.freelancer}`}>
-                            <h4>{application.freelancer_first_name} {application.freelancer_last_name}</h4>
-                        </Link>
-                        <p>{application.proposal}</p>
-                        <div className='price-info'>
-                            <div className="price-range">
-                                <div>{application.bid} $</div>
-                            </div>
-                            <Link to={`/post/${projectid}`}>
-                                <Button>Return</Button>
+                    {application && (
+                        <>
+                            <Link to={`/profile/${application.freelancer}`}>
+                                <h4>
+                                    {application.freelancer_first_name}{' '}
+                                    {application.freelancer_last_name}
+                                </h4>
                             </Link>
-                            <Button primary={true} onClick={hire}>Hire</Button>
-                        </div></>
-                    }
+                            <p>{application.proposal}</p>
+                            <div className='price-info'>
+                                <div className='price-range'>
+                                    <div>{application.bid} $</div>
+                                </div>
+                                <Link to={`/post/${projectid}`}>
+                                    <Button>Return</Button>
+                                </Link>
+                                <Button primary={true} onClick={hire}>
+                                    Hire
+                                </Button>
+                            </div>
+                        </>
+                    )}
                 </StyledApplication>
             </div>
             <Footer />
         </>
-    )
-}
+    );
+};
 
-export default Application
+export default Application;

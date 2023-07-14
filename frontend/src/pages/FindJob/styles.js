@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledFilters = styled.div`
     width: 20%;
@@ -7,11 +7,11 @@ export const StyledFilters = styled.div`
     box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.2);
     padding: 1rem;
     height: fit-content;
-    &>div {
+    & > div {
         margin-top: 1rem;
         border-bottom: 1px solid #7b7b7b;
         padding-bottom: 1.5rem;
-        &:last-child{
+        &:last-child {
             border: none;
         }
         h4 {
@@ -36,12 +36,12 @@ export const StyledFilters = styled.div`
             margin: 0 auto;
         }
     }
-    input[type="number"] {
+    input[type='number'] {
         appearance: textfield;
         width: 40%;
         padding: 0.5rem;
     }
-`
+`;
 
 export const StyledFindContainer = styled.div`
     width: 85%;
@@ -61,7 +61,7 @@ export const StyledFindContainer = styled.div`
             border: none;
             border-bottom: solid 1px #7b7b7b;
             border-radius: 0;
-            &:focus{
+            &:focus {
                 box-shadow: none;
             }
         }
@@ -79,10 +79,7 @@ export const StyledFindContainer = styled.div`
     .posts-container {
         display: flex;
     }
-`
-
-
-
+`;
 
 export const StyledPosts = styled.div`
     margin-left: auto;
@@ -112,11 +109,11 @@ export const StyledPosts = styled.div`
         -webkit-box-orient: vertical;
         margin: 1rem 0.5rem;
     }
-    .loading-container{
+    .loading-container {
         padding-top: 2rem;
-        .loading{
+        .loading {
             padding-left: 2rem;
             height: 180px;
         }
     }
-`
+`;

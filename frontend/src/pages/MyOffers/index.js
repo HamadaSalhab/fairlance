@@ -13,21 +13,20 @@ const index = () => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'Authorization': `token ${authToken}`,
-                'ngrok-skip-browser-warning': 'true'
-            }
-        }
-        fetch('/api/offers/list/', req).then(res => res.json())
-            .then(
-                data => {
-                    setOffers(data);
-                    console.log(data)
-                }
-            )
-            .catch(e => {
-                console.log(e);
+                Authorization: `token ${authToken}`,
+                'ngrok-skip-browser-warning': 'true',
+            },
+        };
+        fetch('/api/offers/list/', req)
+            .then((res) => res.json())
+            .then((data) => {
+                setOffers(data);
+                console.log(data);
             })
-    }, [])
+            .catch((e) => {
+                console.log(e);
+            });
+    }, []);
 
     return (
         <>
@@ -35,12 +34,18 @@ const index = () => {
             <StyledOffers>
                 <h4>Offers:</h4>
                 {offers.map((offer) => {
-                    return <Offer owner={offer.project_owner} project={offer.project_title} projectid={offer.project_id} />
+                    return (
+                        <Offer
+                            owner={offer.project_owner}
+                            project={offer.project_title}
+                            projectid={offer.project_id}
+                        />
+                    );
                 })}
                 {offers.length === 0 && <Offer noOffer={true} />}
             </StyledOffers>
         </>
-    )
-}
+    );
+};
 
-export default index
+export default index;

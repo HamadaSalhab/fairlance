@@ -1,10 +1,10 @@
-import React from 'react'
-import searching from '../../../assets/svg/searching.svg'
-import Poster from '../../../components/Poster'
-import SearchBar from '../../../components/SearchBar'
-import Button from '../../../components/Button'
+import React from 'react';
+import searching from '../../../assets/svg/searching.svg';
+import Poster from '../../../components/Poster';
+import SearchBar from '../../../components/SearchBar';
+import Button from '../../../components/Button';
 import { StyledHire } from '../style';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const MainView = () => {
     const Content = () => {
@@ -15,16 +15,16 @@ const MainView = () => {
                 <h3>We have experienced freelancers from all around the world</h3>
                 <StyledHire className='hire-search'>
                     <Link to='/create-post'>
-                        <Button extrapadding={true} primary={true}>Hire freelancer</Button>
+                        <Button extrapadding={true} primary={true}>
+                            Hire freelancer
+                        </Button>
                     </Link>
-                    <SearchBar text="Search for a job" />
+                    <SearchBar text='Search for a job' />
                 </StyledHire>
             </div>
-        )
-    }
-    return (
-        <Poster img={searching} Content={Content} />
-    )
-}
+        );
+    };
+    return <Poster img={searching} Content={Content} />;
+};
 
-export default MainView
+export default MainView;

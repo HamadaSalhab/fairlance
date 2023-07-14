@@ -19,7 +19,7 @@ export const StyledOptions = styled.div`
         text-align: center;
         justify-content: center;
         font-weight: 600;
-        border-right: solid 1px #1E88E5;
+        border-right: solid 1px #1e88e5;
         padding: 0 0.5rem;
         &:last-child {
             border-right: none;
@@ -36,7 +36,7 @@ export const StyledOptions = styled.div`
             height: 40px;
         }
     }
-`
+`;
 
 export const StyledPost = styled.div`
     height: 100%;
@@ -56,7 +56,7 @@ export const StyledPost = styled.div`
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-    &>div:first-child{
+    & > div:first-child {
         height: 100%;
     }
     .post-image {
@@ -79,7 +79,7 @@ export const StyledPost = styled.div`
         }
     }
     .apply-info {
-        p{
+        p {
             margin-right: auto;
         }
         bottom: 0;
@@ -91,8 +91,7 @@ export const StyledPost = styled.div`
             margin-right: auto;
         }
     }
-
-`
+`;
 
 export const StyledWhyUs = styled.div`
     h4 {
@@ -103,16 +102,16 @@ export const StyledWhyUs = styled.div`
         margin-left: 3rem;
     }
     i {
-        color: #1E88E5;
+        color: #1e88e5;
         margin-right: 1rem;
         font-size: 1.2rem;
     }
     button {
         margin-top: 2rem;
     }
-`
+`;
 
 export const StyledHire = styled.div`
     width: 100%;
     margin-top: 3rem;
-`
+`;

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const EmptyApplication = () => {
-  return (
-    <div>There are no applications on this post yet</div>
-  )
-}
+    return <div>There are no applications on this post yet</div>;
+};
 
-export default EmptyApplication
+export default EmptyApplication;

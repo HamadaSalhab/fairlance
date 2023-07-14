@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 
 export const StyledPoster = styled.div`
-
     height: 100vh;
     width: 85%;
     margin: 0 auto;
@@ -26,4 +25,4 @@ export const StyledPoster = styled.div`
             user-select: none;
         }
     }
-`
+`;

@@ -5,17 +5,17 @@ export const StyledDetailedPost = styled.div`
     padding: 1rem 1.5rem;
     min-height: 30vh;
     box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
-    &>div:first-child {
+    & > div:first-child {
         display: flex;
         div {
             margin-left: auto;
         }
-        h4{
+        h4 {
             color: #777;
             font-weight: bold;
-            text-decoration:none;
-            &:hover{
-                color: #1E88E5;
+            text-decoration: none;
+            &:hover {
+                color: #1e88e5;
             }
         }
     }
@@ -30,14 +30,13 @@ export const StyledDetailedPost = styled.div`
             align-items: center;
         }
     }
-    .price-info{
+    .price-info {
         display: flex;
     }
-    p{
+    p {
         white-space: pre-line;
     }
-
-`
+`;
 
 export const StyledApply = styled.div`
     padding: 1rem 1.5rem;
@@ -45,12 +44,12 @@ export const StyledApply = styled.div`
     background-color: #fff;
     margin-top: 1rem;
     box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
-    label{
+    label {
         font-weight: 600;
         display: block;
         margin-top: 1rem;
     }
-    textarea{
+    textarea {
         margin-left: 0.7rem;
         margin-top: 0.5rem;
         width: 95%;
@@ -61,59 +60,59 @@ export const StyledApply = styled.div`
         padding: 0.6rem;
         height: 250px;
     }
-    p{
+    p {
         color: #a2a2a2;
     }
-    .proposal{
+    .proposal {
         display: flex;
-        button{
+        button {
             margin-left: auto;
         }
-        input{
+        input {
             margin-left: 1rem;
             padding: 0.5rem;
-            width: 80px
+            width: 80px;
         }
     }
-`
+`;
 
 export const StyledApplications = styled.div`
     width: 100%;
     background-color: #fff;
     margin-top: 1rem;
     box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
-    .price-info{
+    .price-info {
         display: flex;
-        .price-range{
+        .price-range {
             margin-right: auto;
         }
     }
-    button{
+    button {
         padding: 0.5rem;
     }
-    p{
+    p {
         display: -webkit-box;
         -webkit-line-clamp: 4;
         line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-    &>div{
+    & > div {
         padding: 1.5rem 1.5rem;
         border-bottom: solid 1px #a2a2a2;
-        &:last-child{
+        &:last-child {
             border: none;
         }
     }
-    h3{
+    h3 {
         padding: 0.5rem;
         border-bottom: solid 1px;
     }
-    .loading{
+    .loading {
         height: 200px;
         padding: 1rem;
     }
-`
+`;
 
 export const StyledApplication = styled.div`
     width: 85%;
@@ -122,23 +121,23 @@ export const StyledApplication = styled.div`
     padding: 1rem;
     margin-top: 1rem;
     box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
-    a{
+    a {
         text-decoration: none;
     }
-    h4{
+    h4 {
         margin-bottom: 1.5rem;
         font-weight: bold;
-        text-decoration:none;
+        text-decoration: none;
         color: #777;
-        &:hover{
-            color: #1E88E5;
+        &:hover {
+            color: #1e88e5;
         }
     }
-    .price-info{
+    .price-info {
         display: flex;
         margin-top: 1.5rem;
-        .price-range{
+        .price-range {
             margin-right: auto;
         }
     }
-`
+`;

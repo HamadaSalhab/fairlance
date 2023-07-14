@@ -10,8 +10,8 @@ export const StyledRadioButton = styled.div`
     * {
         box-sizing: unset;
     }
-    
-    input[type=radio] {
+
+    input[type='radio'] {
         position: absolute;
         visibility: hidden;
     }
@@ -31,13 +31,13 @@ export const StyledRadioButton = styled.div`
     }
 
     &:hover label {
-        color: #1E88E5;
+        color: #1e88e5;
     }
 
     .check {
         display: block;
         position: absolute;
-        border: 2px solid #AAAAAA;
+        border: 2px solid #aaaaaa;
         border-radius: 100%;
         height: 10px;
         width: 10px;
@@ -56,18 +56,18 @@ export const StyledRadioButton = styled.div`
     }
 
     &:hover .check {
-        border: 2px solid #1E88E5;
+        border: 2px solid #1e88e5;
     }
 
-    input[type=radio]:checked~.check {
-        border: 2px solid #1E88E5;
+    input[type='radio']:checked ~ .check {
+        border: 2px solid #1e88e5;
     }
 
-    input[type=radio]:checked~.check::before {
-        background: #1E88E5;
+    input[type='radio']:checked ~ .check::before {
+        background: #1e88e5;
     }
 
-    input[type=radio]:checked~label {
-        color: #1E88E5;
+    input[type='radio']:checked ~ label {
+        color: #1e88e5;
     }
-`
+`;

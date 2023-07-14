@@ -3,11 +3,11 @@ import { styled } from 'styled-components';
 export const StyledNav = styled.ul`
     background-color: #fff;
     box-shadow: 1px 2px 8px 0px rgba(30, 136, 229, 0.1);
-    position: ${props => props.$notfixed ? 'static' : 'fixed'};
+    position: ${(props) => (props.$notfixed ? 'static' : 'fixed')};
     width: 100%;
     z-index: 1;
     top: 0;
-    #nav-container{
+    #nav-container {
         display: flex;
         align-items: center;
         list-style: none;
@@ -17,7 +17,8 @@ export const StyledNav = styled.ul`
         margin: 0 auto;
         & > li {
             margin-left: 1rem;
-            a,button {
+            a,
+            button {
                 border: none;
                 background-color: transparent;
                 text-decoration: none;
@@ -26,7 +27,7 @@ export const StyledNav = styled.ul`
                 font-weight: 500;
                 cursor: pointer;
                 &:hover {
-                    color: #1E88E5;
+                    color: #1e88e5;
                     transition: all 0.3s;
                 }
             }
@@ -34,7 +35,7 @@ export const StyledNav = styled.ul`
                 margin-left: 0;
                 margin-right: auto;
                 span {
-                    color: #1E88E5;
+                    color: #1e88e5;
                 }
                 img {
                     height: 2.7rem;
@@ -44,59 +45,56 @@ export const StyledNav = styled.ul`
                 margin-right: auto;
             }
             .active {
-                color: #1E88E5;
+                color: #1e88e5;
             }
-            #profile-fullname{
+            #profile-fullname {
                 font-size: 1.2rem;
                 font-weight: 500;
             }
         }
     }
-`
+`;
 
+export const Menu = styled.ul`
+    /* main UL component called: "Menu" */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 
-export const Menu = styled.ul `
+    /* dropdown LI */
+    & > .dropdown {
+        display: inline-block;
 
-  /* main UL component called: "Menu" */
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  
+        & > .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
 
-  /* dropdown LI */
-  & > .dropdown {
-      display: inline-block;
-
-      & > .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-
-        & > li {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          text-align: left;
-          border-bottom: solid 1px #ccc;
-          &:last-child{
-            border-bottom: none;
-          }
-          &:first-child{
-            margin-top: 1rem;
-          }
-          &:hover {
-            background-color: #f1f1f1;
-          }
+            & > li {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+                border-bottom: solid 1px #ccc;
+                &:last-child {
+                    border-bottom: none;
+                }
+                &:first-child {
+                    margin-top: 1rem;
+                }
+                &:hover {
+                    background-color: #f1f1f1;
+                }
+            }
         }
-      }
 
-      &:hover .dropdown-content {
-        display: block
-      }
+        &:hover .dropdown-content {
+            display: block;
+        }
     }
-`
+`;
