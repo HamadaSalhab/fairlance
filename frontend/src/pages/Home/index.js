@@ -6,22 +6,22 @@ import Recents from '../../components/Recents';
 import Footer from '../../components/Footer';
 import WhyUs from './Components/WhyUs';
 const RECENT_POSTS_URL =
-    process.env.REACT_APP_RECENT_POSTS || 'http://localhost:3030/delivered-posts';
+  process.env.REACT_APP_RECENT_POSTS || 'http://localhost:3030/delivered-posts';
 
 const Home = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    });
-    return (
-        <div>
-            <NavBar />
-            <MainView />
-            <Options />
-            <WhyUs />
-            <Recents URL={RECENT_POSTS_URL} done={false} />
-            <Footer />
-        </div>
-    );
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+  return (
+    <div>
+      <NavBar />
+      <MainView />
+      <Options />
+      <WhyUs />
+      <Recents URL={RECENT_POSTS_URL} done={false} />
+      <Footer />
+    </div>
+  );
 };
 
 export default Home;
