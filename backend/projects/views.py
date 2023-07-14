@@ -29,7 +29,7 @@ class ProjectListAPIView(generics.ListAPIView):
     Can be accessed by only logged-in users
     """
 
-    queryset = Project.objects.all()
+    queryset = Project.objects.all().order_by("-id")
     serializer_class = ProjectSerializer
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
