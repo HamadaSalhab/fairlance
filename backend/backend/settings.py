@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "transactions",
     "applications",
     "offers",
+    "django_messages_drf",
 ]
 
 MIDDLEWARE = [
