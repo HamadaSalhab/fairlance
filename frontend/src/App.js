@@ -1,23 +1,24 @@
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import LoginPage from './pages/Login';
-import SignupPage from './pages/Signup';
+import Home from './pages/Home/Home';
+import LoginPage from './pages/Login/Login';
+import SignupPage from './pages/Signup/Signup';
 import * as React from 'react';
-import FindJobPage from './pages/FindJob';
-import FAQ from './pages/FAQ';
-import CreatePost from './pages/CreatePost';
-import PostDetailsPage from './pages/PostDetails';
+import FindJobPage from './pages/FindJob/FindJob';
+import FAQ from './pages/FAQ/FAQ';
+import CreatePost from './pages/CreatePost/CreatePost';
+import PostDetailsPage from './pages/PostDetails/PostDetails';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './utils/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
-import MyOffers from './pages/MyOffers';
-import FeedBack from './components/FeedBack';
+import MyOffers from './pages/MyOffers/MyOffers';
+import FeedBack from './components/FeedBack/FeedBack';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 import Application from './components/DetailedPost/components/Application';
 import Profile from './pages/Profile/Profile';
-import MyApplications from './pages/MyApplications';
+import MyApplications from './pages/MyApplications/MyApplications';
+import GuestRoute from './utils/GuestRoute';
 
 function App() {
   return (
@@ -25,10 +26,14 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/login' element={<GuestRoute />}>
+            <Route path='/login' element={<LoginPage />} />
+          </Route>
+          <Route path='/signup' element={<GuestRoute />}>
+            <Route path='/signup' element={<SignupPage />}></Route>
+          </Route>
           <Route path='/faq' element={<FAQ />}></Route>
-          
+
           <Route path='/create-post' element={<PrivateRoute />}>
             <Route path='/create-post' element={<CreatePost />}></Route>
           </Route>

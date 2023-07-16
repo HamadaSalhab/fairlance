@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Range, getTrackBackground } from 'react-range';
 
 const SlideBar = ({ rtl, MAX, MIN, STEP, setValues, values, oneSided }) => {
@@ -7,7 +7,7 @@ const SlideBar = ({ rtl, MAX, MIN, STEP, setValues, values, oneSided }) => {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
       }}
     >
       <Range
@@ -18,8 +18,7 @@ const SlideBar = ({ rtl, MAX, MIN, STEP, setValues, values, oneSided }) => {
         rtl={rtl}
         onChange={(values) => {
           setValues(values);
-        }
-        }
+        }}
         renderTrack={({ props, children }) => (
           <div
             onMouseDown={props.onMouseDown}
@@ -29,7 +28,7 @@ const SlideBar = ({ rtl, MAX, MIN, STEP, setValues, values, oneSided }) => {
               height: '36px',
               display: 'flex',
               width: '80%',
-              marginTop: '0.5rem'
+              marginTop: '0.5rem',
             }}
           >
             <div
@@ -43,9 +42,9 @@ const SlideBar = ({ rtl, MAX, MIN, STEP, setValues, values, oneSided }) => {
                   colors: ['#ccc', '#1E88E5', '#ccc'],
                   min: MIN,
                   max: MAX,
-                  rtl
+                  rtl,
                 }),
-                alignSelf: 'center'
+                alignSelf: 'center',
               }}
             >
               {children}
@@ -53,35 +52,32 @@ const SlideBar = ({ rtl, MAX, MIN, STEP, setValues, values, oneSided }) => {
           </div>
         )}
         renderThumb={({ index, props, isDragged }) => (
-          (
+          <div
+            {...props}
+            style={{
+              ...props.style,
+              height: '15px',
+              width: '15px',
+              borderRadius: '4px',
+              backgroundColor: '#FFF',
+              display: oneSided && index === 1 ? 'none' : 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              boxShadow: '0px 2px 6px #AAA',
+            }}
+          >
             <div
-              {...props}
               style={{
-                ...props.style,
-                height: '15px',
-                width: '15px',
-                borderRadius: '4px',
-                backgroundColor: '#FFF',
-                display: (oneSided&&index===1) ? 'none' : 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                boxShadow: '0px 2px 6px #AAA'
+                height: '7px',
+                width: '3px',
+                backgroundColor: isDragged ? '#1E88E5' : '#CCC',
               }}
-            >
-              <div
-                style={{
-                  height: '7px',
-                  width: '3px',
-                  backgroundColor: isDragged ? '#1E88E5' : '#CCC',
-                }}
-              />
-            </div>
-
-          )
+            />
+          </div>
         )}
       />
     </div>
   );
-}
+};
 
-export default SlideBar
+export default SlideBar;

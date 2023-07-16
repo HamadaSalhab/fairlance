@@ -1,13 +1,26 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthWrapper, LoginForm, InputField, Error, SubmitButton, InputFieldWrapper, EyeIcon, LoginDetails } from './style';
-import NavBar from '../../components/NavBar';
+import {
+  AuthWrapper,
+  LoginForm,
+  InputField,
+  Error,
+  SubmitButton,
+  InputFieldWrapper,
+  EyeIcon,
+  LoginDetails,
+} from './style';
+import NavBar from '../../components/NavBar/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link, useLocation } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 
 const LoginPage = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const { loginUser } = useContext(AuthContext);
@@ -30,20 +43,20 @@ const LoginPage = () => {
           <h2>Welcome back</h2>
           <p>Please enter your details</p>
           <LoginForm onSubmit={handleSubmit(handleLogin)}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor='email'>Email</label>
             <InputField
-              type="email"
-              id="email"
+              type='email'
+              id='email'
               {...register('email', {
                 required: 'Email is required',
               })}
             />
             {errors.email && <Error>{errors.email.message}</Error>}
             <InputFieldWrapper>
-              <label htmlFor="password">Password</label>
+              <label htmlFor='password'>Password</label>
               <InputField
-                type={showPassword ? "text" : "password"}
-                id="password"
+                type={showPassword ? 'text' : 'password'}
+                id='password'
                 {...register('password', {
                   required: 'Password is required',
                 })}
@@ -53,13 +66,16 @@ const LoginPage = () => {
               </EyeIcon>
             </InputFieldWrapper>
             {errors.password && <Error>{errors.password.message}</Error>}
-            <SubmitButton type="submit" disabled={isSubmitting}>
+            <SubmitButton type='submit' disabled={isSubmitting}>
               {isSubmitting ? 'Logging in...' : 'Login'}
             </SubmitButton>
           </LoginForm>
           <p>
-            {/* Don't have an account yet? <Link to='/signup'>Signup</Link> instead. */}
-            Don't have an account yet? <Link to='/signup' className='move-btn'>Signup</Link> instead.
+            Don't have an account yet?
+            <Link to='/signup' className='move-btn'>
+              Signup
+            </Link>
+            instead.
           </p>
         </LoginDetails>
       </AuthWrapper>

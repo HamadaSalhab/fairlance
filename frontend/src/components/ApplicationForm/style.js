@@ -26,18 +26,18 @@ export const StyledApplicationForm = styled.div`
   }
 
   .price {
-        /* margin-left: 1rem; */
-        margin-top: 0.2rem;
-        width: 80%;
-        display: flex;
-        align-items: center;
-        margin-bottom: 1.5rem;
-        input{
-            padding: 0.3rem;
-            margin: auto .5rem;
-            width: fit-content;
-        }
+    /* margin-left: 1rem; */
+    margin-top: 0.2rem;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    input {
+      padding: 0.3rem;
+      margin: auto 0.5rem;
+      width: fit-content;
     }
+  }
 
   input,
   textarea {
@@ -50,7 +50,7 @@ export const StyledApplicationForm = styled.div`
     font-size: 1rem;
     color: #444;
   }
-  textarea{
+  textarea {
     height: 200px;
   }
 `;

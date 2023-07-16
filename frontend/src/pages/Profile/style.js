@@ -9,7 +9,7 @@ export const StyledContainer = styled.div`
   border-radius: 1rem;
   background-color: #fff;
   margin: 0 auto;
-  margin-top: 10rem;
+  margin-top: 7rem;
   margin-bottom: 7rem;
   padding: 2rem;
   /* top: 4rem; */
@@ -25,7 +25,7 @@ export const ProfileInfo = styled.div`
   h2 {
     margin-bottom: 2rem;
   }
-  label{
+  label {
     margin: 1rem 0;
     font-weight: 650;
   }
@@ -33,11 +33,14 @@ export const ProfileInfo = styled.div`
 
 export const InfoBox = styled.div`
   width: auto;
+  min-height: 2.6rem;
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const InputField = styled.input`
@@ -61,7 +64,6 @@ export const StyledPfp = styled.div`
     margin-bottom: 3rem;
     display: flex;
     align-items: center;
-
   }
   label {
     margin-left: 2rem;
@@ -76,22 +78,22 @@ export const UploadPhoto = styled.div`
   margin-bottom: 0.75rem;
 `;
 
-export const ButtonsWrap = styled.div `
+export const ButtonsWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-export const Button = styled.button`
+export const StyledButton = styled.button`
   width: 5rem;
   padding: 10px;
-  background-color: #1E88E5;
-  border: solid #1E88E5 1px;
+  background-color: #1e88e5;
+  border: solid #1e88e5 1px;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
   box-sizing: border-box;
-  
+
   &:hover {
     background-color: #0056b3;
   }

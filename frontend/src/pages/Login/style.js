@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AuthWrapper = styled.div`  
+export const AuthWrapper = styled.div`
   width: fit-content;
   box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.2);
   background-color: #fff;
@@ -10,10 +10,10 @@ export const AuthWrapper = styled.div`
   padding: 2.5rem;
   left: 0;
   right: 0;
-  p{
+  p {
     color: #a1a1a1;
   }
-  h2{
+  h2 {
     padding-bottom: 0.5rem;
   }
   .move-btn {
@@ -22,11 +22,11 @@ export const AuthWrapper = styled.div`
     border: none;
     cursor: pointer;
     color: #555;
-    &:hover{
+    &:hover {
       text-decoration: underline;
     }
   }
-  label{
+  label {
     width: 100%;
   }
 `;
@@ -38,7 +38,7 @@ export const LoginDetails = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-`
+`;
 
 export const BrandDetails = styled.div`
   width: 50%;
@@ -48,10 +48,10 @@ export const BrandDetails = styled.div`
   justify-content: center;
   transition: all 0.5s;
   z-index: 1;
-  img{
+  img {
     width: 60%;
   }
-`
+`;
 
 export const LoginForm = styled.form`
   display: flex;
@@ -92,13 +92,13 @@ export const SubmitButton = styled.button`
   width: 100%;
   padding: 10px;
   margin: 1rem 0;
-  background-color: #1E88E5;
-  border: solid #1E88E5 1px;
+  background-color: #1e88e5;
+  border: solid #1e88e5 1px;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
   box-sizing: border-box;
-  
+
   &:hover {
     background-color: #0056b3;
   }
