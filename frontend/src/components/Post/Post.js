@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import Tags from '../Tags';
+import Tags from '../Tags/Tags';
 import { StyledPost } from './style';
-import Button from '../Button';
+import Button from '../Button/Button';
 import { Link } from 'react-router-dom';
 import momnet from 'moment';
 
@@ -18,8 +18,7 @@ const Post = ({ post }) => {
           </h4>
         </Link>
         <div style={{ color: '#7b7b7b' }}>
-          {' '}
-          <i className='fa-regular fa-clock' style={{ padding: '0.4rem 0.4rem 0 0.4rem' }}></i>{' '}
+          <i className='fa-regular fa-clock' style={{ padding: '0.4rem 0.4rem 0 0.4rem' }}></i>
           Deadline {momnet(post.deadline).fromNow()}
         </div>
       </div>

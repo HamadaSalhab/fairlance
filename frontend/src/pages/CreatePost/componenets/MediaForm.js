@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Button from '../../../components/Button';
+import Button from '../../../components/Button/Button';
 import { FileUploader } from 'react-drag-drop-files';
 import Select from 'react-select';
 import AuthContext from '../../../context/AuthContext';
@@ -34,18 +34,16 @@ const MediaForm = ({ nextForm, prevForm, tags, setTags }) => {
         }
         setSuggestions(tags);
       })
-      .catch((error) => {
+      .catch(() => {
         for (let i = 0; i < 3; i++) {
           setSuggestions([]);
         }
-        console.log(error);
       });
-  }, [setSuggestions]);
+  }, [setSuggestions, authToken]);
 
   const [file, setFile] = useState(null);
   const handleChange = (f) => {
     setFile(f);
-    console.log(f);
   };
   return (
     <form>

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledMyApplications = styled.div`
-  width: 85%;
   margin: 5rem auto;
   min-height: 60vh;
   h4 {
@@ -19,5 +18,23 @@ export const StyledMyApplications = styled.div`
   p {
     overflow-wrap: break-word; /* Add this line to allow long words to wrap */
     margin: 1rem 0.5rem;
+  }
+`;
+
+export const StyledLoading = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  div {
+    width: 85%;
+    background-color: #fff;
+    margin-bottom: 1rem;
+  }
+  .loading {
+    display: block;
+    background-color: #fff;
+    height: 150px;
+    padding: 1rem;
   }
 `;

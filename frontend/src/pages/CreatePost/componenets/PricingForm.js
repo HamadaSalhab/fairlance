@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../../../components/Button';
+import Button from '../../../components/Button/Button';
 import DatePicker from 'react-datepicker';
-import ErrorMessage from '../../../components/ErrorMessage';
+import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 import 'react-datepicker/dist/react-datepicker.css';
 

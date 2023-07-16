@@ -1,8 +1,8 @@
 import React from 'react';
 import searching from '../../../assets/svg/searching.svg';
-import Poster from '../../../components/Poster';
-import SearchBar from '../../../components/SearchBar';
-import Button from '../../../components/Button';
+import Poster from '../../../components/Poster/Poster';
+import SearchBar from '../../../components/SearchBar/SearchBar';
+import Button from '../../../components/Button/Button';
 import { StyledHire } from '../style';
 import { Link } from 'react-router-dom';
 

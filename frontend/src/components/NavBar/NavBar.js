@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import logo from '../../assets/images/logo-new.png';
 import { Link } from 'react-router-dom';
 import { StyledNav, Menu } from './style';
@@ -7,7 +7,6 @@ import AuthContext from '../../context/AuthContext';
 const NavBar = ({ notfixed }) => {
   const { userFirstName, logout } = useContext(AuthContext);
   const { userID } = useContext(AuthContext);
-  const [balance, setBalance] = useState(0);
 
   return (
     <StyledNav id='nav-bar' $notfixed={notfixed}>
@@ -32,13 +31,12 @@ const NavBar = ({ notfixed }) => {
         </li>
         {userFirstName ? (
           <>
-            <li>Balance ${balance.toFixed(2)}</li>
             <li>
               <Menu>
                 <div className='dropdown'>
-                  <a href='#' className='dropbtn'>
+                  <button className='dropbtn'>
                     Profile Menu <i className='fa-solid fa-caret-down'></i>
-                  </a>
+                  </button>
                   <div className='dropdown-content'>
                     <li>
                       <Link to={`/users/${userID}/applications`}>My Applications</Link>

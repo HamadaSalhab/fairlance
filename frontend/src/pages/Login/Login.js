@@ -10,7 +10,7 @@ import {
   EyeIcon,
   LoginDetails,
 } from './style';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link, useLocation } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
@@ -71,11 +71,10 @@ const LoginPage = () => {
             </SubmitButton>
           </LoginForm>
           <p>
-            {/* Don't have an account yet? <Link to='/signup'>Signup</Link> instead. */}
-            Don't have an account yet?{' '}
+            Don't have an account yet?
             <Link to='/signup' className='move-btn'>
               Signup
-            </Link>{' '}
+            </Link>
             instead.
           </p>
         </LoginDetails>

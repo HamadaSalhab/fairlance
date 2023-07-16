@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import NavBar from '../../components/NavBar';
-import SearchBar from '../../components/SearchBar';
+import NavBar from '../../components/NavBar/NavBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import Select from 'react-select';
 import Filters from './components/Filters';
 import Posts from './components/Posts';
 import { StyledFindContainer } from './styles';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
 
 const FindJobPage = () => {
   useEffect(() => {

@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { StyledApplicationForm } from './style';
-import Button from '../Button';
+import Button from '../Button/Button';
 import AuthContext from '../../context/AuthContext';
 import { toast } from 'react-toastify';
+import Request from '../../utils/Request';
 
 const ApplicationForm = ({ projectId, toggleForm }) => {
   const { authToken, userID } = useContext(AuthContext);
@@ -31,20 +32,11 @@ const ApplicationForm = ({ projectId, toggleForm }) => {
   };
 
   const submitApplication = async (applicationData) => {
-    const url = '/api/application/create/';
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        Authorization: `token ${authToken}`,
-        'ngrok-skip-browser-warning': 'true',
-      },
-      body: JSON.stringify(applicationData),
-    };
-
     try {
-      const response = await fetch(url, requestOptions);
+      const response = await fetch(
+        '/api/application/create/',
+        Request('POST', applicationData, authToken),
+      );
       if (response.ok) {
         toast('Application submitted!');
         toggleForm();
@@ -53,7 +45,6 @@ const ApplicationForm = ({ projectId, toggleForm }) => {
       }
     } catch (error) {
       toast.error('Failed to submit application please try again');
-      console.log(error);
     }
   };
 

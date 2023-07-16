@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import AuthContext from '../../../context/AuthContext';
-import Button from '../../Button';
+import Button from '../../Button/Button';
 import { Link } from 'react-router-dom';
 import { StyledApplication } from '../style';
-import NavBar from '../../NavBar';
-import Footer from '../../Footer';
+import NavBar from '../../NavBar/NavBar';
+import Footer from '../../Footer/Footer';
 import { toast } from 'react-toastify';
+import Request from '../../../utils/Request';
 
 const Application = () => {
   const { projectid, id } = useParams();
@@ -15,17 +16,7 @@ const Application = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(projectid);
-    const req = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        Authorization: `token ${authToken}`,
-        'ngrok-skip-browser-warning': 'true',
-      },
-    };
-    fetch(`/api/application/${id}/`, req)
+    fetch(`/api/application/${id}/`, Request('GET', '', authToken))
       .then((response) => {
         return response.json();
       })
@@ -36,34 +27,35 @@ const Application = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [authToken, id]);
 
   const hire = () => {
-    // TODO: implement hiring
-    console.log(id);
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        Authorization: `token ${authToken}`,
-        'ngrok-skip-browser-warning': 'true',
-      },
-      body: JSON.stringify({
-        application: id,
-      }),
-    };
-    fetch('/api/offers/create/', req)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    fetch(
+      '/api/offers/create/',
+      Request(
+        'POST',
+        {
+          application: id,
+        },
+        authToken,
+      ),
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error('Unkown error occured');
+        }
+      })
+      .then(() => {
+        toast(
+          'You have succesffully hired the freelancer. We will tell you when the client accepts your offer',
+        );
       })
       .catch((e) => {
-        console.log(e);
+        if (e === 'Unkown error occured') toast.error(e);
+        else toast.error('Network error');
       });
-    toast(
-      'You have succesffully hired the freelancer. We will tell you when the client accepts your offer',
-    );
     navigate(`/post/${projectid}`);
   };
 

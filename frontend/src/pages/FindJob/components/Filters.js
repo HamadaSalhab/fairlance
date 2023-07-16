@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import RadioButton from '../../../components/RadioButton';
-import SlideBar from '../../../components/SlideBar';
+import RadioButton from '../../../components/RadioButton/RadioButton';
+import SlideBar from '../../../components/SlideBar/SlideBar';
 import Select from 'react-select';
 import { StyledFilters } from '../styles.js';
 

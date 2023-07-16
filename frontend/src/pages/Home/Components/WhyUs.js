@@ -1,7 +1,7 @@
 import React from 'react';
 import whyus from '../../../assets/svg/why-us.svg';
-import Poster from '../../../components/Poster';
-import Button from '../../../components/Button';
+import Poster from '../../../components/Poster/Poster';
+import Button from '../../../components/Button/Button';
 import { StyledWhyUs } from '../style';
 import { Link } from 'react-router-dom';
 

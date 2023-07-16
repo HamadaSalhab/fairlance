@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../../../components/Button';
-import Tags from '../../../components/Tags';
+import Button from '../../../components/Button/Button';
+import Tags from '../../../components/Tags/Tags';
 
 const FinalPreview = ({ handleSubmit, prevForm, title, body, tags, range, deadline, category }) => {
   const [complete, setComplete] = useState(false);
@@ -41,15 +41,13 @@ const FinalPreview = ({ handleSubmit, prevForm, title, body, tags, range, deadli
       setComplete(true);
     }
     setMissing(missingItems);
-  }, []);
+  }, [body, category, deadline, range, title]);
 
   const transfer = (tags) => {
-    console.log(tags);
     let ret = [];
     for (let key in tags) {
       ret.push({ skill_name: tags[key].label });
     }
-    console.log(ret);
     return ret;
   };
 

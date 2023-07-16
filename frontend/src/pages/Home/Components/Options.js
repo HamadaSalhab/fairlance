@@ -13,16 +13,16 @@ const Options = () => {
         <p>You need to register to get your first job</p>
       </div>
       <div>
-        <img srcSet={analyzing} alt='' draggable='false' /> Look for a job{' '}
-        <p>Search for jobs that match your skills from all over the world</p>{' '}
+        <img srcSet={analyzing} alt='' draggable='false' /> Look for a job
+        <p>Search for jobs that match your skills from all over the world</p>
       </div>
       <div>
-        <img srcSet={delivery} alt='' draggable='false' /> Deliver the job{' '}
+        <img srcSet={delivery} alt='' draggable='false' /> Deliver the job
         <p>Make sure that you deliver the best quality projects</p>
       </div>
       <div>
-        <img src={paid} alt='' draggable='false' /> Get paid{' '}
-        <p>Get paid with your most convienent payment option</p>{' '}
+        <img src={paid} alt='' draggable='false' /> Get paid
+        <p>Get paid with your most convienent payment option</p>
       </div>
     </StyledOptions>
   );

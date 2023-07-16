@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import HorizontalBlogs from '../HorizontalBlogs';
+import HorizontalBlogs from '../HorizontalBlogs/HorizontalBlogs';
 import AuthContext from '../../context/AuthContext';
 
 const Recents = ({ done }) => {
@@ -31,7 +31,7 @@ const Recents = ({ done }) => {
         }
         console.log(error);
       });
-  }, [setPosts]);
+  }, [setPosts, authToken]);
 
   const previousPost = () => {
     if (postIdx > 0) {

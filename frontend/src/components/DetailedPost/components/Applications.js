@@ -1,32 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyledApplications } from '../style';
 import AuthContext from '../../../context/AuthContext';
-import Button from '../../Button';
+import Button from '../../Button/Button';
 import { Link } from 'react-router-dom';
 import EmptyApplication from './EmptyApplication';
 import { List } from 'react-content-loader';
+import Request from '../../../utils/Request';
 
 const Applications = ({ id }) => {
   const { authToken } = useContext(AuthContext);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const req = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        Authorization: `token ${authToken}`,
-        'ngrok-skip-browser-warning': 'true',
-      },
-    };
     const load = async () => {
-      await fetch(`/api/application/list/${id}/`, req)
+      await fetch(`/api/application/list/${id}/`, Request('GET', '', authToken))
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
           setApplications(data);
         })
         .catch((error) => {
@@ -35,7 +26,7 @@ const Applications = ({ id }) => {
       setLoading(false);
     };
     load();
-  }, []);
+  }, [authToken, id]);
 
   return (
     <StyledApplications>

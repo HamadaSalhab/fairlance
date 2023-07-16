@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Post from '../../../components/Post';
+import Post from '../../../components/Post/Post';
 import { StyledPosts } from '../styles';
 import AuthContext from '../../../context/AuthContext';
 import { List } from 'react-content-loader';
@@ -27,16 +27,15 @@ const Posts = () => {
         .then((data) => {
           setPosts(data);
         })
-        .catch((error) => {
+        .catch(() => {
           for (let i = 0; i < 3; i++) {
             setPosts([]);
           }
-          console.log(error);
         });
       setLoading(false);
     };
     load();
-  }, [setPosts]);
+  }, [setPosts, authToken]);
 
   return (
     <StyledPosts>

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyledOffers } from './style';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 import Offer from './components/Offer';
 import AuthContext from '../../context/AuthContext';
 
-const index = () => {
+const MyOffers = () => {
   const { authToken } = useContext(AuthContext);
   const [offers, setOffers] = useState([]);
   useEffect(() => {
@@ -21,12 +21,9 @@ const index = () => {
       .then((res) => res.json())
       .then((data) => {
         setOffers(data);
-        console.log(data);
       })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+      .catch(() => {});
+  }, [authToken]);
 
   return (
     <>
@@ -48,4 +45,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default MyOffers;

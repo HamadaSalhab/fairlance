@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Button from '../../../components/Button';
-import ErrorMessage from '../../../components/ErrorMessage';
+import Button from '../../../components/Button/Button';
+import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 const DetailsForm = ({ nextForm, prevForm, description, setDescription }) => {
   const [descriptionError, setDescriptionError] = useState(false);

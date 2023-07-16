@@ -23,7 +23,7 @@ export const StyledNav = styled.ul`
         background-color: transparent;
         text-decoration: none;
         color: #000;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 500;
         cursor: pointer;
         &:hover {

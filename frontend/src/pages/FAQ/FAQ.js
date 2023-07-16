@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 import logo from '../../assets/images/logo-new.png';
 import { StyledFAQ, StyledQuestionsBlock } from './style';
 import Collapsible from './components/Collapsible';

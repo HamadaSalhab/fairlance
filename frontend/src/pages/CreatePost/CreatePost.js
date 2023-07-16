@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { CreatePostStyled, StyledProgress } from './style';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 import TitleForm from './componenets/TitleForm';
 import DetailsForm from './componenets/DetailsForm';
 import MediaForm from './componenets/MediaForm';
@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 
 const TAGS_URL = 'http://localhost:3030/tags';
 
-const index = () => {
+const CreatePost = () => {
   const { authToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [range, setRange] = useState([]);
@@ -72,7 +72,6 @@ const index = () => {
     for (let i = 0; i < tags.length; i++) {
       tags_req.push({ skill_id: tags[i].value });
     }
-    console.log(tags_req);
     const req = {
       method: 'POST',
       headers: {
@@ -89,14 +88,11 @@ const index = () => {
         skills: tags_req,
       }),
     };
-    console.log(req);
     try {
       const res = await fetch('/api/projects/add/', req);
       const ret = await res.json();
-      console.log(ret);
       navigate(`/post/${ret.project_id}`);
       toast('post created successfully');
-      console.log(res);
     } catch (e) {
       toast.error('something went wrong please recheck');
     }
@@ -182,4 +178,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default CreatePost;

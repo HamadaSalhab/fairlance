@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthWrapper, InputField, Error, SubmitButton, InputFieldWrapper, EyeIcon } from './style';
 import { SignupForm, SignupDetails } from './style';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
@@ -98,10 +98,10 @@ const LoginPage = () => {
             </SubmitButton>
           </SignupForm>
           <p>
-            Already have an account?{' '}
+            Already have an account?
             <Link to='/login' className='move-btn'>
               Login
-            </Link>{' '}
+            </Link>
             instead.
           </p>
         </SignupDetails>

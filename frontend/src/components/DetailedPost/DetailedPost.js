@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Tags from '../Tags';
+import Tags from '../Tags/Tags';
 import { StyledDetailedPost } from './style';
-import Button from '../Button';
+import Button from '../Button/Button';
 import { Code } from 'react-content-loader';
 import Applications from './components/Applications';
-import ApplicationForm from '../ApplicationForm';
+import ApplicationForm from '../ApplicationForm/ApplicationForm';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 
@@ -19,7 +19,7 @@ const DetailedPost = ({ post }) => {
       setShowApplications(true);
       console.log('ok');
     }
-  }, [post]);
+  }, [post, userID]);
 
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -38,7 +38,6 @@ const DetailedPost = ({ post }) => {
             </h4>
           </Link>
           <div style={{ color: '#7b7b7b' }}>
-            {' '}
             <i className='fa-regular fa-clock' style={{ padding: '0.4rem 0.4rem 0 0.4rem' }}></i>
             deadline {formatDate(new Date(post.deadline))}
           </div>

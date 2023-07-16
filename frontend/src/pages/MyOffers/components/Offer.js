@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledOffer } from '../style';
 import { Link } from 'react-router-dom';
-import Button from '../../../components/Button';
+import Button from '../../../components/Button/Button';
 
 const Offer = ({ owner, project, projectid, noOffer }) => {
   return (

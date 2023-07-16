@@ -3,7 +3,6 @@ import { styled } from 'styled-components';
 export const StyledOffers = styled.div`
   background-color: #fff;
   width: 85%;
-  height: 60vh;
   margin: 1rem auto;
   h4 {
     padding: 1rem;
@@ -19,6 +18,7 @@ export const StyledOffer = styled.div`
   border-bottom: solid 1px #ccc;
   p {
     margin-right: auto;
+    padding: 1rem 0;
   }
   a {
     color: #000;

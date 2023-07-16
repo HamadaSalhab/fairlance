@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import RadioButton from '../../../components/RadioButton';
-import Button from '../../../components/Button';
-import ErrorMessage from '../../../components/ErrorMessage';
+import RadioButton from '../../../components/RadioButton/RadioButton';
+import Button from '../../../components/Button/Button';
+import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 const TitleForm = ({ category, clickedOption, title, setTitle, nextForm }) => {
   const [titleError, setTitleError] = useState(false);
