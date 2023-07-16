@@ -27,15 +27,6 @@ class Available_Skill(models.Model):
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
 
 
-class Message(models.Model):
-    sender = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="sent_messages"
-    )
-    receiver = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="received_messages"
-    )
-    msg_date = models.DateTimeField()
-    msg_content = models.CharField(max_length=256)
 
 
 def upload_to(instance, filename):
