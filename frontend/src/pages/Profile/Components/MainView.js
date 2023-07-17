@@ -20,16 +20,16 @@ import { BigNumber } from 'bignumber.js';
 import Request from '../../../utils/Request';
 
 const USDT_ABI = USDT;
-const USDT_ADDRESS = '0xee027a8A3448aA286Ecf994039ab366c01d72289';
-const CONTRACT_ADDRESS = '0x187473E3E79DAfaED2f10C891038c12c27a43037';
+const USDT_ADDRESS = '0x9FE7b16A0532f3B6FD3512df12A5B981fF9C2Da2';
+const CONTRACT_ADDRESS = '0x827E8AA9E0f73229AEd872D4a12AE5102fc5Fe0a';
 
 const MainView = () => {
   const [userDetails, setUserDetails] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-    balance: 0,
+    firstName: 'loading...',
+    lastName: 'loading...',
+    email: 'loading...',
+    address: 'loading...',
+    balance: 'loading...',
     photo: {},
     cv: null,
   });
@@ -40,12 +40,13 @@ const MainView = () => {
 
   useEffect(() => {
     let errorOccured = false;
-    fetch(`/api/users/balance`, Request('GET', '', authToken))
+    fetch(`/api/users/balance/`, Request('GET', '', authToken))
       .then(async (res) => {
         if (res.ok) return res.json();
         return Promise.reject(res.status);
       })
       .then((data) => {
+        console.log(data);
         setUserDetails((userDetails) => {
           return {
             ...userDetails,
@@ -65,12 +66,13 @@ const MainView = () => {
         else return Promise.reject(response.status);
       })
       .then((data) => {
+        console.log(data);
         setUserDetails((userDetails) => {
           return {
             ...userDetails,
             firstName: data.first_name,
             lastName: data.last_name,
-            email: data.email,
+            email: data.username,
             address: data.wallet_address ? data.wallet_address : 'Please connect to metamask',
           };
         });
@@ -92,17 +94,28 @@ const MainView = () => {
       });
   }, [id, authToken]);
 
-  const connectWallet = () => {
+  const connectWallet = async () => {
     if (window.ethereum) {
-      window.ethereum.request({ method: 'eth_requestAccounts' }).then((res) => {
-        setUserDetails({ ...userDetails, res });
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        setUserDetails({ ...userDetails, address: await signer.getAddress() });
         setUpdatedExtra(true);
-      });
+      }
+      catch (e) {
+        if (e.code === 4001) {
+          toast.error('User rejected transaction')
+        }
+        else {
+          toast.error('Unknow error')
+        }
+      }
     } else {
       toast.error('Please install MetaMask wallet to continue');
     }
   };
-
+  
   const addFunds = async () => {
     fetch('/api/users/deposit/', Request('GET', '', authToken))
       .then((res) => {
@@ -110,22 +123,36 @@ const MainView = () => {
         else return Promise.reject(res.status);
       })
       .then(async () => {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send('eth_requestAccounts', []);
-        const signer = provider.getSigner();
-        const USDT_CONTRACT = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
-        const value = new BigNumber(fund * 10 ** 18);
-        const tx = await USDT_CONTRACT.transfer(CONTRACT_ADDRESS, value.toString());
-        // TODO: link to the backend
+        let tx=null
+        try {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          await provider.send('eth_requestAccounts', []);
+          const signer = provider.getSigner();
+          const USDT_CONTRACT = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
+          const value = new BigNumber(fund * 10 ** 18);
+          tx = await USDT_CONTRACT.transfer(CONTRACT_ADDRESS, value.toString());
+        }
+        catch (e) {
+          console.log(e);
+        }
+        if (tx == null) {
+          throw new Error('Unable to handle the transaction');
+        }
+        const formData = new FormData();
+        console.log(tx.hash);
+        formData.append('transaction_hash', tx.hash);
+        const req = {
+          method: 'PUT',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `token ${authToken}`,
+            'ngrok-skip-browser-warning': 'true',
+          },
+          body: formData,
+        };
         const res = await fetch(
-          ``,
-          Request(
-            'PUT',
-            {
-              tranaction_hash: tx.hash,
-            },
-            authToken,
-          ),
+          `/api/users/${id}/update/extra-details/`,
+          req,
         );
         if (res.ok) {
           toast(
@@ -136,9 +163,6 @@ const MainView = () => {
         }
       })
       .catch((e) => {
-        if (e.toString().contains('user rejected transaction')) {
-          toast.error('user rejected the transaction');
-        }
         console.log(e);
       });
   };

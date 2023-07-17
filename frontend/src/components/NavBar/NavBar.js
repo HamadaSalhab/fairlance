@@ -35,7 +35,7 @@ const NavBar = ({ notfixed }) => {
               <Menu>
                 <div className='dropdown'>
                   <button className='dropbtn'>
-                    Profile Menu <i className='fa-solid fa-caret-down'></i>
+                    {userFirstName} <i className='fa-solid fa-caret-down'></i>
                   </button>
                   <div className='dropdown-content'>
                     <li>
