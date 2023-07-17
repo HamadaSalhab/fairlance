@@ -18,7 +18,7 @@ import { useParams } from 'react-router';
 import Button from '../../../components/Button/Button';
 import USDT from '../../../USDT.json';
 import * as ethers from 'ethers';
-import { BigNumber } from 'bignumber.js';
+import * as BigNumber from 'big-number';
 import Request from '../../../utils/Request';
 
 const USDT_ABI = USDT;
@@ -110,7 +110,7 @@ const MainView = () => {
         const signer = provider.getSigner();
         setUserDetails({ ...userDetails, address: await signer.getAddress() });
         const formData = new FormData();
-        formData.append('wallet_address', userDetails.address);
+        formData.append('wallet_address', await signer.getAddress());
 
         const req = {
           method: 'PUT',
@@ -165,9 +165,17 @@ const MainView = () => {
           await provider.send('eth_requestAccounts', []);
           const signer = provider.getSigner();
           const USDT_CONTRACT = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
-          const value = new BigNumber(fund * 10 ** 18);
+          const pow = BigNumber(10).pow(18);
+          console.log(pow);
+          const value = BigNumber(fund).mult(pow);
           tx = await USDT_CONTRACT.transfer(CONTRACT_ADDRESS, value.toString());
         } catch (e) {
+          if (e.toString().includes('amount exceeds balance')) {
+            toast.error('You do not have enough balance');
+          }
+          else {
+            toast.error('Error, please try again');
+          }
           console.log(e);
         }
         if (tx == null) {
@@ -277,6 +285,40 @@ const MainView = () => {
         },
       };
     });
+  };
+
+  const withdraw = (value) => {
+    // TODO: remove this shit
+    if (!value) {
+      value = '200';
+    }
+    console.log('here');
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: `token ${authToken}`,
+        'ngrok-skip-browser-warning': 'true',
+      },
+      body: JSON.stringify({ amount: '200' }),
+    };
+    console.log(req);
+    fetch(`/api/users/withdraw/`, req)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error(res.status);
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        toast('Withdraw request confirmed ');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -396,7 +438,7 @@ const MainView = () => {
               </label>
               <BalanceBox name='balance'>{userDetails.balance}</BalanceBox>
               <div id='withdrawButton'>
-                <Button>Withdraw</Button>
+                <Button onClick={withdraw}>Withdraw</Button>
               </div>
             </div>
             <div>
