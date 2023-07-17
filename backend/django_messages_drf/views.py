@@ -71,14 +71,18 @@ class ThreadCRUDApiView(DjangoMessageDRFAuthMixin, ThreadMixin, RequireUserConte
 
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        subject = serializer.data.get('subject') or thread.subject
+        subject = 0 
+        try:
+            subject = thread.subject or serializer.data.get('subject') or "No Subject"
+        except:
+            subject = serializer.data.get('subject') or "No Subject"
+        
         if not thread:
-            raise NotFound()
-            # msg = Message.new_message(
-            #     from_user=self.request.user, to_users=[user], subject=subject,
-            #     content=serializer.data.get('message')
-            # )
+            #raise NotFound()
+             msg = Message.new_message(
+                 from_user=self.request.user, to_users=[user], subject=subject,
+                 content=serializer.data.get('message')
+             )
 
         else:
             msg = Message.new_reply(thread, self.request.user, serializer.data.get('message'))
