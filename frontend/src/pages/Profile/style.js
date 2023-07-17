@@ -17,7 +17,8 @@ export const StyledContainer = styled.div`
   section {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
   }
 `;
 
@@ -48,7 +49,7 @@ export const ProfileInfo = styled.div`
   h2 {
     margin-bottom: 1rem;
   }
-  label{
+  label {
     margin-top: 1rem;
     margin-bottom: 0.3rem;
     font-weight: 650;
@@ -62,17 +63,29 @@ export const BalanceInfo = styled.div`
   margin: 0 1rem;
   width: 100%;
   h2 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 2rem 0;
   }
-  section {
+
+  #wallet-box {
+    width: 50%;
+    margin-bottom: 1rem;
+
+    label {
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-weight: 650;
+    }
+  }
+
+  #balance-container {
     /* background-color: green; */
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
     div {
       display: flex;
       flex-direction: column;
-      width: 45%;
+      width: 50%;
       /* background-color: purple; */
 
       label{
@@ -80,18 +93,29 @@ export const BalanceInfo = styled.div`
         margin-bottom: 0.3rem;
         font-weight: 650;
       }
+
+      #withdrawButton {
+        width: 30%;
+      }
+
+      #depositButton {
+        width: 30%;
+      }
+
     } 
   }
 `;
 
 export const InfoBox = styled.div`
-  /* background-color: red; */
-  width: 85%;
+  width: 90%;
+  /* min-height: 2.6rem; */
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const BalanceBox = styled.div`
@@ -114,6 +138,16 @@ export const InputField = styled.input`
   font-weight: 550;
 `;
 
+export const DepositField = styled.input`
+  width: 50%;
+  height: 90%;
+  padding: 10px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: 550;
+`;
+
 export const StyledPfp = styled.div`
   height: 100%;
   /* background-color: green; */
@@ -127,7 +161,6 @@ export const StyledPfp = styled.div`
     margin-bottom: 3rem;
     display: flex;
     align-items: center;
-
   }
   label {
     margin-left: 2rem;
@@ -142,17 +175,17 @@ export const UploadPhoto = styled.div`
   margin-bottom: 0.75rem;
 `;
 
-export const Button = styled.button`
-  margin: 5px 0; 
+export const StyledButton = styled.button`
   width: 5rem;
   padding: 10px;
-  background-color: #1E88E5;
-  border: solid #1E88E5 1px;
+  margin: 1rem 0;
+  background-color: #1e88e5;
+  border: solid #1e88e5 1px;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
   box-sizing: border-box;
-  
+
   &:hover {
     background-color: #0056b3;
   }

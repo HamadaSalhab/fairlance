@@ -1,17 +1,17 @@
-import React from 'react'
-import './style.js'
-import NavBar from '../../components/NavBar/index.js';
-import MainView from './Components/MainView.js'
-import Footer from '../../components/Footer';
+import React from 'react';
+import './style';
+import NavBar from '../../components/NavBar/NavBar';
+import MainView from './Components/MainView';
+import Footer from '../../components/Footer/Footer';
 
 const Profile = () => {
   return (
     <div>
-      <NavBar/>
-      <MainView/>
-      <Footer/>
+      <NavBar />
+      <MainView />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

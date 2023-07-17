@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
 * {
@@ -23,4 +23,4 @@ body::-webkit-scrollbar {
     background-color: #cfcfcf;
     margin: 0 auto;
 }
-`
+`;
