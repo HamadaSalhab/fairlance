@@ -10,8 +10,9 @@ urlpatterns = [
     path("", views.UserCreateAPIView.as_view()),
     path("<int:pk>/", views.UserDetailAPIView.as_view()),
     path("<int:pk>/update/", views.UserUpdateAPIView.as_view()),
-    path("<int:pk>/update/profile-image/", views.UserExtraUpdateAPIView.as_view()),
+    path("<int:pk>/update/extra-details/", views.UserExtraUpdateAPIView.as_view()),
     path("<int:pk>/applications/", ApplicationListFreelancerView.as_view()),
     path("auth/", views.CustomAuthTokenView.as_view()),
-    # path("<int:pk>/wallet/", views.WalletRetrieveAPIView.as_view()),
+    path("deposit/", views.UserTransactionRetrieveAPIView.as_view()),
+    path("balance/", views.UserBalanceAPIView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
