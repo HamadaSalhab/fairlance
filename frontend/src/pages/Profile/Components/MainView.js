@@ -33,7 +33,7 @@ const MainView = () => {
     address: 'loading...',
     balance: 'loading...',
     photo: {},
-    cv: null,
+    cv: {},
   });
   const [fund, setFund] = useState(0);
   const [updatedExtra, setUpdatedExtra] = useState(false);
@@ -87,6 +87,12 @@ const MainView = () => {
           setUserDetails((userDetails) => {
             return { ...userDetails, photo: { preview: defaultPfp, data: '' } };
           });
+        if (data.profile_cv) {
+          fetch(data.profile_cv, Request('GET', '', authToken));
+          setUserDetails((userDetails) => {
+            return { ...userDetails, cv: { preview: data.profile_cv, data: '' } };
+          });
+        }
       })
       .catch((e) => {
         if (errorOccured) return;
@@ -99,25 +105,53 @@ const MainView = () => {
   const connectWallet = async () => {
     if (window.ethereum) {
       try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-        await provider.send("eth_requestAccounts", []);
+        const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+        await provider.send('eth_requestAccounts', []);
         const signer = provider.getSigner();
         setUserDetails({ ...userDetails, address: await signer.getAddress() });
-        setUpdatedExtra(true);
-      }
-      catch (e) {
+        const formData = new FormData();
+        formData.append('wallet_address', userDetails.address);
+
+        const req = {
+          method: 'PUT',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `token ${authToken}`,
+            'ngrok-skip-browser-warning': 'true',
+          },
+          body: formData,
+        };
+        fetch(`/api/users/${id}/update/extra-details/`, req)
+          .then(async (response) => {
+            if (response.ok) return response.json();
+            else {
+              const e = await response.json();
+              throw new Error(e);
+            }
+          })
+          .then((data) => {
+            if (data instanceof Array && data.includes('Address already exists.')) {
+              toast.error('This address is already in use, please try another address');
+            } else {
+              toast('Updated address successfully');
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error('An Error Occurred, please try again');
+          });
+      } catch (e) {
         if (e.code === 4001) {
-          toast.error('User rejected transaction')
-        }
-        else {
-          toast.error('Unknow error')
+          toast.error('User rejected transaction');
+        } else {
+          toast.error('Unknow error');
         }
       }
     } else {
       toast.error('Please install MetaMask wallet to continue');
     }
   };
-  
+
   const addFunds = async () => {
     fetch('/api/users/deposit/', Request('GET', '', authToken))
       .then((res) => {
@@ -125,7 +159,7 @@ const MainView = () => {
         else return Promise.reject(res.status);
       })
       .then(async () => {
-        let tx=null
+        let tx = null;
         try {
           const provider = new ethers.providers.Web3Provider(window.ethereum);
           await provider.send('eth_requestAccounts', []);
@@ -133,8 +167,7 @@ const MainView = () => {
           const USDT_CONTRACT = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
           const value = new BigNumber(fund * 10 ** 18);
           tx = await USDT_CONTRACT.transfer(CONTRACT_ADDRESS, value.toString());
-        }
-        catch (e) {
+        } catch (e) {
           console.log(e);
         }
         if (tx == null) {
@@ -152,10 +185,7 @@ const MainView = () => {
           },
           body: formData,
         };
-        const res = await fetch(
-          `/api/users/${id}/update/extra-details/`,
-          req,
-        );
+        const res = await fetch(`/api/users/${id}/update/extra-details/`, req);
         if (res.ok) {
           toast(
             'Got your request, you will be able to see your balance when we verify your transaction',
@@ -172,7 +202,7 @@ const MainView = () => {
   const handleUpdate = () => {
     const formData = new FormData();
     formData.append('profile_image', userDetails.photo.data);
-    formData.append('wallet_address', userDetails.address);
+    formData.append('profile_cv', userDetails.cv.data);
 
     const req = {
       method: 'PUT',
@@ -216,11 +246,7 @@ const MainView = () => {
           return response.json();
         })
         .then((data) => {
-          if (data instanceof Array && data.includes('Address already exists.')) {
-            toast.error('This address is already in use, please try another address');
-          } else {
-            toast('Profile photo and address updated successfully');
-          }
+          toast('Profile photo updated successfully');
           console.log(data);
         })
         .catch((error) => {
@@ -242,8 +268,15 @@ const MainView = () => {
   };
 
   const handleCVchange = (e) => {
-    // const selectedFile = e.target.files[0];
-    // TODO: handle CV change
+    setUserDetails((userDetails) => {
+      return {
+        ...userDetails,
+        cv: {
+          preview: URL.createObjectURL(e.target.files[0]),
+          data: e.target.files[0],
+        },
+      };
+    });
   };
 
   return (
@@ -253,7 +286,7 @@ const MainView = () => {
           <ProfileInfo>
             <h2>Profile Info:</h2>
 
-            <label htmlFor="fname">First name</label>
+            <label htmlFor='fname'>First name</label>
             {userID.toString() === id ? (
               <InputField
                 type='text'
@@ -265,7 +298,7 @@ const MainView = () => {
               <InfoBox>{userDetails.firstName}</InfoBox>
             )}
 
-            <label htmlFor="lname">Last name</label>
+            <label htmlFor='lname'>Last name</label>
             {userID.toString() === id ? (
               <InputField
                 type='text'
@@ -280,20 +313,48 @@ const MainView = () => {
             <label htmlFor='email'>Email</label>
             <InfoBox>{userDetails.email}</InfoBox>
 
-            <label htmlFor="cv">CV</label>
+            <label htmlFor='cv'>CV</label>
             {userID.toString() === id ? (
-              <InfoBox>
-                <input type='file' id='cv' name='cv' onChange={handleCVchange} />
-              </InfoBox>
+              userDetails.cv.preview ? (
+                <>
+                  <a href={userDetails.cv.preview} download>
+                    download
+                  </a>
+                  Update CV
+                  <InfoBox>
+                    <input
+                      type='file'
+                      id='cv'
+                      name='cv'
+                      src={userDetails.cv.preview}
+                      onChange={(e) => {
+                        handleCVchange(e);
+                        setUpdatedExtra(true);
+                      }}
+                    />
+                  </InfoBox>
+                </>
+              ) : (
+                <InfoBox>
+                  <input
+                    type='file'
+                    id='cv'
+                    name='cv'
+                    src={userDetails.cv.preview}
+                    onChange={(e) => {
+                      handleCVchange(e);
+                      setUpdatedExtra(true);
+                    }}
+                  />
+                </InfoBox>
+              )
             ) : (
               <InfoBox>
                 {userDetails.cv === null ? <p>(Empty)</p> : <p>User's CV:{userDetails.cv}</p>}
               </InfoBox>
             )}
 
-            {userID.toString() === id && (
-              <StyledButton onClick={handleUpdate}>Save</StyledButton>
-            )}
+            {userID.toString() === id && <StyledButton onClick={handleUpdate}>Save</StyledButton>}
           </ProfileInfo>
           <StyledPfp>
             <img src={userDetails.photo.preview} alt='' />
@@ -319,7 +380,7 @@ const MainView = () => {
         <BalanceInfo>
           <h2>Balance Info:</h2>
           {userID.toString() === id && (
-            <div id ='wallet-box'>
+            <div id='wallet-box'>
               <label htmlFor='wallet'>Wallet Address</label>
               <InfoBox>{userDetails.address}</InfoBox>
               <Button onClick={connectWallet}>
@@ -335,9 +396,7 @@ const MainView = () => {
               </label>
               <BalanceBox name='balance'>{userDetails.balance}</BalanceBox>
               <div id='withdrawButton'>
-                <Button>
-                  Withdraw
-                </Button>
+                <Button>Withdraw</Button>
               </div>
             </div>
             <div>
@@ -352,9 +411,7 @@ const MainView = () => {
                 onChange={(e) => setFund(e.target.value)}
               />
               <div id='depositButton'>
-                <Button onClick={addFunds}>
-                  Deposit
-                </Button>
+                <Button onClick={addFunds}>Deposit</Button>
               </div>
             </div>
           </div>
