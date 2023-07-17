@@ -11,16 +11,35 @@ from .models import UserExtra
 class UserExtraSerializer(serializers.ModelSerializer):
     profile_image = serializers.ImageField(use_url=True, required=False)
     profile_cv = serializers.FileField(use_url=True, required=False)
-    bio = serializers.FileField(required=False)
 
     class Meta:
         model = UserExtra
-        fields = ("profile_image", "bio", "profile_cv")
+        fields = ("profile_image", "profile_cv", "wallet_address")
+
+    def update(self, instance, validated_data):
+        updated_address = validated_data.get("wallet_address")
+        if (
+            not updated_address is None
+            and UserExtra.objects.exclude(pk=instance.pk)
+            .filter(wallet_address=updated_address)
+            .exists()
+        ):
+            raise serializers.ValidationError("Address already exists.")
+
+        return super().update(instance, validated_data)
 
 
 class UserSerializer(serializers.ModelSerializer):
     profile_image = serializers.SerializerMethodField()
+    wallet_address = serializers.SerializerMethodField()
 
+    def get_wallet_address(self, obj):
+        try: 
+            obj = obj.extradetails
+        except:
+            return None
+        return obj.wallet_address 
+        
     def get_profile_image(self, obj):
         try:
             obj = obj.extradetails
@@ -39,6 +58,7 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "date_joined",
             "profile_image",
+            "wallet_address",
         )
         extra_kwargs = {"password": {"write_only": True}}
 
