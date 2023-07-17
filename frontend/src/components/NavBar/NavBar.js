@@ -42,10 +42,10 @@ const NavBar = ({ notfixed }) => {
                       <Link to={`/users/${userID}/applications`}>My Applications</Link>
                     </li>
                     <li>
-                      <Link to={`/offers`}>My offers</Link>
+                      <Link to={`/offers`}>My Offers</Link>
                     </li>
                     <li>
-                      <Link to={`/profile/${userID}`}>My profile</Link>
+                      <Link to={`/profile/${userID}`}>My Profile</Link>
                     </li>
                     <li>
                       <button onClick={() => logout()}>Log out</button>

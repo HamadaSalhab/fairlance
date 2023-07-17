@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledMyApplications = styled.div`
-  margin: 5rem auto;
+  h1 {
+    width: 85%;
+    margin: auto;
+    margin-bottom: 1rem;
+    color: #1e88e5;
+  }
+  margin: 2rem;
   min-height: 60vh;
   h4 {
     margin-right: 1rem;

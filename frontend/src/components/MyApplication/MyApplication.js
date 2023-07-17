@@ -2,29 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { StyledMyApplication } from './style';
 
-const MyApplication = ({ application }) => {
+const MyApplication = ({ idx, application }) => {
   return (
     <div>
       <StyledMyApplication>
         {application && (
           <>
-            <Link to={`/profile/${application.freelancer}`}>
-              <h4>
-                {application.freelancer_first_name} {application.freelancer_last_name}
-              </h4>
+          <h2>Application #{idx+1}</h2>
+            <Link to={`/post/${application.project_id}`}>
+              <h3 style={{color: "#1e88e5"}}>
+                Project: {application.project_title}
+              </h3>
             </Link>
+            <h3>Proposal Message:</h3>
             <p>{application.proposal}</p>
-            <div className='price-info'>
-              <div className='price-range'>
-                <div>{application.bid} $</div>
-              </div>
-              {/* <Link to={`/post/${projectid}`}>
-                <Button>Return</Button>
-              </Link> */}
-              {/* <Button primary={true} onClick={hire}>
-                Hire
-              </Button> */}
-            </div>
+            <h3>Asking Price: ${application.bid}</h3>  
           </>
         )}
       </StyledMyApplication>
