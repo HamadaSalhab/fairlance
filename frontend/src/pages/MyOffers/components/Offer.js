@@ -3,11 +3,12 @@ import { StyledOffer } from '../style';
 import { Link } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
 
-const Offer = ({ owner, project, projectid, noOffer }) => {
+const Offer = ({ owner, project, projectid, noOffer, idx }) => {
   return (
     <StyledOffer>
       {!noOffer ? (
         <>
+        <h2>Offer #{idx+1}</h2>
           <p>
             You got offer from {owner} on <Link to={`/post/${projectid}`}>{project}</Link> project
           </p>
