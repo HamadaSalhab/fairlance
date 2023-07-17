@@ -30,11 +30,12 @@ const MyApplications = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar notfixed={true}/>
       <StyledMyApplications>
+      <h1>My Applications</h1>
         {applications.length > 0 ? (
           applications.map((application, idx) => {
-            return <MyApplication application={application} key={idx}></MyApplication>;
+            return <MyApplication application={application} idx={idx} key={idx}></MyApplication>;
           })
         ) : (
           <StyledLoading className='loading-container'>
