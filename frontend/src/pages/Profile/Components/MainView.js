@@ -1,6 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import defaultPfp from '../../../assets/images/defaultPfp.jpg';
-import { StyledContainer, ProfileInfo, InfoBox, StyledPfp, UploadPhoto, Button, InputField, ButtonsWrap } from '../style';
+import {
+  StyledContainer, ProfileInfo, InfoBox, StyledPfp, UploadPhoto, Button,
+  InputField, BalanceContainer, BalanceInfo, BalanceBox
+} from '../style';
 import { toast } from 'react-toastify';
 import AuthContext from '../../../context/AuthContext';
 import { useParams } from 'react-router';
@@ -110,76 +113,94 @@ const MainView = () => {
   };
 
   return (
-    <StyledContainer>
-      <ProfileInfo>
-        <h2>Your Profile Info:</h2>
+    <>
+      <StyledContainer>
+        <section>
+          <ProfileInfo>
+            <h2>Profile Info:</h2>
 
-        <label htmlFor="fname">First name</label>
-        {userID == id ?
-          <InputField type="text" id="fname" value={firstName}
-            onChange={(e) => setFirstName(e.target.value)} />
-          :
-          <InfoBox>
-            {firstName}
-          </InfoBox>
-        }
-
-        <label htmlFor="lname">Last name</label>
-        {userID == id ?
-          <InputField type="text" id="lname" value={lastName}
-            onChange={(e) => setLastName(e.target.value)} />
-          :
-          <InfoBox>
-            {lastName}
-          </InfoBox>
-        }
-
-
-        <label htmlFor="email">Email</label>
-        <InfoBox>
-          {email}
-        </InfoBox>
-
-        <label htmlFor="cv">CV</label>
-        {userID == id ?
-          <InfoBox>
-            <input type="file" id="cv" name="cv" onChange={handleCVchange} />
-          </InfoBox>
-          :
-          <InfoBox>
-            {cv == null ? <p>(Empty)</p>
+            <label htmlFor="fname">First name</label>
+            {userID == id ?
+              <InputField type="text" id="fname" value={firstName}
+                onChange={(e) => setFirstName(e.target.value)} />
               :
-              <p>User's CV:{cv}</p>
+              <InfoBox>
+                {firstName}
+              </InfoBox>
             }
-          </InfoBox>
-        }
-        {userID == id ?
-          <ButtonsWrap>
-            <Button onClick={handleUpdate}>
-              Save
-            </Button>
 
-          </ButtonsWrap>
-          :
-          <></>
-        }
-      </ProfileInfo>
+            <label htmlFor="lname">Last name</label>
+            {userID == id ?
+              <InputField type="text" id="lname" value={lastName}
+                onChange={(e) => setLastName(e.target.value)} />
+              :
+              <InfoBox>
+                {lastName}
+              </InfoBox>
+            }
 
-      <StyledPfp>
-        <img src={photo.preview} alt="" />
-        {userID == id ?
-          <>
-            <label htmlFor="photo">Update Photo:</label>
-            <UploadPhoto>
-              <input type="file" id="photo" name="photo" src={photo.preview} onChange={handlePhotoChange} />
-            </UploadPhoto>
-          </>
-          :
-          <></>
-        }
 
-      </StyledPfp>
-    </StyledContainer>
+            <label htmlFor="email">Email</label>
+            <InfoBox>
+              {email}
+            </InfoBox>
+
+            <label htmlFor="cv">CV</label>
+            {userID == id ?
+              <InfoBox>
+                <input type="file" id="cv" name="cv" onChange={handleCVchange} />
+              </InfoBox>
+              :
+              <InfoBox>
+                {cv == null ? <p>(Empty)</p>
+                  :
+                  <p>User's CV:{cv}</p>
+                }
+              </InfoBox>
+            }
+            {userID == id ?
+              <Button onClick={handleUpdate}>
+                Save
+              </Button>
+              :
+              <></>
+            }
+          </ProfileInfo>
+
+          <StyledPfp>
+            <img src={photo.preview} alt="" />
+            {userID == id ?
+              <>
+                <label htmlFor="photo">Update Photo:</label>
+                <UploadPhoto>
+                  <input type="file" id="photo" name="photo" src={photo.preview} onChange={handlePhotoChange} />
+                </UploadPhoto>
+              </>
+              :
+              <></>
+            }
+
+          </StyledPfp>
+        </section>
+        <BalanceInfo>
+          <h2>Balance Info:</h2>
+          <section>
+            <div>
+              <label htmlFor='balance'>Current Balance</label>
+              <BalanceBox>
+                <p>0.00</p>
+              </BalanceBox>
+            </div>
+            <div>
+              <label htmlFor='balance'>Top-up your account</label>
+              <Button>
+                Top-Up
+              </Button>
+            </div>
+          </section>
+        </BalanceInfo>
+      </StyledContainer>
+    </>
   );
 };
 

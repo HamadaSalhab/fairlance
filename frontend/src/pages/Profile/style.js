@@ -2,37 +2,101 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  
   box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.2);
+  /* border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem; */
   border-radius: 1rem;
   background-color: #fff;
-  margin: 0 auto;
-  margin-top: 10rem;
-  margin-bottom: 7rem;
+  /* background-color: purple; */
+  margin: 10rem auto;
   padding: 2rem;
-  /* top: 4rem; */
+  left: 0;
+  right: 0;
+  width: 70%;
+  section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+`;
+
+export const BalanceContainer = styled.div`
+  box-sizing: border-box;
+  align-items: center;
+  box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.2);
+  /* border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem; */
+  border-radius: 1rem;
+  background-color: #fff;
+  /* background-color: green; */
+  margin: 0 auto;
+  margin-bottom: 10rem;
+  padding: 2rem;
   left: 0;
   right: 0;
   width: 70%;
 `;
 
 export const ProfileInfo = styled.div`
+  display: flex;
+  flex-direction: column;
   /* background-color: yellow; */
   margin-left: 1rem;
-  width: 45%;
+  height: 100%;
+  width: 50%;
   h2 {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   label{
-    margin: 1rem 0;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
     font-weight: 650;
   }
 `;
 
+export const BalanceInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* background-color: blue; */
+  margin: 0 1rem;
+  width: 100%;
+  h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  section {
+    /* background-color: green; */
+    display: flex;
+    justify-content: space-between;
+    div {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+      /* background-color: purple; */
+
+      label{
+        margin-top: 1rem;
+        margin-bottom: 0.3rem;
+        font-weight: 650;
+      }
+    } 
+  }
+`;
+
 export const InfoBox = styled.div`
-  width: auto;
+  /* background-color: red; */
+  width: 85%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const BalanceBox = styled.div`
+  /* background-color: red; */
+  width: 100%;
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
@@ -41,7 +105,7 @@ export const InfoBox = styled.div`
 `;
 
 export const InputField = styled.input`
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
@@ -51,6 +115,8 @@ export const InputField = styled.input`
 `;
 
 export const StyledPfp = styled.div`
+  height: 100%;
+  /* background-color: green; */
   img {
     border-radius: 50%;
     border: 2px solid #ccc;
@@ -76,13 +142,8 @@ export const UploadPhoto = styled.div`
   margin-bottom: 0.75rem;
 `;
 
-export const ButtonsWrap = styled.div `
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 export const Button = styled.button`
+  margin: 5px 0; 
   width: 5rem;
   padding: 10px;
   background-color: #1E88E5;
