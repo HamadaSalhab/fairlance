@@ -8,7 +8,9 @@ import {
   UploadPhoto,
   StyledButton,
   InputField,
-  ButtonsWrap,
+  DepositField,
+  BalanceBox,
+  BalanceInfo,
 } from '../style';
 import { toast } from 'react-toastify';
 import AuthContext from '../../../context/AuthContext';
@@ -245,101 +247,120 @@ const MainView = () => {
   };
 
   return (
-    <StyledContainer>
-      <ProfileInfo>
-        <h2>Profile Info:</h2>
+    <>
+      <StyledContainer>
+        <section>
+          <ProfileInfo>
+            <h2>Profile Info:</h2>
 
-        <label htmlFor='fname'>First name</label>
-        {userID.toString() === id ? (
-          <InputField
-            type='text'
-            id='fname'
-            value={userDetails.firstName}
-            onChange={(e) => setUserDetails({ ...userDetails, firstName: e.target.value })}
-          />
-        ) : (
-          <InfoBox>{userDetails.firstName}</InfoBox>
-        )}
-
-        <label htmlFor='lname'>Last name</label>
-        {userID.toString() === id ? (
-          <InputField
-            type='text'
-            id='lname'
-            value={userDetails.lastName}
-            onChange={(e) => setUserDetails({ ...userDetails, lastName: e.target.value })}
-          />
-        ) : (
-          <InfoBox>{userDetails.lastName}</InfoBox>
-        )}
-
-        <label htmlFor='email'>Email</label>
-        <InfoBox>{userDetails.email}</InfoBox>
-
-        <label htmlFor='cv'>CV</label>
-        {userID.toString() === id ? (
-          <InfoBox>
-            <input type='file' id='cv' name='cv' onChange={handleCVchange} />
-          </InfoBox>
-        ) : (
-          <InfoBox>
-            {userDetails.cv === null ? <p>(Empty)</p> : <p>User's CV:{userDetails.cv}</p>}
-          </InfoBox>
-        )}
-        {/* Those are for testing only, change them to a better style */}
-        {userID.toString() === id && (
-          <div style={{ marginBottom: '1rem' }}>
-            <label htmlFor='wallet'>Wallet Address</label>
-            <InfoBox>{userDetails.address}</InfoBox>
-            <Button onClick={connectWallet}>
-              Connect wallet
-              <i style={{ paddingLeft: '0.5rem' }} className='fab fa-ethereum fa-l'></i>
-            </Button>
-            <label htmlFor='fund' style={{ display: 'block', marginBottom: '0.5rem' }}>
-              Deposit funds
-            </label>
-            <InputField
-              type='number'
-              id='fund'
-              name='fund'
-              value={fund}
-              onChange={(e) => setFund(e.target.value)}
-            />
-            <Button onClick={addFunds}>Deposit</Button>
-            <label htmlFor='balance' style={{ display: 'block' }}>
-              Balance
-            </label>
-            <InfoBox name='balance'>{userDetails.balance}</InfoBox>
-          </div>
-        )}
-        {userID.toString() === id && (
-          <ButtonsWrap>
-            <StyledButton onClick={handleUpdate}>Save</StyledButton>
-          </ButtonsWrap>
-        )}
-      </ProfileInfo>
-
-      <StyledPfp>
-        <img src={userDetails.photo.preview} alt='' />
-        {userID.toString() === id && (
-          <>
-            <label htmlFor='photo'>Update Photo:</label>
-            <UploadPhoto>
-              <input
-                type='file'
-                id='photo'
-                name='photo'
-                src={userDetails.photo.preview}
-                onChange={(e) => {
-                  handlePhotoChange(e);
-                  setUpdatedExtra(true);
-                }}
+            <label htmlFor="fname">First name</label>
+            {userID.toString() === id ? (
+              <InputField
+                type='text'
+                id='fname'
+                value={userDetails.firstName}
+                onChange={(e) => setUserDetails({ ...userDetails, firstName: e.target.value })}
               />
-            </UploadPhoto>
-          </>
-        )}
-      </StyledPfp>
-    </StyledContainer>
+            ) : (
+              <InfoBox>{userDetails.firstName}</InfoBox>
+            )}
+
+            <label htmlFor="lname">Last name</label>
+            {userID.toString() === id ? (
+              <InputField
+                type='text'
+                id='lname'
+                value={userDetails.lastName}
+                onChange={(e) => setUserDetails({ ...userDetails, lastName: e.target.value })}
+              />
+            ) : (
+              <InfoBox>{userDetails.lastName}</InfoBox>
+            )}
+
+            <label htmlFor='email'>Email</label>
+            <InfoBox>{userDetails.email}</InfoBox>
+
+            <label htmlFor="cv">CV</label>
+            {userID.toString() === id ? (
+              <InfoBox>
+                <input type='file' id='cv' name='cv' onChange={handleCVchange} />
+              </InfoBox>
+            ) : (
+              <InfoBox>
+                {userDetails.cv === null ? <p>(Empty)</p> : <p>User's CV:{userDetails.cv}</p>}
+              </InfoBox>
+            )}
+
+            {userID.toString() === id && (
+              <StyledButton onClick={handleUpdate}>Save</StyledButton>
+            )}
+          </ProfileInfo>
+          <StyledPfp>
+            <img src={userDetails.photo.preview} alt='' />
+            {userID.toString() === id && (
+              <>
+                <label htmlFor='photo'>Update Photo:</label>
+                <UploadPhoto>
+                  <input
+                    type='file'
+                    id='photo'
+                    name='photo'
+                    src={userDetails.photo.preview}
+                    onChange={(e) => {
+                      handlePhotoChange(e);
+                      setUpdatedExtra(true);
+                    }}
+                  />
+                </UploadPhoto>
+              </>
+            )}
+          </StyledPfp>
+        </section>
+        <BalanceInfo>
+          <h2>Balance Info:</h2>
+          {userID.toString() === id && (
+            <div id ='wallet-box'>
+              <label htmlFor='wallet'>Wallet Address</label>
+              <InfoBox>{userDetails.address}</InfoBox>
+              <Button onClick={connectWallet}>
+                Connect wallet
+                <i style={{ paddingLeft: '0.5rem' }} className='fab fa-ethereum fa-l'></i>
+              </Button>
+            </div>
+          )}
+          <div id='balance-container'>
+            <div>
+              <label htmlFor='balance' style={{ display: 'block' }}>
+                Balance
+              </label>
+              <BalanceBox name='balance'>{userDetails.balance}</BalanceBox>
+              <div id='withdrawButton'>
+                <Button>
+                  Withdraw
+                </Button>
+              </div>
+            </div>
+            <div>
+              <label htmlFor='fund' style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Deposit funds
+              </label>
+              <DepositField
+                type='number'
+                id='fund'
+                name='fund'
+                value={fund}
+                onChange={(e) => setFund(e.target.value)}
+              />
+              <div id='depositButton'>
+                <Button onClick={addFunds}>
+                  Deposit
+                </Button>
+              </div>
+            </div>
+          </div>
+        </BalanceInfo>
+      </StyledContainer>
+    </>
   );
 };
 
