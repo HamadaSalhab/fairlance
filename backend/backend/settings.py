@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     "8a8a-188-130-155-165.ngrok-free.app",
     "e8b6-188-130-155-154.ngrok-free.app",
     "9df5-188-130-155-154.ngrok-free.app",
-    "d716-188-130-155-153.ngrok-free.app",
+    "e45e-188-130-155-169.ngrok-free.app",
     "127.0.0.1",
     "localhost",
 ]
@@ -136,16 +136,17 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_FRAMEWORK = {}
+#REST_FRAMEWORK = {}
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         "rest_framework.authentication.TokenAuthentication"
-#     ],
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         'rest_framework.permissions.IsAuthenticated'
-#     ]
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication"
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "mediafiles")
 MEDIA_URL = "/media/"
+CSRF_TRUSTED_ORIGINS = ['https://e45e-188-130-155-169.ngrok-free.app']
