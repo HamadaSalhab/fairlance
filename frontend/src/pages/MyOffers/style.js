@@ -1,26 +1,55 @@
 import { styled } from 'styled-components';
 
 export const StyledOffers = styled.div`
-  background-color: #fff;
-  width: 85%;
-  margin: 1rem auto;
+  h1 {
+    width: 85%;
+    margin: auto;
+    margin-bottom: 1rem;
+    color: #1e88e5;
+  }
+  margin: 2rem;
+  min-height: 60vh;
   h4 {
-    padding: 1rem;
-    border-bottom: solid 1px;
+    margin-right: 1rem;
+    display: inline-block;
+    color: #777;
+    &:hover {
+      color: #1e88e5;
+    }
+  }
+  h3 {
+    margin-top: 0.5rem;
+    overflow-wrap: break-word; /* Add this line to allow long words to wrap */
+  }
+  p {
+    overflow-wrap: break-word; /* Add this line to allow long words to wrap */
+    margin: 1rem 0.5rem;
   }
 `;
 
 export const StyledOffer = styled.div`
+  width: 85%;
+  background-color: #fff;
+  margin: 0 auto;
   padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: solid 1px #ccc;
-  p {
-    margin-right: auto;
-    padding: 1rem 0;
-  }
+  margin-top: 1rem;
+  box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
   a {
-    color: #000;
+    text-decoration: none;
+  }
+  h2 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: solid 1px;
+  }
+  h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #777;
+    /* &:hover {
+      color: #1e88e5;
+    } */
   }
 `;

@@ -5,11 +5,20 @@ export const StyledDetailedPost = styled.div`
   padding: 1rem 1.5rem;
   min-height: 30vh;
   box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
+
+  h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #1e88e5;
+    }
+
   & > div:first-child {
     display: flex;
     div {
       margin-left: auto;
     }
+    
     h4 {
       color: #777;
       font-weight: bold;
@@ -20,12 +29,16 @@ export const StyledDetailedPost = styled.div`
     }
   }
 
+  .owner-and-deadline{
+    display: flex;
+    justify-content: space-between;
+  }
+
   .price-range {
     margin-top: 1rem;
     display: flex;
     margin-right: auto;
     div {
-      margin: 0 0.5rem;
       display: flex;
       align-items: center;
     }
@@ -77,6 +90,8 @@ export const StyledApply = styled.div`
 `;
 
 export const StyledApplications = styled.div`
+  padding: 1rem 1.5rem;
+
   width: 100%;
   background-color: #fff;
   margin-top: 1rem;
@@ -104,9 +119,12 @@ export const StyledApplications = styled.div`
       border: none;
     }
   }
-  h3 {
+  h2 {
+    color: #1e88e5;
     padding: 0.5rem;
     border-bottom: solid 1px;
+    border-color: black;
+    font-weight: bold;
   }
   .loading {
     height: 200px;
