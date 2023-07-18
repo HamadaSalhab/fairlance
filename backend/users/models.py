@@ -41,3 +41,7 @@ class UserExtra(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     wallet_address = models.CharField(max_length=256, default='not-specified')
     transaction_hash = models.CharField(max_length=128, blank=True, null=True, default=None)
+
+class Transaction(models.Model):
+    transaction_hash = models.CharField(max_length=128, unique=True)
+    

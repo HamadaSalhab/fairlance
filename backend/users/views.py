@@ -63,18 +63,19 @@ class UserBalanceAPIView(generics.RetrieveAPIView):
             settings.USDT_CONTRACT_ADDRESS,
             settings.USDT_CONTRACT_ABI,
         )
-        print(ret)
         if ret is None:
             return Response({"balance": instance.balance}, status=status.HTTP_200_OK)
 
         (sender, receiver, amount, statuss) = ret
-
+        
         instance.transaction_hash = None
 
         accepted = "OK"
+        statuss = str(statuss)
+        
         if (
             receiver is not None
-            and statuss == 1
+            and statuss == '1'
             and sender == instance.wallet_address
             and receiver == settings.CONTRACT_ADDRESS
         ):
@@ -89,13 +90,54 @@ class UserBalanceAPIView(generics.RetrieveAPIView):
             status=status.HTTP_200_OK,
         )
 
+class UserWithdrawAPIView(generics.CreateAPIView):
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        amount = request.data.get('amount')
+        if amount is None:
+            return Response({"details":"bad request"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            amount = int(amount)
+        except:
+            return Response({"details":"invalid amount"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            instance = request.user.extradetails
+        except:
+            return Response({"details":"you don't have sufficient balannce"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if amount > instance.balance:
+            return Response({"details":"you don't have sufficient balannce"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if amount < 1.0:
+            return Response({"details":"you can't withdraw less than 1.0 usdt"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if instance.wallet_address is None:
+            return Response({"details":"please specify your wallet first"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        tx = transac.send_transaction_to_user(instance.wallet_address, amount*1000000000000000000)
+        
+        statuss = str(tx['status'])
+        
+        if statuss == '1':
+            instance.balance = instance.balance - amount
+            instance.save()
+            return Response({"details":"Successfull Withdrawal"}, status=status.HTTP_202_ACCEPTED)
+        
+        else :
+            return Response({"details":"Rejected Withdrawal"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        
+        
+
 
 class UserTransactionRetrieveAPIView(generics.RetrieveAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        print(request.user)
         instance = None
         try:
             instance = UserExtra.objects.get(user=request.user)
@@ -108,7 +150,7 @@ class UserTransactionRetrieveAPIView(generics.RetrieveAPIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        if instance.wallet_address is "not-specified":
+        if instance.wallet_address == "not-specified":
             return Response(
                 {"details": "wallet address is not specified"},
                 status=status.HTTP_400_BAD_REQUEST,
@@ -138,7 +180,7 @@ class UserUpdateAPIView(generics.UpdateAPIView):
 
 class UserExtraUpdateAPIView(generics.UpdateAPIView):
     parser_classes = (FormParser, MultiPartParser)
-    queryset = UserExtraSerializer
+    queryset = UserExtra.objects.all()
     serializer_class = UserExtraSerializer
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]

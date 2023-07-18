@@ -9,7 +9,15 @@ from .models import Application, Employment
 class ApplicationSerializer(serializers.ModelSerializer):
     freelancer_first_name = serializers.SerializerMethodField()
     freelancer_last_name = serializers.SerializerMethodField()
+    project_id = serializers.SerializerMethodField()
+    project_title = serializers.SerializerMethodField()
 
+    def get_project_id(self, obj):
+        return obj.project.id
+    
+    def get_project_title(self, obj):
+        return obj.project.title
+    
     def get_freelancer_first_name(self, obj):
         return obj.freelancer.first_name
 

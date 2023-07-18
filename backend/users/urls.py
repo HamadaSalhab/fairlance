@@ -14,5 +14,6 @@ urlpatterns = [
     path("<int:pk>/applications/", ApplicationListFreelancerView.as_view()),
     path("auth/", views.CustomAuthTokenView.as_view()),
     path("deposit/", views.UserTransactionRetrieveAPIView.as_view()),
+    path("withdraw/", views.UserWithdrawAPIView.as_view()),
     path("balance/", views.UserBalanceAPIView.as_view()),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
