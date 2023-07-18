@@ -8,7 +8,7 @@ import {
   UploadPhoto,
   StyledButton,
   InputField,
-  DepositField,
+  MoneyField,
   BalanceBox,
   BalanceInfo,
 } from '../style';
@@ -80,6 +80,7 @@ const MainView = () => {
         });
         if (data.profile_image) {
           fetch(data.profile_image, Request('GET', '', authToken));
+          fetch(data.profile_cv, Request('GET', '', authToken));
           setUserDetails((userDetails) => {
             return { ...userDetails, photo: { preview: data.profile_image, data: '' } };
           });
@@ -310,32 +311,22 @@ const MainView = () => {
               <InfoBox>{userDetails.lastName}</InfoBox>
             )}
 
-            <label htmlFor='email'>Email</label>
-            <InfoBox>{userDetails.email}</InfoBox>
-
+            {userID.toString() === id && (
+              <>
+                <label htmlFor='email'>Email</label>
+                <InfoBox>{userDetails.email}</InfoBox>
+              </>
+            )}
             <label htmlFor='cv'>CV</label>
             {userID.toString() === id ? (
               userDetails.cv.preview ? (
                 <>
-                  <a href={userDetails.cv.preview} download>
-                    download
-                  </a>
-                  Update CV
-                  <InfoBox>
-                    <input
-                      type='file'
-                      id='cv'
-                      name='cv'
-                      src={userDetails.cv.preview}
-                      onChange={(e) => {
-                        handleCVchange(e);
-                        setUpdatedExtra(true);
-                      }}
-                    />
-                  </InfoBox>
-                </>
-              ) : (
-                <InfoBox>
+                  <div className='download-file'>
+                    <a href={userDetails.cv.preview} download>
+                      <i className='fas fa-file-download'></i>
+                      Download
+                    </a>
+                  </div>
                   <input
                     type='file'
                     id='cv'
@@ -346,12 +337,40 @@ const MainView = () => {
                       setUpdatedExtra(true);
                     }}
                   />
-                </InfoBox>
+                  <label className='update-file' htmlFor='cv'>
+                    Update CV
+                  </label>
+                </>
+              ) : (
+                <>
+                  <input
+                    type='file'
+                    id='cv'
+                    name='cv'
+                    src={userDetails.cv.preview}
+                    onChange={(e) => {
+                      handleCVchange(e);
+                      setUpdatedExtra(true);
+                    }}
+                  />
+                  <label className='update-file' htmlFor='cv'>
+                    Update CV
+                  </label>
+                </>
               )
             ) : (
-              <InfoBox>
-                {userDetails.cv === null ? <p>(Empty)</p> : <p>User's CV:{userDetails.cv}</p>}
-              </InfoBox>
+              <>
+                {userDetails.cv.preview ? (
+                  <div className='download-file'>
+                    <a href={userDetails.cv.preview} download>
+                      <i className='fas fa-file-download'></i>
+                      Download
+                    </a>
+                  </div>
+                ) : (
+                  <InfoBox>Empty</InfoBox>
+                )}
+              </>
             )}
 
             {userID.toString() === id && <StyledButton onClick={handleUpdate}>Save</StyledButton>}
@@ -359,63 +378,74 @@ const MainView = () => {
           <StyledPfp>
             <img src={userDetails.photo.preview} alt='' />
             {userID.toString() === id && (
-              <>
-                <label htmlFor='photo'>Update Photo:</label>
-                <UploadPhoto>
-                  <input
-                    type='file'
-                    id='photo'
-                    name='photo'
-                    src={userDetails.photo.preview}
-                    onChange={(e) => {
-                      handlePhotoChange(e);
-                      setUpdatedExtra(true);
-                    }}
-                  />
-                </UploadPhoto>
-              </>
+              <div className='update-photo-container'>
+                <input
+                  type='file'
+                  id='photo'
+                  name='photo'
+                  accept='image/*'
+                  src={userDetails.photo.preview}
+                  onChange={(e) => {
+                    handlePhotoChange(e);
+                    setUpdatedExtra(true);
+                  }}
+                />
+                <label className='update-photo' htmlFor='photo'>Update Photo</label>
+              </div>
             )}
           </StyledPfp>
         </section>
-        <BalanceInfo>
-          <h2>Balance Info:</h2>
-          {userID.toString() === id && (
-            <div id='wallet-box'>
-              <label htmlFor='wallet'>Wallet Address</label>
-              <InfoBox>{userDetails.address}</InfoBox>
-              <Button onClick={connectWallet}>
-                Connect wallet
-                <i style={{ paddingLeft: '0.5rem' }} className='fab fa-ethereum fa-l'></i>
-              </Button>
-            </div>
-          )}
-          <div id='balance-container'>
-            <div>
-              <label htmlFor='balance' style={{ display: 'block' }}>
-                Balance
-              </label>
-              <BalanceBox name='balance'>{userDetails.balance}</BalanceBox>
-              <div id='withdrawButton'>
-                <Button>Withdraw</Button>
+        {userID.toString() === id && (
+          <BalanceInfo>
+            <h2>Balance Info:</h2>
+            <div id='money-container'>
+              <div id='wallet-box'>
+                <label htmlFor='wallet'>Wallet Address</label>
+                <InfoBox>{userDetails.address}</InfoBox>
+                <Button onClick={connectWallet}>
+                  Connect wallet
+                  <i style={{ paddingLeft: '0.5rem' }} className='fab fa-ethereum fa-l'></i>
+                </Button>
+              </div>
+              <div id='balance-amount'>
+                <label htmlFor='balance' style={{ display: 'block' }}>
+                  Balance
+                </label>
+                <BalanceBox name='balance'>{userDetails.balance}</BalanceBox>
               </div>
             </div>
-            <div>
-              <label htmlFor='fund' style={{ display: 'block', marginBottom: '0.5rem' }}>
-                Deposit funds
-              </label>
-              <DepositField
-                type='number'
-                id='fund'
-                name='fund'
-                value={fund}
-                onChange={(e) => setFund(e.target.value)}
-              />
-              <div id='depositButton'>
-                <Button onClick={addFunds}>Deposit</Button>
+            <div id='withdraw-deposit'>
+              <div id='withdraw-box'>
+                <label htmlFor='balance' style={{ display: 'block' }}>
+                  Withdraw amount
+                </label>
+                <MoneyField
+                  type='number'
+                  id='fund'
+                  name='withdraw'
+                />
+                <div id='withdrawButton'>
+                  <Button>Withdraw</Button>
+                </div>
+              </div>
+              <div id='deposit-box'>
+                <label htmlFor='fund' style={{ display: 'block', marginBottom: '0.5rem' }}>
+                  Deposit funds
+                </label>
+                <MoneyField
+                  type='number'
+                  id='fund'
+                  name='fund'
+                  value={fund}
+                  onChange={(e) => setFund(e.target.value)}
+                />
+                <div id='depositButton'>
+                  <Button onClick={addFunds}>Deposit</Button>
+                </div>
               </div>
             </div>
-          </div>
-        </BalanceInfo>
+          </BalanceInfo>
+        )}
       </StyledContainer>
     </>
   );
