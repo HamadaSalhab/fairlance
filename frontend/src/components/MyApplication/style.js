@@ -17,7 +17,7 @@ export const StyledMyApplication = styled.div`
   }
   h3 {
     margin-bottom: 0.5rem;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
     text-decoration: none;
     color: #777;

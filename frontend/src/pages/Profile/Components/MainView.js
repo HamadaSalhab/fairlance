@@ -392,7 +392,7 @@ const MainView = () => {
               )
             ) : (
               <InfoBox>
-                {userDetails.cv === null ? <p>(Empty)</p> : <p>User's CV:{userDetails.cv}</p>}
+                {userDetails.cv.preview === null ? <p>(Empty)</p> : <p>User's CV:{userDetails.cv.preview}</p>}
               </InfoBox>
             )}
 

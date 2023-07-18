@@ -32,14 +32,14 @@ const MyOffers = () => {
         <h1>Received Offers</h1>
         {offers.map((offer, idx) => {
           return (
-            <>
             <Offer
+              key={idx}
               idx={idx}
+              applicationid={offer.application}
               owner={offer.project_owner}
               project={offer.project_title}
               projectid={offer.project_id}
             />
-            </>
           );
         })}
         {offers.length === 0 && <Offer noOffer={true} />}
