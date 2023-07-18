@@ -24,6 +24,19 @@ class Project(models.Model):
     price_max = models.DecimalField(max_digits=10, decimal_places=1, default=100.0)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="hiring")
 
+def upload_to(instance, filename):
+    return "files/{filename}".format(filename=filename)
+
+class Project_Submission(models.Model):
+    project = models.OneToOneField(
+        Project,  primary_key=True, on_delete=models.CASCADE, related_name='project_submission'
+    )
+    freelancer = models.ForeignKey(
+        User, on_delete=models.CASCADE,default=None, null=True, blank=True, related_name="onworkingprojects"
+    )
+    bid = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    submission = models.FileField(upload_to=upload_to, blank=True, null=True, default=None)
+
 
 class Required_Skill(models.Model):
     project = models.ForeignKey(

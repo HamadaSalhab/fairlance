@@ -29,8 +29,6 @@ class ApplicationListView(generics.ListAPIView):
     Can be accessed by a client
     """
 
-    permissions_classes = []
-    authentication_classes = []
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
     lookup_field = "project_id"
@@ -97,6 +95,19 @@ class ApplicationCreateView(generics.CreateAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
+
+    def post(self, request, *args, **kwargs):
+        # try:
+
+        #     project_id = request.data.get('request_id')
+        #     project = Project.objects.get(id=project_id)
+        # except:
+        #     return Response({"details": "invalid project"}, status=status.HTTP_400_BAD_REQUEST)
+            
+        # if Application.objects.filter(freelancer=request.user).filter(project=project).exists():
+        #     return Response({"details": "You've already applied for this project"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return super().create(request, *args, **kwargs)
 
 
 class EmploymentRetrieveView(generics.RetrieveAPIView):

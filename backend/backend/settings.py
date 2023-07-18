@@ -27,8 +27,7 @@ SECRET_KEY = "django-insecure-j7&)!%5v_ipzk2oywc#j^qxg+1b79m*1lolx^3nr%-61lg#vmn
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '1ad2-188-130-155-162.ngrok-free.app',
-    "8a8a-188-130-155-165.ngrok-free.app",
+    'f604-188-130-155-154.ngrok-free.app',
     "127.0.0.1",
     "localhost",
 ]
@@ -50,6 +49,7 @@ INSTALLED_APPS = [
     "transactions",
     "applications",
     "offers",
+    "django_messages_drf",
 ]
 
 MIDDLEWARE = [
@@ -132,16 +132,36 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_FRAMEWORK = {}
+#REST_FRAMEWORK = {}
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         "rest_framework.authentication.TokenAuthentication"
-#     ],
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         'rest_framework.permissions.IsAuthenticated'
-#     ]
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication"
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "mediafiles")
 MEDIA_URL = "/media/"
+
+CSRF_TRUSTED_ORIGINS = ['https://e45e-188-130-155-169.ngrok-free.app']
+
+
+
+CONTRACT_ADDRESS = Config.Contract_Address
+
+USDT_CONTRACT_ADDRESS = Config.usdt_contract_address
+
+USDT_CONTRACT_ABI = Config.usdt_contract_abi
+
+
+CALLER_ADDRESS = Config.caller
+
+PRIVATE_ADDRESS = Config.private_key
+
+CONTRACT_ABI = Config.contract_abi
+
+
+

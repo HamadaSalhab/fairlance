@@ -32,4 +32,5 @@ urlpatterns = [
     path("api/users/", include("users.urls")),
     path("api/skills/", SkillListAPIView.as_view()),
     path("api/offers/", include("offers.urls")),
+    path("api/messages/", include("django_messages_drf.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

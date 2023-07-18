@@ -27,26 +27,21 @@ class Available_Skill(models.Model):
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
 
 
-class Message(models.Model):
-    sender = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="sent_messages"
-    )
-    receiver = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="received_messages"
-    )
-    msg_date = models.DateTimeField()
-    msg_content = models.CharField(max_length=256)
 
 
 def upload_to(instance, filename):
-    return "images/{filename}".format(filename=filename)
-
+    return "files/{filename}".format(filename=filename)
 
 class UserExtra(models.Model):
     user = models.OneToOneField(
         User, primary_key=True, on_delete=models.CASCADE, related_name="extradetails"
     )
-    bio = models.CharField(max_length=4096)
     profile_image = models.ImageField(upload_to=upload_to, blank=True, null=True)
-    profile_cv = models.FileField(upload_to="profile_cvs/", null=True)
-    balance = models.IntegerField(default=0)
+    profile_cv = models.FileField(upload_to=upload_to, blank=True, null=True)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    wallet_address = models.CharField(max_length=256, default='not-specified')
+    transaction_hash = models.CharField(max_length=128, blank=True, null=True, default=None)
+
+class Transaction(models.Model):
+    transaction_hash = models.CharField(max_length=128, unique=True)
+    
