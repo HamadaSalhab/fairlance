@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 const DeliveryForm = ({ project_id }) => {
   const [deliveredFile, setDeliveredFile] = useState(null);
-  const { authToken, userID } = useContext(AuthContext);
+  const { authToken } = useContext(AuthContext);
 
   const onDeliveredFileChange = (e) => {
     setDeliveredFile(e.target.files[0]);
@@ -18,10 +18,6 @@ const DeliveryForm = ({ project_id }) => {
     const reader = new FileReader();
     reader.readAsDataURL(deliveredFile);
     reader.onloadend = () => {
-      const base64data = reader.result;
-      //   const data = {
-      //     submission: base64data
-      //   };
       const formData = new FormData();
       formData.append('submission', deliveredFile);
       const config = {

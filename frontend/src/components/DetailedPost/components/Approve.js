@@ -1,20 +1,13 @@
-import { useEffect, useContext, useState } from 'react';
+import { useContext } from 'react';
 import { StyledApprove } from '../style';
 import AuthContext from '../../../context/AuthContext';
 import Request from '../../../utils/Request';
 import Button from '../../Button/Button';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Approve = ({ submissionLink, project_id }) => {
   const { authToken } = useContext(AuthContext);
-  const [submissionFile, setSubmissionFile] = useState({});
-
-  //   useEffect(() => {
-  //     if (submissionLink) {
-  //       fetch(submissionLink, Request('GET', '', authToken));
-  //       setSubmissionFile({ preview: submissionLink, data: '' });
-  //     }
-  //   });
 
   const downloadSubmissionFile = async () => {
     try {
@@ -35,7 +28,7 @@ const Approve = ({ submissionLink, project_id }) => {
       console.log(e);
     }
   };
-
+  const navigate = useNavigate();
   const approveAndPay = async () => {
     try {
       const response = await fetch(
@@ -48,6 +41,7 @@ const Approve = ({ submissionLink, project_id }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       toast('The payment has been successfully completed. Thanks for using our service!');
+      navigate(0);
     } catch (e) {
       console.log(e);
     }
@@ -55,16 +49,12 @@ const Approve = ({ submissionLink, project_id }) => {
 
   return (
     <StyledApprove>
-      The freelancer has submitted the project. Please view it carefully, and if it meets your
-      conditions, please approve it.
+      <h4>
+        The freelancer has submitted the project. Please view it carefully, and if it meets your
+        conditions, please approve it.
+      </h4>
       <br />
-      {/* <div className='download-file'>
-        <a href={submissionFile.preview} download>
-          <i className='fas fa-file-download'></i>
-          Download
-        </a>
-      </div> */}
-      <Button primary={true} onClick={downloadSubmissionFile}>
+      <Button primary={false} onClick={downloadSubmissionFile}>
         Download File
       </Button>
       <Button primary={true} onClick={approveAndPay}>
