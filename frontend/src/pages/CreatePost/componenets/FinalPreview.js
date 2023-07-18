@@ -21,7 +21,7 @@ const FinalPreview = ({ handleSubmit, prevForm, title, body, tags, range, deadli
     if (!body) {
       missingItems.push('Please add a description to your post');
     }
-    if (!range || range[0] > range[1]) {
+    if (!range || parseInt(range[0]) > parseInt(range[1])) {
       missingItems.push('Please add valid price to your post');
     }
     if (deadline < new Date()) {

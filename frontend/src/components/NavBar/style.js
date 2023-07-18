@@ -62,6 +62,15 @@ export const Menu = styled.ul`
   padding: 0;
   overflow: hidden;
 
+  .name-head{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+    margin-right: 3px;
+  }
+
   /* dropdown LI */
   & > .dropdown {
     display: inline-block;
