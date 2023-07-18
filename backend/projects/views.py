@@ -65,7 +65,7 @@ class ProjectPayAPIView(generics.CreateAPIView):
 
         details.balance = details.balance + instance.project_submission.bid
         instance.status = 'finished'
-        instance.save()
+        details.save()
 
         return Response({"details": f"you successfully paid the amount {instance.project_submission.bid} to the freelancer"}, status=status.HTTP_200_OK)
 

@@ -29,8 +29,6 @@ class ApplicationListView(generics.ListAPIView):
     Can be accessed by a client
     """
 
-    permissions_classes = []
-    authentication_classes = []
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
     lookup_field = "project_id"
