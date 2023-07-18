@@ -27,14 +27,7 @@ SECRET_KEY = "django-insecure-j7&)!%5v_ipzk2oywc#j^qxg+1b79m*1lolx^3nr%-61lg#vmn
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'e8be-188-130-155-154.ngrok-free.app',
-    '1ad2-188-130-155-162.ngrok-free.app',
-    "8a8a-188-130-155-165.ngrok-free.app",
-    "e8b6-188-130-155-154.ngrok-free.app",
-    "9df5-188-130-155-154.ngrok-free.app",
-    "e45e-188-130-155-169.ngrok-free.app",
-    "4d3b-188-130-155-154.ngrok-free.app",
-    "aa55-188-130-155-154.ngrok-free.app",
+    'f604-188-130-155-154.ngrok-free.app',
     "127.0.0.1",
     "localhost",
 ]
@@ -158,6 +151,17 @@ CSRF_TRUSTED_ORIGINS = ['https://e45e-188-130-155-169.ngrok-free.app']
 
 
 CONTRACT_ADDRESS = Config.Contract_Address
+
 USDT_CONTRACT_ADDRESS = Config.usdt_contract_address
+
 USDT_CONTRACT_ABI = Config.usdt_contract_abi
+
+
+CALLER_ADDRESS = Config.caller
+
+PRIVATE_ADDRESS = Config.private_key
+
+CONTRACT_ABI = Config.contract_abi
+
+
 

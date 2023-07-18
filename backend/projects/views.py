@@ -2,11 +2,62 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from users.serializers import Skill
-from .serializers import ProjectSerializer, Required_SkillSerializer
-from .models import Project
+from .serializers import ProjectSerializer, Required_SkillSerializer, ProjectSubmissionSerializer
+from .models import Project, Project_Submission
 
+class ProjectSubmissionUpdateAPIView(generics.UpdateAPIView):
+    parser_classes = (FormParser, MultiPartParser)
+    queryset = Project_Submission.objects.all()
+    serializer_class = ProjectSubmissionSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def update(self, request, pk=None, **kwargs):
+        try:
+            project_id = pk
+            instance = Project.objects.get(id=project_id)
+        except:
+            return Response({"details": "invalid project id"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if (
+            instance.project_submission.freelancer is None or
+            (
+                instance.project_submission.freelancer is not None 
+                and instance.project_submission.freelancer.id != request.user.id
+            )
+        ):
+            return Response({"details": "You are not hired for this project!"}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.get_serializer(instance.project_submission, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        instance.status = 'delivered'
+        instance.save()
+        return Response(serializer.data)
+    
+class ProjectPayAPIView(generics.CreateAPIView):
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk=None, *args, **kwargs):
+        try:
+            project_id = pk
+            instance = Project.objects.get(id=project_id)
+        except:
+            return Response({"details": "invalid project id"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if request.user != instance.owner.id:
+            return Response({"details": "You are not authorized to pay"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        if instance.status != 'delivered':
+            return Response({"details": "The project is not delivered yet"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        receiver = instance.project_submission.freelancer
+        receiver.balance = receiver.balance + instance.project_submission.bid
+        instance.status = 'finished'
+        instance.save()
 
 class ProjectRecentAPIView(generics.ListAPIView):
     """
@@ -15,7 +66,7 @@ class ProjectRecentAPIView(generics.ListAPIView):
     """
 
     serializer_class = ProjectSerializer
-    authentication_class = []
+    authentication_classes = []
     permission_classes = []
 
     def get_queryset(self):
@@ -67,6 +118,10 @@ class ProjectCreateAPIView(generics.CreateAPIView):
                         raise Exception("skill_id is not valid")
 
             self.perform_create(serializer)
+            try:
+                Project_Submission.objects.create(project=Project.objects.get(id=serializer.data.get("id")))
+            except Exception as e:
+                print(e)
 
             if skills:
                 project_id = serializer.data.get("id")
