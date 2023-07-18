@@ -22,5 +22,6 @@ backend/db.sqlite3
 /backend/django_messages_drf/__pycache__
 /backend/offers/migrations
 /backend/offers/__pycache__
+.hypothesis
 /mediafiles
 **/migrations/*
