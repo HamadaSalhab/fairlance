@@ -36,10 +36,12 @@ class ProjectSubmissionUpdateAPIView(generics.UpdateAPIView):
         instance.status = 'delivered'
         instance.save()
         return Response(serializer.data)
-    
+
+from users.models import UserExtra 
 class ProjectPayAPIView(generics.CreateAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
+    serializer_class = ProjectSerializer
 
     def post(self, request, pk=None, *args, **kwargs):
         try:
@@ -48,16 +50,24 @@ class ProjectPayAPIView(generics.CreateAPIView):
         except:
             return Response({"details": "invalid project id"}, status=status.HTTP_400_BAD_REQUEST)
         
-        if request.user != instance.owner.id:
+        print(request.user)
+        if request.user.id != instance.owner.id:
             return Response({"details": "You are not authorized to pay"}, status=status.HTTP_401_UNAUTHORIZED)
         
         if instance.status != 'delivered':
-            return Response({"details": "The project is not delivered yet"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"details": "The project is either not delivered or finished"}, status=status.HTTP_400_BAD_REQUEST)
         
         receiver = instance.project_submission.freelancer
-        receiver.balance = receiver.balance + instance.project_submission.bid
+        try:
+            details = receiver.extradetails
+        except:
+            details = UserExtra.create(user=receiver)
+
+        details.balance = details.balance + instance.project_submission.bid
         instance.status = 'finished'
         instance.save()
+
+        return Response({"details": f"you successfully paid the amount {instance.project_submission.bid} to the freelancer"}, status=status.HTTP_200_OK)
 
 class ProjectRecentAPIView(generics.ListAPIView):
     """
