@@ -31,8 +31,9 @@ class ProjectSubmissionUpdateAPIView(generics.UpdateAPIView):
         ):
             return Response({"details": "You are not hired for this project!"}, status=status.HTTP_400_BAD_REQUEST)
         
+        
         if (
-            instance.status != 'in-progress'
+            instance.status != 'in_progress'
         ):
             return Response({"details": "This project does not accept submissions"}, status=status.HTTP_400_BAD_REQUEST)
         serializer = self.get_serializer(instance.project_submission, data=request.data)
