@@ -172,11 +172,10 @@ export const StyledApprove = styled.div`
   }
   h4 {
     margin-bottom: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #777;
+    color: #000;
+    font-weight: 400;
     &:hover {
-      color: #1e88e5;
+      color: #000;
     }
   }
   

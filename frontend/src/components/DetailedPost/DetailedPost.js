@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import DeliveryForm from '../DeliveryForm/DeliveryForm';
 import Approve from './components/Approve';
+import Finished from './components/Finished';
 
 const DetailedPost = ({ post }) => {
   const [showForm, setShowForm] = useState(false);
@@ -16,7 +17,7 @@ const DetailedPost = ({ post }) => {
   const { userID } = useContext(AuthContext);
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (post && userID === post.owner && post.status !== "delivered") {
+    if (post && userID === post.owner && post.status !== 'delivered') {
       setShowApplications(true);
       console.log('ok');
     }
@@ -29,11 +30,11 @@ const DetailedPost = ({ post }) => {
   const formatDate = (date) => {
     return date.toLocaleString();
   };
-  
+
   return post ? (
     <div style={{ minHeight: '80vh' }}>
       <StyledDetailedPost>
-      <h1>Post Details</h1>
+        <h1>Post Details</h1>
         <div className='owner-and-deadline'>
           <Link to={`/profile/${post.owner}`}>
             <h4>
@@ -50,10 +51,15 @@ const DetailedPost = ({ post }) => {
         <Tags tags={post.skills || []} />
         <div className='price-info'>
           <div className='price-range'>
-            <div><div style={{fontWeight: 'bold', paddingRight: "0.5rem"}}>Price Range:</div> ${parseInt(post.price_min)}<div>-</div>{parseInt(post.price_max)}</div>
+            <div>
+              <div style={{ fontWeight: 'bold', paddingRight: '0.5rem' }}>Price Range:</div> $
+              {parseInt(post.price_min)}
+              <div>-</div>
+              {parseInt(post.price_max)}
             </div>
-          {!showApplications && (
-            !post.am_i_working_on_this && <>
+          </div>
+          {!showApplications && !post.am_i_working_on_this && (
+            <>
               {!showForm ? (
                 <Button onClick={toggleForm}>Apply</Button>
               ) : (
@@ -61,13 +67,21 @@ const DetailedPost = ({ post }) => {
               )}
             </>
           )}
-          
         </div>
       </StyledDetailedPost>
-      {post.status === "delivered" &&  userID === post.owner ? <Approve submissionLink={post.submission} project_id={post.id}></Approve> : <></>}
-      {showForm === true ? <ApplicationForm projectId={post.id} toggleForm={toggleForm}/> : <></>}
-      {showApplications === true ? <Applications id={post.id}/> : <></>}
+      {post.status === 'delivered' && userID === post.owner ? (
+        <Approve submissionLink={post.submission} project_id={post.id}></Approve>
+      ) : (
+        <></>
+      )}
+      {showForm === true ? <ApplicationForm projectId={post.id} toggleForm={toggleForm} /> : <></>}
+      {showApplications === true && post.status !== 'finished' ? (
+        <Applications id={post.id} />
+      ) : (
+        <></>
+      )}
       {post.am_i_working_on_this === 1 ? <DeliveryForm project_id={post.id}></DeliveryForm> : <></>}
+      {post.status === 'finished' ? <Finished /> : <></>}
     </div>
   ) : (
     <StyledDetailedPost>
