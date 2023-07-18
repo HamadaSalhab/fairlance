@@ -8,6 +8,7 @@ import ApplicationForm from '../ApplicationForm/ApplicationForm';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import DeliveryForm from '../DeliveryForm/DeliveryForm';
+import Approve from './components/Approve';
 
 const DetailedPost = ({ post }) => {
   const [showForm, setShowForm] = useState(false);
@@ -15,7 +16,7 @@ const DetailedPost = ({ post }) => {
   const { userID } = useContext(AuthContext);
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (post && userID === post.owner) {
+    if (post && userID === post.owner && post.status !== "delivered") {
       setShowApplications(true);
       console.log('ok');
     }
@@ -63,8 +64,9 @@ const DetailedPost = ({ post }) => {
           
         </div>
       </StyledDetailedPost>
-      {showForm && <ApplicationForm projectId={post.id} toggleForm={toggleForm} />}
-      {showApplications && <Applications id={post.id} />}
+      {post.status === "delivered" &&  userID === post.owner ? <Approve submissionLink={post.submission} project_id={post.id}></Approve> : <></>}
+      {showForm === true ? <ApplicationForm projectId={post.id} toggleForm={toggleForm}/> : <></>}
+      {showApplications === true ? <Applications id={post.id}/> : <></>}
       {post.am_i_working_on_this === 1 ? <DeliveryForm project_id={post.id}></DeliveryForm> : <></>}
     </div>
   ) : (

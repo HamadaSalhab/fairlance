@@ -19,6 +19,7 @@ const PostDetailsPage = () => {
         const ret = await res.json();
         if (res.ok) {
           setPost(ret);
+          console.log(ret);
         }
       } catch (_) {
         return;

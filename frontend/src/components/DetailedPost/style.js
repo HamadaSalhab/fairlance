@@ -159,3 +159,49 @@ export const StyledApplication = styled.div`
     }
   }
 `;
+
+export const StyledApprove = styled.div`
+  width: 100%;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.1);
+  a {
+    text-decoration: none;
+  }
+  h4 {
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #777;
+    &:hover {
+      color: #1e88e5;
+    }
+  }
+  
+
+  .download-file {
+    /* background-color: red; */
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    a {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+      &:hover {
+        color:#1e88e5;
+        border: 1px solid #1e88e5;
+      }
+      i {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+`;

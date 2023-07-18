@@ -3,6 +3,7 @@ import { StyledDeliveryForm } from './style';
 import axios from 'axios';
 import Button from '../Button/Button';
 import AuthContext from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const DeliveryForm = ({ project_id }) => {
   const [deliveredFile, setDeliveredFile] = useState(null);
@@ -33,7 +34,11 @@ const DeliveryForm = ({ project_id }) => {
         .put(`/api/projects/${project_id}/update/`, formData, config)
         .then((response) => {
           console.log(response);
-        })
+        }).then(() => {
+            toast(
+              'Project submitted successfully!',
+            );
+          })
         .catch((error) => {
           console.log(error);
         });
