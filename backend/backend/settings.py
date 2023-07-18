@@ -132,19 +132,22 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_FRAMEWORK = {}
+#REST_FRAMEWORK = {}
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         "rest_framework.authentication.TokenAuthentication"
-#     ],
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         'rest_framework.permissions.IsAuthenticated'
-#     ]
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication"
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "mediafiles")
 MEDIA_URL = "/media/"
+
+CSRF_TRUSTED_ORIGINS = ['https://e45e-188-130-155-169.ngrok-free.app']
+
 
 
 CONTRACT_ADDRESS = Config.Contract_Address
@@ -152,6 +155,7 @@ CONTRACT_ADDRESS = Config.Contract_Address
 USDT_CONTRACT_ADDRESS = Config.usdt_contract_address
 
 USDT_CONTRACT_ABI = Config.usdt_contract_abi
+
 
 CALLER_ADDRESS = Config.caller
 
