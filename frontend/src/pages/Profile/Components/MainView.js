@@ -5,7 +5,6 @@ import {
   ProfileInfo,
   InfoBox,
   StyledPfp,
-  UploadPhoto,
   StyledButton,
   InputField,
   MoneyField,
@@ -20,6 +19,7 @@ import USDT from '../../../USDT.json';
 import * as ethers from 'ethers';
 import * as BigNumber from 'big-number';
 import Request from '../../../utils/Request';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const USDT_ABI = USDT;
 const USDT_ADDRESS = '0x9FE7b16A0532f3B6FD3512df12A5B981fF9C2Da2';
@@ -35,10 +35,32 @@ const MainView = () => {
     photo: {},
     cv: {},
   });
+  const [withdrawValue, setWithdrawValue] = useState(0);
   const [fund, setFund] = useState(0);
   const [updatedExtra, setUpdatedExtra] = useState(false);
   const { authToken, userID, setUserFirstName } = useContext(AuthContext);
   const { id } = useParams();
+
+  const fetchBalance = () => {
+    fetch(`/api/users/balance/`, Request('GET', '', authToken))
+      .then(async (res) => {
+        if (res.ok) return res.json();
+        return Promise.reject(res.status);
+      })
+      .then((data) => {
+        console.log(data);
+        setUserDetails((userDetails) => {
+          return {
+            ...userDetails,
+            balance: data.balance,
+          };
+        });
+      })
+      .catch((e) => {
+        if (e === 401) toast.error('You are not authorized to view the balance');
+        else toast.error(`We could not retrive your balance: error code ${e}`);
+      });
+  };
 
   useEffect(() => {
     let errorOccured = false;
@@ -173,8 +195,7 @@ const MainView = () => {
         } catch (e) {
           if (e.toString().includes('amount exceeds balance')) {
             toast.error('You do not have enough balance');
-          }
-          else {
+          } else {
             toast.error('Error, please try again');
           }
           console.log(e);
@@ -287,12 +308,8 @@ const MainView = () => {
       };
     });
   };
-
-  const withdraw = (value) => {
-    // TODO: remove this shit
-    if (!value) {
-      value = '200';
-    }
+  const [loading, setLoading] = useState(false);
+  const withdraw = () => {
     console.log('here');
     const req = {
       method: 'POST',
@@ -302,11 +319,14 @@ const MainView = () => {
         Authorization: `token ${authToken}`,
         'ngrok-skip-browser-warning': 'true',
       },
-      body: JSON.stringify({ amount: '200' }),
+      body: JSON.stringify({ amount: withdrawValue }),
     };
     console.log(req);
+    setLoading(true);
+    toast('Please wait until we verify the transaction');
     fetch(`/api/users/withdraw/`, req)
       .then((res) => {
+        setLoading(false);
         if (res.ok) {
           return res.json();
         } else {
@@ -314,10 +334,13 @@ const MainView = () => {
         }
       })
       .then((data) => {
+        setLoading(false);
         console.log(data);
+        fetchBalance();
         toast('Withdraw request confirmed ');
       })
       .catch((e) => {
+        setLoading(false);
         console.log(e);
       });
   };
@@ -401,7 +424,6 @@ const MainView = () => {
                 </>
               )
             ) : (
-
               <>
                 {userDetails.cv.preview ? (
                   <div className='download-file'>
@@ -414,7 +436,6 @@ const MainView = () => {
                   <InfoBox>Empty</InfoBox>
                 )}
               </>
-
             )}
 
             {userID.toString() === id && <StyledButton onClick={handleUpdate}>Save</StyledButton>}
@@ -434,7 +455,9 @@ const MainView = () => {
                     setUpdatedExtra(true);
                   }}
                 />
-                <label className='update-photo' htmlFor='photo'>Update Photo</label>
+                <label className='update-photo' htmlFor='photo'>
+                  Update Photo
+                </label>
               </div>
             )}
           </StyledPfp>
@@ -454,6 +477,11 @@ const MainView = () => {
               <div id='balance-amount'>
                 <label htmlFor='balance' style={{ display: 'block' }}>
                   Balance
+                  {loading && (
+                    <div style={{ display: 'inline-block', marginLeft: '0.5rem' }}>
+                      <ClipLoader size={20} />
+                    </div>
+                  )}
                 </label>
                 <BalanceBox name='balance'>{userDetails.balance}</BalanceBox>
               </div>
@@ -467,9 +495,11 @@ const MainView = () => {
                   type='number'
                   id='fund'
                   name='withdraw'
+                  value={withdrawValue}
+                  onChange={(e) => setWithdrawValue(e.target.value)}
                 />
                 <div id='withdrawButton'>
-                  <Button>Withdraw</Button>
+                  <Button onClick={withdraw}>Withdraw</Button>
                 </div>
               </div>
               <div id='deposit-box'>
