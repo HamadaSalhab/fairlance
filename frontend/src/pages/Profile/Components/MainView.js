@@ -20,6 +20,7 @@ import USDT from '../../../USDT.json';
 import * as ethers from 'ethers';
 import * as BigNumber from 'big-number';
 import Request from '../../../utils/Request';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const USDT_ABI = USDT;
 const USDT_ADDRESS = '0x9FE7b16A0532f3B6FD3512df12A5B981fF9C2Da2';
@@ -39,6 +40,27 @@ const MainView = () => {
   const [updatedExtra, setUpdatedExtra] = useState(false);
   const { authToken, userID, setUserFirstName } = useContext(AuthContext);
   const { id } = useParams();
+
+  const fetchBalance = () => {
+    fetch(`/api/users/balance/`, Request('GET', '', authToken))
+      .then(async (res) => {
+        if (res.ok) return res.json();
+        return Promise.reject(res.status);
+      })
+      .then((data) => {
+        console.log(data);
+        setUserDetails((userDetails) => {
+          return {
+            ...userDetails,
+            balance: data.balance,
+          };
+        });
+      })
+      .catch((e) => {
+        if (e === 401) toast.error('You are not authorized to view the balance');
+        else toast.error(`We could not retrive your balance: error code ${e}`);
+      });
+  };
 
   useEffect(() => {
     let errorOccured = false;
@@ -172,8 +194,7 @@ const MainView = () => {
         } catch (e) {
           if (e.toString().includes('amount exceeds balance')) {
             toast.error('You do not have enough balance');
-          }
-          else {
+          } else {
             toast.error('Error, please try again');
           }
           console.log(e);
@@ -286,7 +307,7 @@ const MainView = () => {
       };
     });
   };
-
+  const [loading, setLoading] = useState(false);
   const withdraw = (value) => {
     // TODO: remove this shit
     if (!value) {
@@ -301,11 +322,14 @@ const MainView = () => {
         Authorization: `token ${authToken}`,
         'ngrok-skip-browser-warning': 'true',
       },
-      body: JSON.stringify({ amount: '200' }),
+      body: JSON.stringify({ amount: '2' }),
     };
     console.log(req);
+    setLoading(true);
+    toast('Please wait until we verify the transaction')
     fetch(`/api/users/withdraw/`, req)
       .then((res) => {
+        setLoading(false);
         if (res.ok) {
           return res.json();
         } else {
@@ -313,10 +337,13 @@ const MainView = () => {
         }
       })
       .then((data) => {
+        setLoading(false);
         console.log(data);
+        fetchBalance();
         toast('Withdraw request confirmed ');
       })
       .catch((e) => {
+        setLoading(false);
         console.log(e);
       });
   };
@@ -392,7 +419,11 @@ const MainView = () => {
               )
             ) : (
               <InfoBox>
-                {userDetails.cv.preview === null ? <p>(Empty)</p> : <p>User's CV:{userDetails.cv.preview}</p>}
+                {userDetails.cv.preview === null ? (
+                  <p>(Empty)</p>
+                ) : (
+                  <p>User's CV:{userDetails.cv.preview}</p>
+                )}
               </InfoBox>
             )}
 
@@ -435,6 +466,11 @@ const MainView = () => {
             <div>
               <label htmlFor='balance' style={{ display: 'block' }}>
                 Balance
+                {loading && (
+                  <div style={{ display: 'inline-block', marginLeft: '0.5rem' }}>
+                    <ClipLoader size={20} />
+                  </div>
+                )}
               </label>
               <BalanceBox name='balance'>{userDetails.balance}</BalanceBox>
               <div id='withdrawButton'>
