@@ -7,6 +7,7 @@ import Applications from './components/Applications';
 import ApplicationForm from '../ApplicationForm/ApplicationForm';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
+import DeliveryForm from '../DeliveryForm/DeliveryForm';
 
 const DetailedPost = ({ post }) => {
   const [showForm, setShowForm] = useState(false);
@@ -14,7 +15,6 @@ const DetailedPost = ({ post }) => {
   const { userID } = useContext(AuthContext);
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(userID);
     if (post && userID === post.owner) {
       setShowApplications(true);
       console.log('ok');
@@ -28,6 +28,7 @@ const DetailedPost = ({ post }) => {
   const formatDate = (date) => {
     return date.toLocaleString();
   };
+  
   return post ? (
     <div style={{ minHeight: '80vh' }}>
       <StyledDetailedPost>
@@ -51,7 +52,7 @@ const DetailedPost = ({ post }) => {
             <div><div style={{fontWeight: 'bold', paddingRight: "0.5rem"}}>Price Range:</div> ${parseInt(post.price_min)}<div>-</div>{parseInt(post.price_max)}</div>
             </div>
           {!showApplications && (
-            <>
+            !post.am_i_working_on_this && <>
               {!showForm ? (
                 <Button onClick={toggleForm}>Apply</Button>
               ) : (
@@ -59,10 +60,12 @@ const DetailedPost = ({ post }) => {
               )}
             </>
           )}
+          
         </div>
       </StyledDetailedPost>
       {showForm && <ApplicationForm projectId={post.id} toggleForm={toggleForm} />}
       {showApplications && <Applications id={post.id} />}
+      {post.am_i_working_on_this === 1 ? <DeliveryForm project_id={post.id}></DeliveryForm> : <></>}
     </div>
   ) : (
     <StyledDetailedPost>
