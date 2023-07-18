@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-from users.models import Users
-from projects.models import Projects
-from transactions.models import Payments
+from projects.models import Project
+from transactions.models import Payment
 
-class Applications(models.Model):
-    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
-    freelancer = models.ForeignKey(Users, on_delete=models.CASCADE)
 
-class Employments(models.Model):
-    employment = models.ForeignKey(Applications, on_delete=models.CASCADE)
-    payment = models.ForeignKey(Payments, on_delete=models.CASCADE)
-    state = models.CharField(max_length=256)
+class Application(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    freelancer = models.ForeignKey(User, on_delete=models.CASCADE)
+    bid = models.DecimalField(max_digits=10, decimal_places=1, default=0.0)
+    proposal = models.CharField(max_length=4096, null=False, default="")
 
+
+class Employment(models.Model):
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)

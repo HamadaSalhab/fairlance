@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Project, Required_Skill, Project_Submission
+
+admin.site.register(Project)
+admin.site.register(Required_Skill)
+admin.site.register(Project_Submission)
