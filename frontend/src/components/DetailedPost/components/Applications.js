@@ -30,7 +30,7 @@ const Applications = ({ id }) => {
 
   return (
     <StyledApplications>
-      <h3>Applications:</h3>
+      <h2>Applications</h2>
       {applications.length === 0 && !loading && <EmptyApplication />}
       {loading && <List className='loading' />}
       {applications.map((application, idx) => {

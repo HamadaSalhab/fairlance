@@ -30,7 +30,7 @@ const PricingForm = ({ prevForm, nextForm, range, setRange, deadline, setDeadlin
 
   const check = (e, nextCall) => {
     let error = false;
-    if (range[0] > range[1] || !range[0] || !range[1]) {
+    if (parseInt(range[0]) > parseInt(range[1]) || !range[0] || !range[1]) {
       setPriceError(true);
       error = true;
     } else {

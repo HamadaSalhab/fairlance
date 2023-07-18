@@ -5,7 +5,7 @@ import { StyledNav, Menu } from './style';
 import AuthContext from '../../context/AuthContext';
 
 const NavBar = ({ notfixed }) => {
-  const { userFirstName, logout } = useContext(AuthContext);
+  const { userFirstName, logout, userLastName } = useContext(AuthContext);
   const { userID } = useContext(AuthContext);
 
   return (
@@ -35,17 +35,17 @@ const NavBar = ({ notfixed }) => {
               <Menu>
                 <div className='dropdown'>
                   <button className='dropbtn'>
-                    {userFirstName} <i className='fa-solid fa-caret-down'></i>
+                    <span className='name-head'>{userFirstName} {userLastName}</span> <i className='fa-solid fa-caret-down'></i>
                   </button>
                   <div className='dropdown-content'>
                     <li>
                       <Link to={`/users/${userID}/applications`}>My Applications</Link>
                     </li>
                     <li>
-                      <Link to={`/offers`}>My offers</Link>
+                      <Link to={`/offers`}>My Offers</Link>
                     </li>
                     <li>
-                      <Link to={`/profile/${userID}`}>My profile</Link>
+                      <Link to={`/profile/${userID}`}>My Profile</Link>
                     </li>
                     <li>
                       <button onClick={() => logout()}>Log out</button>

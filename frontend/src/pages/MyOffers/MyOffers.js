@@ -29,10 +29,13 @@ const MyOffers = () => {
     <>
       <NavBar notfixed={true} />
       <StyledOffers>
-        <h4>Offers:</h4>
-        {offers.map((offer) => {
+        <h1>Received Offers</h1>
+        {offers.map((offer, idx) => {
           return (
             <Offer
+              key={idx}
+              idx={idx}
+              applicationid={offer.application}
               owner={offer.project_owner}
               project={offer.project_title}
               projectid={offer.project_id}

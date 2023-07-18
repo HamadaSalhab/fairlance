@@ -31,15 +31,16 @@ const DetailedPost = ({ post }) => {
   return post ? (
     <div style={{ minHeight: '80vh' }}>
       <StyledDetailedPost>
-        <div>
+      <h1>Post Details</h1>
+        <div className='owner-and-deadline'>
           <Link to={`/profile/${post.owner}`}>
             <h4>
-              {post.first_name} {post.last_name}
+              Owner: {post.first_name} {post.last_name}
             </h4>
           </Link>
           <div style={{ color: '#7b7b7b' }}>
             <i className='fa-regular fa-clock' style={{ padding: '0.4rem 0.4rem 0 0.4rem' }}></i>
-            deadline {formatDate(new Date(post.deadline))}
+            Deadline: {formatDate(new Date(post.deadline))}
           </div>
         </div>
         <h3>{post.title}</h3>
@@ -47,10 +48,8 @@ const DetailedPost = ({ post }) => {
         <Tags tags={post.skills || []} />
         <div className='price-info'>
           <div className='price-range'>
-            <div>{parseInt(post.price_min)} -</div>
-
-            <div>{parseInt(post.price_max)} $</div>
-          </div>
+            <div><div style={{fontWeight: 'bold', paddingRight: "0.5rem"}}>Price Range:</div> ${parseInt(post.price_min)}<div>-</div>{parseInt(post.price_max)}</div>
+            </div>
           {!showApplications && (
             <>
               {!showForm ? (
