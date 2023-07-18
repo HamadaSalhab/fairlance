@@ -30,6 +30,11 @@ class ProjectSubmissionUpdateAPIView(generics.UpdateAPIView):
             )
         ):
             return Response({"details": "You are not hired for this project!"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if (
+            instance.status != 'in-progress'
+        ):
+            return Response({"details": "This project does not accept submissions"}, status=status.HTTP_400_BAD_REQUEST)
         serializer = self.get_serializer(instance.project_submission, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -66,7 +71,7 @@ class ProjectPayAPIView(generics.CreateAPIView):
         details.balance = details.balance + instance.project_submission.bid
         instance.status = 'finished'
         details.save()
-
+        instance.save()
         return Response({"details": f"you successfully paid the amount {instance.project_submission.bid} to the freelancer"}, status=status.HTTP_200_OK)
 
 class ProjectRecentAPIView(generics.ListAPIView):

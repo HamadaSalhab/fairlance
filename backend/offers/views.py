@@ -54,10 +54,9 @@ class OfferCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         print(request.data)
         try: 
-
             return super().create(request, *args, **kwargs)
         except Exception as e:
-            print(e)
+            return Response({"details":"something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
             
 
 

@@ -96,6 +96,19 @@ class ApplicationCreateView(generics.CreateAPIView):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
+    def post(self, request, *args, **kwargs):
+        # try:
+
+        #     project_id = request.data.get('request_id')
+        #     project = Project.objects.get(id=project_id)
+        # except:
+        #     return Response({"details": "invalid project"}, status=status.HTTP_400_BAD_REQUEST)
+            
+        # if Application.objects.filter(freelancer=request.user).filter(project=project).exists():
+        #     return Response({"details": "You've already applied for this project"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return super().create(request, *args, **kwargs)
+
 
 class EmploymentRetrieveView(generics.RetrieveAPIView):
     """
