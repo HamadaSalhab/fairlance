@@ -22,23 +22,6 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export const BalanceContainer = styled.div`
-  box-sizing: border-box;
-  align-items: center;
-  box-shadow: 0px 0px 12px -1px rgba(30, 136, 229, 0.2);
-  /* border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem; */
-  border-radius: 1rem;
-  background-color: #fff;
-  /* background-color: green; */
-  margin: 0 auto;
-  margin-bottom: 10rem;
-  padding: 2rem;
-  left: 0;
-  right: 0;
-  width: 70%;
-`;
-
 export const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,6 +37,49 @@ export const ProfileInfo = styled.div`
     margin-bottom: 0.3rem;
     font-weight: 650;
   }
+  #cv {
+    display: none;
+  }
+  .update-file {
+    width: 20%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+  /* background-color: red; */
+    &:hover {
+      border: 1px solid #1e88e5 ;
+      color: #1e88e5;
+    }  
+  } 
+
+  .download-file {
+    /* background-color: red; */
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    a {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+      &:hover {
+        color:#1e88e5;
+        border: 1px solid #1e88e5;
+      }
+      i {
+        margin-right: 0.5rem;
+      }
+    }
+  }
 `;
 
 export const BalanceInfo = styled.div`
@@ -66,22 +92,34 @@ export const BalanceInfo = styled.div`
     margin: 2rem 0;
   }
 
-  #wallet-box {
-    width: 50%;
+  #money-container {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 1rem;
 
+    #wallet-box {
+      width: 50%;
+      /* background-color: red; */
+      margin-right: 2rem;
+    }
+
+    #balance-amount {
+      width: 50%;
+      /* background-color:blue ; */
+    }
+
     label {
-      margin-top: 1rem;
-      margin-bottom: 0.3rem;
       font-weight: 650;
+      margin-bottom: 0.3rem;
     }
   }
 
-  #balance-container {
+  #withdraw-deposit{
     /* background-color: green; */
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+
     div {
       display: flex;
       flex-direction: column;
@@ -101,8 +139,12 @@ export const BalanceInfo = styled.div`
       #depositButton {
         width: 30%;
       }
-
     } 
+
+    #withdraw-box{
+      margin-right: 2rem;
+    }
+
   }
 `;
 
@@ -120,7 +162,7 @@ export const InfoBox = styled.div`
 
 export const BalanceBox = styled.div`
   /* background-color: red; */
-  width: 100%;
+  width: 50%;
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
@@ -138,7 +180,7 @@ export const InputField = styled.input`
   font-weight: 550;
 `;
 
-export const DepositField = styled.input`
+export const MoneyField = styled.input`
   width: 50%;
   height: 90%;
   padding: 10px;
@@ -149,6 +191,9 @@ export const DepositField = styled.input`
 `;
 
 export const StyledPfp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
   /* background-color: green; */
   img {
@@ -157,23 +202,44 @@ export const StyledPfp = styled.div`
     width: 42vh;
     height: 42vh;
     margin: 2rem;
-    margin-right: 3rem;
-    margin-bottom: 3rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    object-fit: cover;
+  }
+  .update-photo-container {
     display: flex;
     align-items: center;
-  }
-  label {
-    margin-left: 2rem;
-    font-weight: 650;
+    input {
+     display: none;
+    }
+   .update-photo {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+    /* background-color: red; */
+      &:hover {
+        border: 1px solid #1e88e5 ;
+        color: #1e88e5;
+      } 
+    }
   }
 `;
 
-export const UploadPhoto = styled.div`
-  width: auto;
-  margin-left: 2rem;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-`;
+// export const UploadPhoto = styled.div`
+//   width: auto;
+//   margin-left: 2rem;
+//   margin-top: 0.75rem;
+//   margin-bottom: 0.75rem;
+//   /* background-color: red; */
+//   #photo {
+//     /* display: none; */
+//   }
+// `;
 
 export const StyledButton = styled.button`
   width: 5rem;
